@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Step 4 · Preview & publish</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Poppins:wght@500;600&family=Source+Serif+4:wght@400;600&display=swap">
+<style>
+body{margin:0;background:#ffffff}
+a{color:#0b4f9c}a:hover{color:#083a73}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid #0b4f9c;outline-offset:2px}
+.rail :focus-visible,.btn.p:focus-visible{outline:2px solid #ffffff;box-shadow:0 0 0 4px #0b4f9c}
+.skip{position:absolute;left:8px;top:-60px;background:#fff;color:#0b2d4a;padding:10px 14px;border-radius:6px;font-size:14px;z-index:10}.skip:focus{top:8px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.app{container-type:inline-size;font-family:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;color:#15202b;background:#fff;min-height:100vh;font-size:13px;line-height:20px}
+.shell{display:flex;align-items:stretch;min-height:100vh}
+.rail{flex:0 0 56px;background:#0b2d4a;display:flex;flex-direction:column;align-items:center;gap:6px;padding-block:12px}
+.rail a{color:#b7c6d6;display:flex;padding:8px;border-radius:8px}.rail a:hover{color:#fff;background:#163c5e}.rail a[aria-current="page"]{color:#fff;background:#1b4a72}
+.logo{width:32px;height:32px;border-radius:8px;background:#fff;color:#0b2d4a;font:600 9px/1 Poppins,sans-serif;letter-spacing:.04em;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.main{flex:1 1 auto;min-width:0;display:flex;flex-direction:column}
+.hdr{display:flex;align-items:center;gap:4px;padding:0 20px;height:48px;border-bottom:1px solid #e6e9ee;box-sizing:border-box}
+.hdr h1{margin:0 20px 0 0;font:600 15px/20px Poppins,sans-serif;color:#15202b}
+.hdr nav{display:flex;gap:2px;align-self:stretch;align-items:stretch;overflow-x:auto}
+.hdr nav a{display:inline-flex;align-items:center;padding:0 10px;color:#5f6b7a;text-decoration:none;font-weight:500;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.hdr nav a:hover{color:#15202b}.hdr nav a[aria-current="page"]{color:#0b2d4a;border-bottom-color:#0b2d4a}
+.hdr .sp{flex-grow:1}
+.srch{display:flex;align-items:center;gap:6px;border:1px solid #d7dde5;border-radius:6px;height:30px;padding:0 8px;color:#6b7784;min-width:0;background:#fff}
+.srch input{border:0;outline:0;font:inherit;color:#15202b;background:transparent;width:150px;min-width:0}
+.icb{border:0;background:transparent;width:32px;height:32px;border-radius:6px;color:#5f6b7a;display:inline-flex;align-items:center;justify-content:center}.icb:hover{background:#f1f3f6;color:#15202b}
+.av{width:28px;height:28px;border-radius:50%;background:#0b2d4a;color:#fff;font-size:11px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;border:0;margin-left:4px}
+.pill{border:1px solid #d7dde5;background:#fff;border-radius:6px;height:30px;padding:0 10px;font-size:13px;color:#15202b;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.wz{display:flex;align-items:center;gap:16px;padding:0 20px;height:44px;border-bottom:1px solid #e6e9ee;box-sizing:border-box;background:#fafbfc}
+.crumb{display:inline-flex;align-items:center;gap:6px;color:#5f6b7a;white-space:nowrap;min-width:0}
+.crumb a{color:#5f6b7a;text-decoration:none}.crumb a:hover{color:#15202b}
+.crumb b{color:#15202b;font-weight:600}
+.stp{display:flex;align-items:center;gap:4px;list-style:none;margin:0 0 0 auto;padding:0;overflow-x:auto}
+.stp li{display:inline-flex;align-items:center;gap:6px;color:#5f6b7a;white-space:nowrap;padding:4px 8px;border-radius:6px}
+.stp li .n{width:18px;height:18px;border-radius:50%;border:1.5px solid #9aa6b3;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;box-sizing:border-box}
+.stp li[aria-current="step"]{color:#0b2d4a;font-weight:600;background:#e8eef5}.stp li[aria-current="step"] .n{background:#0b2d4a;border-color:#0b2d4a;color:#fff}
+.stp li.done .n{background:#1f7a4d;border-color:#1f7a4d;color:#fff}.stp li.done a{color:#5f6b7a;text-decoration:none}.stp li.done a:hover{color:#15202b}
+.stp .sep{color:#c4ccd5}
+.chip{display:inline-flex;align-items:center;gap:6px;height:20px;padding:0 8px;border-radius:4px;font-size:11px;font-weight:600;letter-spacing:.02em;white-space:nowrap;text-transform:uppercase}
+.chip.blue{background:#e8eef5;color:#0b2d4a}.chip.amber{background:#fdf3e2;color:#8a4b00}.chip.green{background:#e4f3ea;color:#1f6b45}.chip.grey{background:#eef1f4;color:#5f6b7a}.chip.red{background:#fdecea;color:#a1261a}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#1f7a4d;flex:0 0 7px}.dot.warn{background:#a86f00}.dot.todo{background:transparent;border:1.5px solid #9aa6b3;box-sizing:border-box}.dot.blue{background:#0b4f9c}.dot.red{background:#c0392b}
+.st{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:#5f6b7a;white-space:nowrap}.st.hot{color:#8a4b00}
+.body{padding:20px 24px 28px;display:flex;flex-direction:column;gap:20px;max-width:1480px;box-sizing:border-box;width:100%}
+.ph{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.ph h2{margin:0;font:600 20px/28px Poppins,sans-serif;color:#15202b}
+.ph p{margin:2px 0 0;color:#5f6b7a;max-width:70ch}
+.ph .sp{flex-grow:1}
+.h3{display:flex;align-items:baseline;gap:10px;padding-bottom:6px;border-bottom:1px solid #e6e9ee}
+.h3 h3{margin:0;font:600 14px/20px Poppins,sans-serif}
+.h3 .m{color:#5f6b7a;font-size:12px}.h3 .sp{flex-grow:1}
+.eyebrow{font-size:11px;line-height:16px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#5f6b7a}
+.meta{font-size:12px;line-height:16px;color:#5f6b7a}
+.note{font-size:12px;line-height:16px;color:#5f6b7a;margin:0}
+.btn{border:1px solid transparent;border-radius:6px;height:32px;padding:0 12px;font-size:13px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;box-sizing:border-box;white-space:nowrap;background:#fff;color:#15202b}
+.btn.p{background:#0b2d4a;color:#fff}.btn.p:hover{background:#0a2540;color:#fff}
+.btn.s{border-color:#8a95a1;color:#15202b}.btn.s:hover{background:#f1f3f6}
+.btn.t{color:#0b4f9c;padding:0 6px}.btn.t:hover{text-decoration:underline}
+.btn.d{background:#a1261a;color:#fff}
+.btn[aria-disabled="true"]{background:#e6e9ee;color:#7b8794;border-color:transparent;cursor:not-allowed}
+.btn.s[aria-disabled="true"]{background:#fff;color:#9aa6b3;border-color:#e6e9ee}
+.btn.w{width:100%}
+.ctl{height:32px;border:1px solid #8a95a1;border-radius:6px;padding:0 10px;font:400 13px/20px 'IBM Plex Sans',system-ui,sans-serif;color:#15202b;background:#fff;box-sizing:border-box;width:100%;min-width:0}
+.ctl:hover{border-color:#9aa6b3}.ctl[readonly]{background:#f6f8fa;color:#3d4955}
+.selw{position:relative;display:block}.selw select{appearance:none;-webkit-appearance:none;padding-right:30px}
+.selw svg{position:absolute;right:9px;top:50%;transform:translateY(-50%);pointer-events:none;color:#5f6b7a}
+.lbl{font-size:12px;line-height:16px;font-weight:500;color:#3d4955;display:block;margin-bottom:4px}
+.segf{display:inline-flex;border:1px solid #8a95a1;border-radius:6px;overflow:hidden;height:30px;background:#fff}
+.segf button{border:0;background:transparent;padding:0 10px;font-size:12px;font-weight:500;color:#3d4955;border-left:1px solid #e6e9ee;display:inline-flex;align-items:center;gap:6px}
+.segf button:first-child{border-left:0}.segf button[aria-pressed="true"]{background:#0b2d4a;color:#fff}
+.segf .n{opacity:.75;font-weight:400}
+.cb{width:16px;height:16px;border:1.5px solid #9aa6b3;border-radius:4px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;background:#fff;color:#fff;flex:0 0 16px}
+.cb.on{background:#0b2d4a;border-color:#0b2d4a}.cb.mix{background:#0b2d4a;border-color:#0b2d4a}
+.cbb{border:0;background:transparent;padding:0;display:inline-flex;width:28px;height:28px;align-items:center;justify-content:center;border-radius:6px}
+.cbb:hover .cb{border-color:#0b2d4a}
+.rd{width:15px;height:15px;border-radius:50%;border:1.5px solid #9aa6b3;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;flex:0 0 15px;background:#fff}
+.rd[aria-checked="true"],[aria-checked="true"]>.rd{border-color:#0b2d4a}.rd[aria-checked="true"] i,[aria-checked="true"]>.rd i{display:block;width:7px;height:7px;border-radius:50%;background:#0b2d4a}
+.rad{display:flex;flex-direction:column;gap:6px}
+.rad button{display:grid;grid-template-columns:15px minmax(0,1fr);column-gap:10px;align-items:start;text-align:left;border:0;background:transparent;padding:3px 0;font-size:13px;color:#15202b;width:100%}
+.rad .rd{margin-top:3px}.rad .h{display:block;font-size:12px;line-height:16px;color:#5f6b7a}
+.tgl{width:32px;height:18px;border-radius:99px;border:0;background:#c9d1da;position:relative;padding:0;flex:0 0 32px}.tgl[aria-checked="true"]{background:#0b2d4a}.tgl i{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff}.tgl[aria-checked="true"] i{left:16px}
+.al{border-radius:6px;padding:8px 12px;font-size:12px;line-height:18px;display:flex;gap:8px;align-items:flex-start}
+.al.ok{background:#e4f3ea;color:#1f5e3d}.al.warn{background:#fdf3e2;color:#5c3b00}.al.info{background:#eef3f9;color:#0b2d4a}
+.ft{position:sticky;bottom:0;background:#fff;border-top:1px solid #e6e9ee;padding:10px 24px;display:flex;align-items:center;gap:10px;z-index:3}
+.ft .sp{flex-grow:1}.ft .why{font-size:12px;color:#5f6b7a}
+.row{display:grid;align-items:center;column-gap:16px;padding:0 12px;min-height:44px;border-bottom:1px solid #eceff3;position:relative}
+.row:hover{background:#f7f9fb}
+.row .tt{font-weight:600;color:#15202b;text-decoration:none}.row .tt:hover{color:#0b4f9c}.row .tt::after{content:"";position:absolute;inset:0}
+.row .ab{position:relative;z-index:1}
+.hrow{display:grid;column-gap:16px;padding:0 12px;height:32px;align-items:center;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#5f6b7a;border-bottom:1px solid #e6e9ee}
+.kv{display:grid;grid-template-columns:120px minmax(0,1fr);row-gap:6px;column-gap:12px;font-size:13px}.kv dt{color:#5f6b7a;margin:0}.kv dd{margin:0}
+.thumb{width:36px;height:46px;border-radius:2px;background:#fff;border:1px solid #c9d1da;position:relative;overflow:hidden;flex:0 0 36px;box-sizing:border-box}
+.thumb i{position:absolute;left:6px;right:6px;height:2px;background:#dfe4ea}.thumb b{position:absolute;left:6px;right:12px;top:6px;height:3px;background:#0b2d4a}
+.thumb .tag{position:absolute;left:0;right:0;bottom:0;background:#0b2d4a;color:#fff;font-size:7px;line-height:10px;font-weight:600;text-align:center;letter-spacing:.04em}
+.thumb.lg{width:64px;height:84px;flex-basis:64px}
+::placeholder{color:#5f6b7a;opacity:1}
+.srch{border-color:#8a95a1}.srch:focus-within{outline:2px solid #0b4f9c;outline-offset:2px}
+.cb,.rd{border-color:#6b7784}
+.tgl{background:#fff;border:1.5px solid #6b7784;box-sizing:border-box}.tgl i{background:#6b7784}.tgl[aria-checked="true"]{background:#0b2d4a;border-color:#0b2d4a}.tgl[aria-checked="true"] i{background:#fff}
+.segf button[aria-checked="true"]{background:#0b2d4a;color:#fff}
+.rail a[aria-current="page"]{box-shadow:inset 3px 0 0 #fff}
+.btn.p[aria-disabled="true"]{color:#5f6b7a}
+.ph p{max-width:64ch}
+.rad label{display:grid;grid-template-columns:15px minmax(0,1fr);column-gap:10px;align-items:start;text-align:left;padding:3px 0;font-size:13px;color:#15202b;width:100%;cursor:pointer;position:relative}
+.rad input,.rbl input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.rad input:checked+.rd,.rbl input:checked+.rd{border-color:#0b2d4a}.rad input:checked+.rd i,.rbl input:checked+.rd i{display:block;width:7px;height:7px;border-radius:50%;background:#0b2d4a}
+.rad input:focus-visible+.rd,.rbl input:focus-visible+.rd{outline:2px solid #0b4f9c;outline-offset:2px}
+.rbl{display:inline-flex;position:relative;width:28px;height:28px;align-items:center;justify-content:center;cursor:pointer}
+.btn.danger{color:#a1261a;border-color:#a1261a}
+@container (max-width: 1100px){ .hide-md{display:none!important} .wz{height:auto;flex-wrap:wrap;padding-block:6px;row-gap:4px} .stp{margin-left:0;flex-basis:100%} }
+@container (max-width: 640px){ .rail{display:none} .hdr{padding:0 12px} .hdr nav a{padding:0 8px} .hdr h1{margin-right:8px} .body{padding:16px} .ft{padding:10px 16px;flex-wrap:wrap} .ft .btn.p{width:100%;order:9} .stp li span.lb{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap} .stp li[aria-current="step"] span.lb{display:inline} .btn,.ctl{height:40px} .hide-sm{display:none!important} .row{grid-template-columns:minmax(0,1fr)!important;row-gap:4px;padding:10px 12px} .hrow{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)} }
+@container (min-width: 2200px){ .shell{zoom:1.15} }
+@container (min-width: 2800px){ .shell{zoom:1.35} }
+
+
+.opts{display:flex;flex-direction:column;gap:2px}.opts label{display:flex;gap:8px;align-items:flex-start;font-size:13px;padding:3px 0;cursor:pointer}.opts input{margin:3px 0 0}.opts .h{display:block;font-size:12px;line-height:16px;color:#5f6b7a}
+.ci .cbb[aria-disabled="true"] .cb{opacity:.45}
+.ci .cbb[aria-disabled="true"] .cb{opacity:.45}
+.ci .cbb[aria-disabled="true"] .cb{opacity:.45}
+.rv{display:grid;grid-template-columns:112px minmax(0,1fr) 300px;column-gap:24px;align-items:start}
+.pgs{display:flex;flex-direction:column;gap:8px;max-height:900px;overflow:auto;padding:2px}
+.pg{border:0;background:transparent;padding:0;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;color:#5f6b7a;width:100%}
+.pg .pp{width:84px;height:108px;background:#fff;border:1px solid #c9d1da;border-radius:2px;position:relative;box-sizing:border-box}
+.pg[aria-current="true"] .pp{outline:2px solid #0b2d4a;outline-offset:1px}
+.pg .pp i{position:absolute;left:10px;right:10px;height:2px;background:#dfe4ea}.pg .pp b{position:absolute;left:10px;right:30px;top:12px;height:4px;background:#0b2d4a}
+.pg .vw{position:absolute;right:-5px;bottom:-5px;width:16px;height:16px;border-radius:50%;background:#1f7a4d;color:#fff;display:flex;align-items:center;justify-content:center}
+.pg .cm{position:absolute;right:-5px;top:-5px;width:16px;height:16px;border-radius:50%;background:#0b4f9c;color:#fff;display:flex;align-items:center;justify-content:center}
+.doc{background:#f1f3f6;border-radius:8px;padding:20px;display:flex;justify-content:center}
+.paper{background:#fff;width:100%;max-width:640px;padding:40px 48px 32px;box-sizing:border-box;border:1px solid #d7dde5;font-family:'Source Serif 4',Georgia,serif;color:#15202b;font-size:13.5px;line-height:22px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 3px rgba(21,32,43,.08)}
+.paper .rh{font:500 9px/12px 'IBM Plex Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#5f6b7a;border-bottom:1px solid #e6e9ee;padding-bottom:8px;display:flex;justify-content:space-between}
+.paper h4{margin:4px 0 0;font-size:20px;line-height:28px;font-weight:600;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.paper p{margin:0;text-align:justify;hyphens:auto}
+.ev{display:inline;font:500 10.5px/14px 'IBM Plex Sans',sans-serif;color:#0b4f9c;background:#e8eef5;border-radius:3px;padding:1px 5px;white-space:nowrap;text-decoration:none;vertical-align:baseline}
+.paper .evl{font:400 11.5px/16px 'IBM Plex Sans',sans-serif;border-top:1px solid #e6e9ee;padding-top:8px;margin-top:4px}
+.paper .evl .eyebrow{display:block;margin-bottom:4px}
+.paper .evl div{display:grid;grid-template-columns:minmax(0,1fr) 44px 60px;gap:10px;padding:3px 0;border-bottom:1px solid #f1f3f6}
+.paper .pf{font:400 9.5px 'IBM Plex Sans',sans-serif;color:#5f6b7a;display:flex;justify-content:space-between;margin-top:6px}
+.side{border-left:1px solid #e6e9ee;padding-left:24px;display:flex;flex-direction:column;gap:18px;position:sticky;top:12px}
+.ci{display:grid;grid-template-columns:28px minmax(0,1fr);column-gap:6px;align-items:start;padding:8px 0;border-bottom:1px solid #eceff3}
+.ci .t{font-weight:500}.ci .meta{display:block}
+.oc{display:flex;flex-direction:column;gap:4px}
+.oc button{display:grid;grid-template-columns:15px minmax(0,1fr);column-gap:10px;align-items:start;text-align:left;border:0;background:transparent;padding:4px 0;font-size:13px;color:#15202b;width:100%}
+.oc .rd{margin-top:3px}.oc .h{display:block;font-size:12px;line-height:16px;color:#5f6b7a}
+.tb{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.cmt{border-bottom:1px solid #eceff3;padding:8px 0;display:flex;flex-direction:column;gap:3px;font-size:12px}
+.cmt .w{display:flex;justify-content:space-between;gap:8px;color:#5f6b7a;font-size:11px}
+@container (max-width: 1280px){ .rv{grid-template-columns:112px minmax(0,1fr)} .side{grid-column:1/-1;border-left:0;padding-left:0;border-top:1px solid #e6e9ee;padding-top:16px;position:static} }
+@container (max-width: 1100px){ .rv{grid-template-columns:minmax(0,1fr)} .pgs{display:none} .dtb{flex-wrap:wrap;row-gap:8px} .paper{width:min(100%,660px)} }
+@container (max-width: 640px){ .rv{grid-template-columns:minmax(0,1fr)} .pgs{flex-direction:row;max-height:none;overflow-x:auto} .pg{width:auto} .paper{padding:24px 16px} }
+
+.ordl{list-style:none;margin:0;padding:0;border:1px solid #e6e9ee;border-radius:8px;overflow:hidden}.ordl li{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:center;padding:6px 10px;border-top:1px solid #eceff3;font-size:13px}.ordl li:first-child{border-top:0}.ordl li.fixed{background:#f7f8fa;color:#5f6b7a}.ordl li.moved{background:#eef3fa}.ordl .n{font-size:11px;color:#5f6b7a;font-variant-numeric:tabular-nums}.ordl .mv{display:inline-flex;gap:4px}.ordl .mv button{width:26px;height:26px;border:1px solid #c9d1da;border-radius:4px;background:#fff;font-size:13px}.ordl .mv button[aria-disabled="true"]{color:#a5aeb8;border-color:#e6e9ee}
+.afk{list-style:none;margin:6px 0 0;padding:0;border:1px solid #e6e9ee;border-radius:8px}.afk li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;padding:8px 12px;border-top:1px solid #eceff3;font-size:13px;align-items:start}.afk li:first-child{border-top:0}.afk li.always{display:block;background:#f7f8fa}.afk label{display:block;cursor:pointer}.afk .t{font-weight:500}.afk .meta{margin-left:8px}.afk .d{display:block;font-size:12px;line-height:16px;color:#5f6b7a}.afk input{margin:3px 0 0}
+.plain{margin:4px 0 0;padding-left:18px;font-size:13px;display:flex;flex-direction:column;gap:3px}.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}@container (max-width: 640px){ .g2{grid-template-columns:minmax(0,1fr)} }
+.ov{position:fixed;inset:0;background:rgba(21,32,43,.4);z-index:30;display:flex;align-items:center;justify-content:center;padding:16px}
+.dlg{background:#fff;border-radius:8px;width:100%;max-width:560px;box-shadow:0 16px 40px rgba(21,32,43,.24);display:flex;flex-direction:column}
+.dlg .dh{padding:16px 20px 8px}.dlg .db{padding:8px 20px;display:flex;flex-direction:column;gap:12px}.dlg .df{padding:12px 20px 16px;display:flex;gap:8px;justify-content:flex-end}
+
+.chip.ai{background:linear-gradient(90deg,#4f46e5,#7c3aed);color:#fff}
+.aic{color:#5b3df5}
+.ring.ai{background:conic-gradient(#5b3df5 0 58%,#e9e5ff 58% 100%)}
+.cat .bar i.ai{background:linear-gradient(90deg,#4f46e5,#8b5cf6)}
+.half.aihalf{background:linear-gradient(180deg,#faf9ff,#ffffff 60%);border-radius:10px;padding:16px 20px;border:1px solid #e4dfff}
+.half.aihalf+.half,.half+.half.aihalf{border-left:0;padding-left:20px}
+.unlock .card{border:1px solid #c7bfff;border-top:4px solid #5b3df5;background:#fff}
+.btn.ai{background:linear-gradient(90deg,#4f46e5,#7c3aed);color:#fff;border:0}
+.btn.ai:hover{background:linear-gradient(90deg,#4338ca,#7c3aed);color:#fff}
+.btn.ais{border:1px solid #c7bfff;color:#4f46e5;background:#faf9ff}.btn.ais:hover{background:#f1edff}
+.al.ai{background:#f3f0ff;color:#3b2fa3}
+.find.ai{border-left:3px solid #8b5cf6;padding-left:10px}
+
+
+.dtb{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:6px 8px;border:1px solid #e6e9ee;border-radius:6px;background:#fff}
+.dtb .pgn{font-size:12px;color:#5f6b7a;white-space:nowrap}
+.doc{flex-direction:column;align-items:center;justify-content:flex-start;gap:20px;padding:24px 20px;background:#e9ecf0;max-height:1120px;overflow:auto}
+.rd-top{display:flex;align-items:center;gap:10px;padding:6px 20px;min-height:44px;border-bottom:1px solid #e6e9ee;background:#fff;position:sticky;top:0;z-index:4;flex-wrap:wrap}.rd-top>*{flex:0 0 auto;white-space:nowrap}.rd-top .srch{flex:0 1 160px}
+@media (max-width: 900px){ .rd-body.cm{grid-template-columns:minmax(0,1fr) !important} .rd-doc{padding-bottom:62vh} .rd-cm{position:fixed;left:0;right:0;bottom:0;top:auto;height:auto;max-height:60vh;border-left:0;border-top:1px solid #e6e9ee;box-shadow:0 -8px 24px rgba(21,32,43,.12);z-index:5} .rd-top .crumb{display:none} }
+.rd-body{display:grid;grid-template-columns:minmax(0,1fr)}.rd-body.cm{grid-template-columns:minmax(0,1fr) 340px}
+.rd-cm{background:#fff;border-left:1px solid #e6e9ee;padding:14px 16px;display:flex;flex-direction:column;gap:12px;position:sticky;top:44px;height:calc(100vh - 44px);overflow:auto}
+.cmi{border:1px solid #e6e9ee;border-radius:8px;padding:10px 12px}.cmi.done{opacity:.65}
+.secnav{display:inline-flex;align-items:center;gap:4px}
+.rd-doc{background:#e9ecf0;min-height:calc(100vh - 44px);padding:28px 20px;display:flex;flex-direction:column;align-items:center;gap:24px}
+.rd-doc .paper{max-width:760px;min-height:984px;font-size:14.5px;line-height:24px}
+.paper{max-width:660px;min-height:854px;padding:48px 56px 40px;box-shadow:0 2px 6px rgba(21,32,43,.14);position:relative}
+.paper .pf{margin-top:auto}
+.ai{display:inline-flex;align-items:center;gap:6px}
+.chg{display:flex;flex-direction:column;gap:6px;font-size:12px}
+.chg div,.chg a{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:5px 0;border-bottom:1px solid #eceff3}.chg a{color:#0b4f9c}.chg a:hover{background:#f7f9fb}.chg a .meta{color:#5f6b7a}
+.mark{position:absolute;left:0;top:0;bottom:0;width:4px;background:#0b4f9c;border-radius:0 2px 2px 0}
+
+.fl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}.fl li{display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;align-items:start;font-size:13px}.fl li .d{display:block}
+.sv{font-size:11px;font-weight:600;padding:1px 6px;border-radius:4px;justify-self:start;margin-top:2px}.sv.high{background:#fdecea;color:#a1261a}.sv.medium{background:#fdf3dc;color:#7a4b00}.sv.low{background:#eef1f5;color:#3b4654}
+.nar p{margin:0 0 10px;font:400 14px/22px Georgia,'Times New Roman',serif;color:#15202b}.nar mark,.nar .fmark{background:#fdf3dc;color:inherit;border-bottom:2px solid #d79a1a;padding:0 1px}.nar .fmark.rv{background:#dfe6f2;border-bottom-color:#2f6db5}.mk{display:inline-block;font:600 10px/16px 'IBM Plex Sans',system-ui,sans-serif;background:#7a4b00;color:#fff;border-radius:8px;padding:0 5px;vertical-align:super;margin-left:2px}
+.nar .rv{background:#e3ecf8;border-bottom:2px solid #2f6db5;color:inherit;padding:0 1px}.mkb{display:inline-block;font:600 10px/16px 'IBM Plex Sans',system-ui,sans-serif;background:#2f6db5;color:#fff;border-radius:8px;padding:0 5px;vertical-align:super;margin-left:2px}
+.nar .sel{background:#bcd3f3;color:inherit}.nar .sent{cursor:pointer}.nar .sent:hover{background:#eef3fa}
+.pop{border:1px solid #8a95a1;border-radius:8px;padding:10px 12px;margin:2px 0 14px;background:#fff;box-shadow:0 8px 24px rgba(21,32,43,.14);display:flex;flex-direction:column;gap:8px;font-size:13px}.pop q{font-style:italic;color:#3b4654}.pop textarea{min-height:56px}
+.yr{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}.yr li{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:10px;font-size:13px;align-items:start}.yr q{font-style:italic;color:#3b4654;display:block;font-size:12px}.yr .act{display:flex;gap:8px;font-size:12px}
+.seltip{display:flex;gap:8px;align-items:center;font-size:12px;color:#5f6b7a;margin-bottom:8px}.seltip .k{border:1px solid #c9d1da;border-radius:4px;padding:0 5px;font:500 11px/18px 'IBM Plex Sans',system-ui,sans-serif;color:#15202b}
+.paper .nar p{font:inherit;line-height:inherit;margin:0 0 12px}.paper .nar{display:block}.paper .pop{font:400 13px/19px 'IBM Plex Sans',system-ui,sans-serif}
+
+</style>
+</helmet>
+<div class="app"><sc-if value="{{ordOpen}}" hint-placeholder-val="{{false}}"><div class="ov"><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="orh" aria-describedby="ord" style="max-width: 560px;">
+  <div class="dh"><h3 id="orh" style="margin: 0; font: 600 16px/24px Poppins, sans-serif;">Order sections</h3><p id="ord" class="note" style="margin-top: 4px;">Move a standard up or down to change where it prints. Cover and Contents stay first; Documents and Links stay last (set in Step 1). Standard numbers do not change; the contents and page numbers are rebuilt.</p></div>
+  <div class="db">
+    <ol class="ordl" aria-label="Sections in print order"><sc-for list="{{ordRows}}" as="r" hint-placeholder-count="16"><li class="{{r.cls}}"><span class="n">{{r.num}}</span><span>{{r.full}}<sc-if value="{{r.moved}}" hint-placeholder-val="{{false}}"> <span class="chip grey" style="margin-left: 6px;">moved</span></sc-if></span><sc-if value="{{r.fixed}}" hint-placeholder-val="{{false}}"><span class="meta">fixed</span></sc-if><sc-if value="{{r.movable}}" hint-placeholder-val="{{true}}"><span class="mv"><button type="button" aria-label="Move {{r.full}} up" aria-disabled="{{r.noUp}}" onClick="{{r.up}}">↑</button><button type="button" aria-label="Move {{r.full}} down" aria-disabled="{{r.noDown}}" onClick="{{r.down}}">↓</button></span></sc-if></li></sc-for></ol>
+    <p class="note" role="status" style="margin: 0;">{{ordHint}}</p>
+  </div>
+  <div class="df"><button type="button" class="btn t" aria-disabled="{{ordIsTemplate}}" onClick="{{ordReset}}">Reset to template order</button><span style="flex-grow: 1;"></span><button type="button" class="btn s" autofocus onClick="{{ordCancel}}">Cancel</button><button type="button" class="btn p" aria-disabled="{{ordSame}}" onClick="{{ordApply}}">Apply order</button></div>
+</div></div></sc-if><div class="shell"><a href="#main" class="skip">Skip to main content</a>
+  <nav class="rail" aria-label="SPOL modules">
+    <span class="logo" role="img" aria-label="SPOL">SPOL</span>
+    <a href="#" aria-label="Home"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg></a><a href="#" aria-label="Planning"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg></a><a href="#" aria-label="Assessment"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg></a><a href="#" aria-label="Accreditation" aria-current="page"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M3 10l9-6 9 6M5 10v9M19 10v9M9 10v9M15 10v9M3 21h18"></path></svg></a><a href="#" aria-label="Reports"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><rect x="5" y="3" width="14" height="18" rx="2"></rect><path d="M9 8h6M9 12h6M9 16h4"></path></svg></a><a href="#" aria-label="Settings"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"></path></svg></a>
+  </nav>
+  <div class="main">
+    <header class="hdr">
+      <h1>Accreditation</h1>
+      <nav aria-label="Accreditation"><a href="#">Dashboard</a><a href="#">All Accreditation</a><a href="#">Create Cycle</a><a href="L0.dc.html" aria-current="page">Publish</a><a href="#">Document Repository</a></nav>
+      <span class="sp"></span>
+      
+      <button type="button" class="icb" aria-label="Help and Ask SPOL"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7M12 17h.01"></path></svg></button>
+      <button type="button" class="icb" aria-label="Notifications"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8M10 20a2 2 0 0 0 4 0"></path></svg></button>
+      <button type="button" class="av" aria-label="Alex Carter, account menu" aria-haspopup="true">AC</button>
+    </header>
+    <div class="wz">
+      <div class="crumb"><a href="L0.dc.html">Publish</a><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M9 6l6 6-6 6"></path></svg><b>Compliance Certification</b><span class="chip blue">Draft 4</span><span class="hide-md">· SACS 10-Year · 2024–2025</span></div>
+      <nav aria-label="Publish steps"><ol class="stp"><li class="done"><span class="n" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M5 12l5 5L20 7"></path></svg></span><a href="S1.dc.html"><span class="sr">Step 1, completed: </span><span class="lb">Standards & content</span></a></li><li class="done"><span class="n" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M5 12l5 5L20 7"></path></svg></span><a href="S2.dc.html"><span class="sr">Step 2, completed: </span><span class="lb">Readiness check</span></a></li><li class="done"><span class="n" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M5 12l5 5L20 7"></path></svg></span><a href="S3.dc.html"><span class="sr">Step 3, completed: </span><span class="lb">Cover & signers</span></a></li><li aria-current="step"><span class="n" aria-hidden="true">4</span><span><span class="sr">Step 4 of 4: </span><span class="lb">Preview & publish</span></span></li></ol></nav>
+      <span class="meta hide-md" style="display: inline-flex; align-items: center; gap: 5px; color: #1f7a4d;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M5 12l5 5L20 7"></path></svg><span style="color: #5f6b7a;">Saved</span></span>
+    </div>
+    <main id="main" tabindex="-1" class="body">
+      <div class="ph"><div><h2>Preview &amp; publish</h2><p>Read the document as it will print, confirm the three items, then choose the format and publish.</p></div><span class="sp"></span></div>
+      <div class="rv">
+  <nav class="pgs" aria-label="Report pages"><sc-for list="{{pages}}" as="p" hint-placeholder-count="16">
+  <button type="button" class="pg" aria-current="{{p.cur}}" aria-label="{{p.label}}" onClick="{{p.go}}"><span class="pp"><b></b><i style="top: 30px"></i><i style="top: 38px"></i><i style="top: 46px"></i><i style="top: 54px"></i><i style="top: 62px; right: 40px"></i><sc-if value="{{p.viewed}}" hint-placeholder-val="{{true}}"><span class="vw"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M5 12l5 5L20 7"></path></svg></span></sc-if><sc-if value="{{p.hasC}}" hint-placeholder-val="{{false}}"><span class="cm"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M21 12a8 8 0 0 1-8 8H7l-4 3V12a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z"></path></svg></span></sc-if></span><span>{{p.name}}</span></button>
+</sc-for></nav>
+  <div style="display: flex; flex-direction: column; gap: 10px; min-width: 0;">
+    <div class="dtb"><span class="secnav" role="group" aria-label="Section"><button type="button" class="btn s" style="height: 28px; width: 28px; padding: 0;" aria-label="Previous section" aria-disabled="{{noPrev}}" onClick="{{prevSec}}">‹</button><span class="selw"><select class="ctl" style="height: 28px; font-size: 12px; width: 300px;" aria-label="Go to section" value="{{curIdx}}" onChange="{{goSec}}"><sc-for list="{{pages}}" as="p" hint-placeholder-count="3"><option value="{{p.idx}}">{{p.optLabel}}</option></sc-for></select></span><button type="button" class="btn s" style="height: 28px; width: 28px; padding: 0;" aria-label="Next section" aria-disabled="{{noNext}}" onClick="{{nextSec}}">›</button></span><span class="pgn">{{secPageLine}}</span><span class="segf" role="group" aria-label="Zoom" style="height: 26px;"><button type="button" aria-label="Zoom out">−</button><span role="status" style="display: inline-flex; align-items: center; padding: 0 8px; font-size: 12px; border-left: 1px solid #e6e9ee;">100%</span><button type="button" aria-label="Zoom in">+</button></span><label class="srch" style="height: 26px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" placeholder="Find" aria-label="Find in document" style="width: 150px;"></label><span style="flex-grow: 1;"></span><span class="meta" role="status">{{viewedLine}}</span><span class="meta hide-md">· Select a sentence to comment</span><button type="button" class="btn s" style="height: 28px; font-size: 12px;" onClick="{{nextUnviewed}}">Next unviewed</button><button type="button" class="btn s" style="height: 28px; font-size: 12px;" aria-haspopup="dialog" onClick="{{openOrd}}">Order sections</button><div class="segf" role="group" aria-label="Mode" style="height: 28px;"><button type="button" aria-pressed="{{isPrev}}" onClick="{{modePrev}}">Preview</button><button type="button" aria-pressed="{{isEdit}}" onClick="{{modeEdit}}">Edit</button></div><a class="btn ais" href="S4a.dc.html" style="height: 28px; font-size: 12px;" aria-label="Auto-format with AI · 4 credits"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM5 19l.7 1.8L7.5 21l-1.8.7L5 23l-.7-1.3L2.5 21l1.8-.2z"></path></svg>Auto-format with AI</a><a class="btn s" href="S4r.dc.html" style="height: 28px; width: 28px; padding: 0;" aria-label="Reading mode" title="Reading mode"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"></path></svg></a></div>
+    <sc-if value="{{isEdit}}" hint-placeholder-val="{{false}}"><div class="al warn" role="status"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M12 3l10 18H2z"></path><path d="M12 10v4M12 17h.01"></path></svg><span style="flex: 1 1 auto;">Editing clears the confirmations and marks the readiness check out of date.</span><label style="display: inline-flex; gap: 6px; align-items: center; white-space: nowrap;"><input type="checkbox"> Also update the response in All Accreditation</label><button type="button" class="btn p" style="height: 26px; font-size: 12px;" onClick="{{saveEdit}}">Save</button><button type="button" class="btn s" style="height: 26px; font-size: 12px;" onClick="{{discardEdit}}">Discard</button></div></sc-if>
+    <div class="doc"><article class="paper" aria-label="Report page">
+  <div class="rh"><span>Westmoor University · Compliance Certification</span><span>SACSCOC 2018</span></div>
+  <h4>{{secHeading}} <sc-if value="{{secHasChip}}" hint-placeholder-val="{{true}}"><span class="chip green" style="font-family: Poppins, sans-serif;">{{secChip}}</span></sc-if></h4>
+  <div class="nar rdnar" onMouseUp="{{rvSel}}"><sc-for list="{{rvParas}}" as="p" hint-placeholder-count="3"><p data-rvp="{{p.i}}"><sc-for list="{{p.segs}}" as="g" hint-placeholder-count="3"><sc-if value="{{g.isSent}}" hint-placeholder-val="{{true}}"><span class="sentb {{g.cls}}" role="button" tabindex="0" aria-pressed="{{g.inSel}}" onClick="{{g.pick}}" onKeyDown="{{g.pick}}">{{g.t}}</span></sc-if><sc-if value="{{g.isPlain}}" hint-placeholder-val="{{false}}"><span class="{{g.cls}}">{{g.t}}</span></sc-if><sc-if value="{{g.hasMk}}" hint-placeholder-val="{{false}}"><span class="{{g.mkCls}}" data-mk="1" role="img" aria-label="{{g.mkLabel}}">{{g.mk}}</span></sc-if></sc-for></p><sc-if value="{{p.hasSel}}" hint-placeholder-val="{{false}}"><div class="pop" role="dialog" aria-labelledby="poph2"><div id="poph2" style="font-weight: 500;">Comment on the selected text</div><q>{{rvSelText}}</q><textarea aria-label="Comment" placeholder="What should the writer change or clarify? Then choose Add." onInput="{{rvSetDraft}}"></textarea><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><button type="button" class="btn p" style="height: 28px; font-size: 12px;" onClick="{{rvAdd}}">{{rvAddLabel}}</button><button type="button" class="btn t" style="height: 28px; font-size: 12px;" onClick="{{rvCancel}}">Cancel</button><span class="meta" style="margin: 0;">Anchored to {{rvSelWhere}} · stays with {{secCode}}</span></div></div></sc-if></sc-for></div>
+  <p class="meta" style="font: 400 11px/15px 'IBM Plex Sans', system-ui, sans-serif; margin: 0 0 10px;">{{secHint}}</p>
+  <sc-if value="{{isSec31}}" hint-placeholder-val="{{false}}"><table style="width: 100%; border-collapse: collapse; font: 400 11.5px/16px 'IBM Plex Sans', sans-serif; margin: 4px 0;"><caption style="text-align: left; font-weight: 600; padding-bottom: 4px;">Table 3.1 · Board composition, 2025–26</caption><thead><tr style="background: #f1f3f6;"><th style="text-align: left; padding: 5px 8px; border: 1px solid #dfe4ea;">Seat</th><th style="text-align: left; padding: 5px 8px; border: 1px solid #dfe4ea;">Trustee</th><th style="text-align: left; padding: 5px 8px; border: 1px solid #dfe4ea;">Term ends</th><th style="text-align: left; padding: 5px 8px; border: 1px solid #dfe4ea;">Affiliation</th></tr></thead>
+  <tbody><tr><td style="padding: 5px 8px; border: 1px solid #dfe4ea;">Chair</td><td style="padding: 5px 8px; border: 1px solid #dfe4ea;">R. Ellison</td><td style="padding: 5px 8px; border: 1px solid #dfe4ea;">2027</td><td style="padding: 5px 8px; border: 1px solid #dfe4ea;">None</td></tr><tr><td style="padding: 5px 8px; border: 1px solid #dfe4ea;">Vice-chair</td><td style="padding: 5px 8px; border: 1px solid #dfe4ea;">P. Nakamura</td><td style="padding: 5px 8px; border: 1px solid #dfe4ea;">2026</td><td style="padding: 5px 8px; border: 1px solid #dfe4ea;">None</td></tr><tr><td style="padding: 5px 8px; border: 1px solid #dfe4ea;">Trustee</td><td style="padding: 5px 8px; border: 1px solid #dfe4ea;">L. Okafor</td><td style="padding: 5px 8px; border: 1px solid #dfe4ea;">2028</td><td style="padding: 5px 8px; border: 1px solid #dfe4ea;">Alumni association</td></tr><tr><td style="padding: 5px 8px; border: 1px solid #dfe4ea;">Ex officio</td><td style="padding: 5px 8px; border: 1px solid #dfe4ea;">Dr. J. Okonkwo</td><td style="padding: 5px 8px; border: 1px solid #dfe4ea;">—</td><td style="padding: 5px 8px; border: 1px solid #dfe4ea;">President, non-voting</td></tr></tbody></table></sc-if>
+  <sc-if value="{{secHasEv}}" hint-placeholder-val="{{true}}"><div class="evl"><span class="ol">Evidence</span><sc-for list="{{secEv}}" as="e" hint-placeholder-count="3"><div><span>{{e.n}}</span><span>{{e.t}}</span><span>{{e.p}}</span></div></sc-for></div></sc-if>
+  <div class="pf"><span>Westmoor University</span><span>{{secFooterPage}}</span></div>
+</article></div>
+    <sc-if value="{{showCm}}" hint-placeholder-val="{{false}}"><div style="display: flex; flex-direction: column; gap: 6px;"><div style="display: flex; align-items: baseline; gap: 8px;"><span class="eyebrow">{{cmOpenLine}}</span><span style="flex-grow: 1;"></span><button type="button" class="btn t" style="height: 24px; font-size: 12px;" onClick="{{showConfirm}}">Hide</button></div><sc-for list="{{comments}}" as="k" hint-placeholder-count="3"><div class="cmt"><div class="w"><span><b style="color: #15202b;">{{k.who}}</b> · {{k.where}}</span><span>{{k.when}}</span></div><span>{{k.text}}</span><div><sc-if value="{{k.open}}" hint-placeholder-val="{{true}}"><button type="button" class="btn t" style="height: 22px; padding: 0; font-size: 12px;" onClick="{{k.resolve}}">Resolve</button></sc-if><sc-if value="{{k.done}}" hint-placeholder-val="{{false}}"><span class="chip grey">Resolved</span></sc-if></div></div></sc-for></div></sc-if>
+  </div>
+  <aside class="side">
+  <section aria-labelledby="cfh" style="display: flex; flex-direction: column; gap: 6px;">
+    <span class="eyebrow" id="cfh">Confirm &amp; attest</span><span class="meta" role="status">{{confLine}}</span>
+    <sc-if value="{{locked}}" hint-placeholder-val="{{true}}"><div class="al warn" id="lockwhy"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg><span>{{lockText}}</span></div></sc-if><sc-if value="{{unlockedNow}}" hint-placeholder-val="{{false}}"><span id="lockwhy" class="sr" role="status">You can now confirm.</span></sc-if>
+    <div>
+      <sc-for list="{{checks}}" as="c" hint-placeholder-count="3">
+        <div class="ci"><button type="button" class="cbb" role="checkbox" aria-checked="{{c.on}}" aria-disabled="{{c.dis}}" aria-describedby="lockwhy" aria-label="{{c.t}} · {{c.m}}" onClick="{{c.toggle}}"><span class="cb {{c.cls}}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M5 12l5 5L20 7"></path></svg></span></button><div><span class="t">{{c.t}}</span><span class="meta">{{c.m}}</span></div></div>
+      </sc-for>
+    </div>
+    <span class="note">Confirming as Alex Carter · not available while impersonating. Signers attest on the cover.</span>
+    <button type="button" class="btn t" style="align-self: flex-start; padding: 0;" onClick="{{showComments}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M21 12a8 8 0 0 1-8 8H7l-4 3V12a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z"></path></svg>Comments (3)</button>
+  </section>
+  <section aria-labelledby="pbh" style="display: flex; flex-direction: column; gap: 10px;">
+    <span class="eyebrow" id="pbh">Publish</span>
+    <div><span class="lbl">Format</span><div class="segf" role="radiogroup" aria-label="Output format" style="height: 30px;"><button type="button" role="radio" aria-checked="true">PDF</button><button type="button" role="radio" aria-checked="false">Word</button><button type="button" role="radio" aria-checked="false">HTML package</button><button type="button" role="radio" aria-checked="false">Website</button></div><p class="note" style="margin-top: 4px;">Bookmarked, links kept. Best for printing and sharing.</p></div>
+    <div><span class="lbl">Version</span><div class="oc rad" role="radiogroup" aria-label="Version"><label><input type="radio" name="ver" checked><span class="rd"><i></i></span><span>Internal draft<span class="h">Watermarked “Draft”. For your team.</span></span></label><label><input type="radio" name="ver" disabled aria-describedby="finwhy"><span class="rd"><i></i></span><span style="color: #6b7a8d;">Final for submission<span class="h" id="finwhy" style="color: #8a4b00;">Not yet: 3.3, 4.2, 6.2 not approved or excluded by send back.</span></span></label></div></div>
+    <div><span class="lbl" id="opth">Options</span><div class="opts" role="group" aria-labelledby="opth">
+      <label><input type="checkbox" checked> <span>Table of contents<span class="h">Rebuilt from the headings at publish</span></span></label>
+      <label><input type="checkbox" checked> <span>Page numbers<span class="h">Continuous, “Page n of 184”</span></span></label>
+      <label><input type="checkbox" checked> <span>Page break before each standard</span></label>
+      <label><input type="checkbox" checked> <span>Running headers<span class="h">Institution · report · accreditor</span></span></label>
+      <label><input type="checkbox" checked> <span>Documents and links listed at the end<span class="h">From Step 1 · Content settings</span></span></label>
+      <label><input type="checkbox" disabled aria-describedby="clwhy"> <span style="color: #6b7a8d;">Cover letter<span class="h" id="clwhy">None uploaded · add it in Step 3</span></span></label>
+      <label><input type="checkbox" checked disabled aria-describedby="wmwhy"> <span style="color: #6b7a8d;">“Draft” watermark<span class="h" id="wmwhy">Follows the version: on for an internal draft, off for a final</span></span></label>
+    </div></div>
+    <div><label class="lbl" for="fn">File name</label><span style="display: flex; align-items: center; gap: 6px;"><input id="fn" class="ctl" value="Westmoor_SACSCOC_ComplianceCertification_Draft4_2026-10-17" aria-describedby="fnh" style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11.5px; flex: 1 1 auto; min-width: 0;"><span class="meta" style="font-family: 'IBM Plex Mono', ui-monospace, monospace;">.pdf</span></span><span id="fnh" class="sr">The extension is fixed; \ / : * ? " &lt; &gt; | are removed.</span></div>
+    <div class="al warn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M12 3l10 18H2z"></path><path d="M12 10v4M12 17h.01"></path></svg><span><b>Before you publish:</b> 17 open findings · 3 open comments · formatting not yet run. None of it blocks a draft.</span></div>
+  </section>
+</aside>
+</div>
+    </main>
+    <div class="ft"><a class="btn s" href="S3.dc.html">Back</a><a class="btn t" href="L0.dc.html">Save and exit</a><span class="sp"></span><span class="why" id="whyn" role="status">{{{{pubWhy}}}}</span><sc-if value="{{{{canPub}}}}" hint-placeholder-val="{{{{false}}}}"><a class="btn p" href="S4b.dc.html" aria-describedby="whyn">Publish draft</a></sc-if><sc-if value="{{{{cannotPub}}}}" hint-placeholder-val="{{{{true}}}}"><span class="btn p" role="button" tabindex="0" aria-disabled="true" aria-describedby="whyn">Publish draft</span></sc-if></div>
+  </div>
+</div></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1330}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = Object.assign({ av: false, ver: false, rowMenu: -1 }, { viewed: { 0: 1, 1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1, 7: 1, 8: 1 }, cur: 4, conf: {}, mode: 'prev', stale: false, side: 'cf', cm: {}, ord: null, ordOpen: false, ordDraft: null, ordDone: false, rvc: [], rvsel: null, rvdraft: '', rvo: '', rvoHas: false }); }
+  renderVals(){
+    var self = this, st = this.state;
+    var base = {
+      avOpen: st.av, toggleAv: function(){ self.setState({ av: !st.av, ver: false, rowMenu: -1 }); },
+      verOpen: st.ver, toggleVer: function(){ self.setState({ ver: !st.ver, av: false, rowMenu: -1 }); }
+    };
+    
+    var PG = ['Cover','Contents','1.1','2.1','3.1','3.2','3.3','4.1','4.2','5.1','5.2','6.1','6.2','6.3','Documents','Links'];
+    var PGN = { '1.1': 'Integrity', '2.1': 'Institutional Mission', '3.1': 'Governing Board', '3.2': 'Board Oversight', '3.3': 'Administrative Staff', '4.1': 'Institutional Planning', '4.2': 'Assessment of Outcomes', '5.1': 'Faculty Qualifications', '5.2': 'Faculty Evaluation', '6.1': 'Financial Resources', '6.2': 'Physical Resources', '6.3': 'Library and Learning Resources' };
+    var CMSEC = { 0: 2, 1: 4, 2: 10 };
+    var CMI = { 2: 1, 4: 1, 10: 1 };
+    var viewed = st.viewed || {}, conf = st.conf || {}, cm = st.cm || {};
+    var nV = Object.keys(viewed).length, all = nV >= PG.length;
+    var TPL = PG.map(function(_, i){ return i; }); var ORD = st.ord || TPL; var FIXED = { 0: 1, 1: 1, 14: 1, 15: 1 };
+    var curPos = ORD.indexOf(st.cur);
+    var pages = ORD.map(function(i, pos){ var n = PG[i]; return { name: n, idx: i, pos: pos, full: PGN[n] ? (n + ' ' + PGN[n]) : n, optLabel: (PGN[n] ? (n + ' ' + PGN[n]) : n) + (viewed[i] ? ' · viewed' : '') + (CMI[i] ? ' · comments' : ''), sel: i === st.cur, cur: i === st.cur, viewed: !!viewed[i], hasC: !!CMI[i], label: 'Section ' + n + (viewed[i] ? ', viewed' : '') + (CMI[i] ? ', has comments' : ''),
+      go: function(){ var v = Object.assign({}, viewed); v[i] = 1; self.setState({ cur: i, viewed: v }); } }; });
+    var locked = !all && !st.stale;
+    var CK = [['Sections and standards','12 standards in 6 sections · Not approved: 3.3, 4.2, 6.2'],['Formatting and branding','Logo Westmoor logo.svg · No cover letter · Fonts embedded, page numbers continuous'],['Findings and comments','17 open findings carried from Readiness · 3 open comments']];
+    var checks = CK.map(function(c, i){ var dis = locked; return { t: c[0], m: c[1], on: !!conf[i], dis: dis, cls: conf[i] ? 'on' : '', toggle: function(){ if (dis) return; var n = Object.assign({}, conf); if (n[i]) delete n[i]; else n[i] = 1; self.setState({ conf: n }); } }; });
+    var nC = Object.keys(conf).length;
+    var CM = [{ who: 'Dr. Maria Santos', role: 'Reader', where: '1.1 Integrity', when: '14 Oct', text: 'Cite the policy revision date.' }, { who: 'Priya Natarajan', role: 'Editor', where: '3.1 Governing Board', when: '15 Oct', text: 'Clarify the recusal rule: does a trustee leave the room, or abstain? The minutes say "recorded", which a reviewer may read either way.' }, { who: 'Dr. Maria Santos', role: 'Reader', where: '5.2 Faculty Evaluation', when: '12 Oct', text: 'Add the evaluation cycle length.' }];
+    var nOpenC = CM.filter(function(c, i){ return !cm[i]; }).length;
+    var nOpenC = CM.filter(function(c, i){ return !cm[i]; }).length;
+    var nOpenC = CM.filter(function(c, i){ return !cm[i]; }).length;
+    var comments = CM.map(function(c, i){ return Object.assign({}, c, { open: !cm[i], done: !!cm[i], cls: cm[i] ? 'done' : '', here: CMSEC[i] === st.cur, resolve: function(){ var n = Object.assign({}, cm); if (n[i]) delete n[i]; else n[i] = 1; self.setState({ cm: n }); }, goto: function(){ var v = Object.assign({}, viewed); v[CMSEC[i]] = 1; self.setState({ cur: CMSEC[i], viewed: v }); } }); });
+    function goIdx(i){ if (i === undefined || i < 0 || i >= PG.length) return; var v = Object.assign({}, viewed); v[i] = 1; self.setState({ cur: i, viewed: v }); }
+    var curName = PGN[PG[st.cur]] ? (PG[st.cur] + ' ' + PGN[PG[st.cur]]) : PG[st.cur];
+    var cmHere = comments.filter(function(c){ return c.here; }).length;
+    Object.assign(base, { pages: pages, viewedLine: nV + ' of 16 sections viewed', nextUnviewed: function(){ for (var p = 0; p < ORD.length; p++) { var i = ORD[p]; if (!viewed[i]) { var v = Object.assign({}, viewed); v[i] = 1; self.setState({ cur: i, viewed: v }); return; } } },
+      openOrd: function(){ self.setState({ ordOpen: true, ordDraft: ORD.slice() }); }, ordCancel: function(){ self.setState({ ordOpen: false, ordDraft: null }); }, ordReset: function(){ self.setState({ ordDraft: TPL.slice() }); },
+      ordApply: function(){ var d = st.ordDraft || ORD; var same = d.join() === ORD.join(); self.setState({ ord: d.join() === TPL.join() ? null : d.slice(), ordOpen: false, ordDraft: null, conf: same ? conf : {}, ordDone: !same }); },
+      ordOpen: !!st.ordOpen, ordRows: (st.ordDraft || ORD).map(function(i, pos, D){ var fixed = !!FIXED[i]; var full = PGN[PG[i]] ? (PG[i] + ' ' + PGN[PG[i]]) : PG[i]; var noUp = fixed || pos <= 0 || !!FIXED[D[pos - 1]]; var noDown = fixed || pos >= D.length - 1 || !!FIXED[D[pos + 1]];
+        function swap(a, b){ var n = D.slice(); var t = n[a]; n[a] = n[b]; n[b] = t; self.setState({ ordDraft: n }); }
+        return { num: pos + 1, full: full, fixed: fixed, movable: !fixed, moved: TPL[pos] !== i, cls: (fixed ? 'fixed' : '') + (TPL[pos] !== i ? ' moved' : ''), noUp: noUp, noDown: noDown, up: function(){ if (!noUp) swap(pos, pos - 1); }, down: function(){ if (!noDown) swap(pos, pos + 1); } }; }),
+      ordSame: (st.ordDraft || ORD).join() === ORD.join(), ordIsTemplate: (st.ordDraft || ORD).join() === TPL.join(),
+      ordHint: (function(){ var D = st.ordDraft || ORD; var n = D.filter(function(i, pos){ return TPL[pos] !== i; }).length; return n ? n + ' section' + (n === 1 ? '' : 's') + ' out of template order. Applying rebuilds the contents and page numbers and clears the confirmations.' : 'Template order. Use the arrows, or Tab to a button and press Enter.'; })(),
+      ordDone: !!st.ordDone, ordDoneText: 'Section order changed · contents and page numbers rebuilt · confirmations cleared · recorded in the audit trail.',
+      isPrev: st.mode === 'prev', isEdit: st.mode === 'edit', modePrev: function(){ self.setState({ mode: 'prev' }); }, modeEdit: function(){ self.setState({ mode: 'edit' }); }, saveEdit: function(){ self.setState({ mode: 'prev', conf: {}, stale: true }); }, discardEdit: function(){ self.setState({ mode: 'prev' }); },
+      checks: checks, confLine: nC + ' of 3 confirmed · signers attest on the final version', locked: locked, stale: !!st.stale, lockText: 'View all 16 sections to confirm.', unlockedNow: !locked, cmLabel: 'Comments (' + nOpenC + ')', cmOpenLine: 'Comments · ' + nOpenC + ' open', nOpenC: nOpenC,
+      canPub: nC === 3, cannotPub: nC < 3, pubWhy: nC === 3 ? 'Ready to publish an internal draft · ' + nV + ' of 16 sections viewed' : 'Confirm ' + (3 - nC) + ' more to publish · ' + nV + ' of 16 sections viewed',
+      showCf: st.side === 'cf', showCm: st.side === 'cm', showComments: function(){ self.setState({ side: 'cm' }); }, showConfirm: function(){ self.setState({ side: 'cf' }); }, comments: comments,
+      curName: curName, curLabel: curName + ' · ' + (curPos + 1) + ' of ' + PG.length, curIdx: String(st.cur), hasPrev: curPos > 0, hasNext: curPos < PG.length - 1, noPrev: curPos <= 0, noNext: curPos >= PG.length - 1, prevSec: function(){ goIdx(ORD[curPos - 1]); }, nextSec: function(){ goIdx(ORD[curPos + 1]); }, goSec: function(e){ goIdx(parseInt(e && e.target ? e.target.value : e, 10)); },
+      rdCmOpen: !!st.rdCm, rdCmClosed: !st.rdCm, toggleRdCm: function(){ self.setState({ rdCm: !st.rdCm }); }, rdBodyCls: st.rdCm ? 'rd-body cm' : 'rd-body', cmHereLine: cmHere + (cmHere === 1 ? ' comment on ' : ' comments on ') + curName + ' · ' + nOpenC + ' open in the report' });
+
+    var SECTIONS = [{"code": "Cover", "title": "Compliance Certification", "chip": "", "p0": 1, "p1": 1, "paras": ["Westmoor University · Compliance Certification · SACS 10-Year · 2024–2025.", "Prepared by Alex Carter, Accreditation Coordinator. Signatures attesting to integrity: Dr. James Okonkwo, CEO · Dr. Maria Santos, Accreditation Liaison. Submit by 15 Dec 2026."], "ev": [], "marks": []}, {"code": "Contents", "title": "Contents", "chip": "", "p0": 2, "p1": 3, "paras": ["Section 1 Integrity · 1.1 Integrity, page 4. Section 2 Mission · 2.1 Institutional Mission, page 9. Section 3 Governance and Administration · 3.1 Governing Board, page 14 · 3.2 Board Oversight, page 16 · 3.3 Administrative Staff, page 21.", "Section 4 Institutional Effectiveness · 4.1 Institutional Planning, page 22 · 4.2 Assessment of Outcomes, page 41. Section 5 Faculty · 5.1 Faculty Qualifications, page 67 · 5.2 Faculty Evaluation, page 100. Section 6 Resources · 6.1 Financial Resources, page 113 · 6.2 Physical Resources, page 131 · 6.3 Library and Learning Resources, page 151. Documents, page 171. Links, page 181."], "ev": [], "marks": []}, {"code": "1.1", "title": "Integrity", "chip": "Compliance", "p0": 4, "p1": 8, "paras": ["Westmoor University represents itself accurately and honestly to students, the public and the Commission. The catalog, the website and all recruiting materials are reviewed each spring by the Office of Communications against the policies recieved from each academic unit, and discrepancies are corrected before the fall term.", "The University responds fully and in good faith to every request from the Commission. Over the current cycle it has filed its annual profile on time, disclosed the 2024 change of ownership of its medical office building within the required period, and hosted the 2023 special visit without restriction on access to records or people.", "Integrity is also a matter of internal practice. The Policy on Academic and Administrative Integrity, revised in 2023, requires every employee to complete annual training and to report conflicts through the compliance hotline; 97 per cent of employees completed the 2025 training."], "ev": [["Policy on Academic and Administrative Integrity (2023)", "PDF", "12 pages"], ["Communications review log, spring 2026", "XLSX", "3 sheets"], ["Compliance hotline summary 2025", "PDF", "4 pages"]], "marks": [{"i": 0, "q": "The catalog, the website and all recruiting materials are reviewed each spring by the Office of Communications against the policies recieved from each academic unit, and discrepancies are corrected before the fall term.", "mk": "1", "label": "Open comment"}, {"i": 2, "q": "Integrity is also a matter of internal practice.", "mk": "2", "label": "Finding: spelling"}]}, {"code": "2.1", "title": "Institutional Mission", "chip": "Compliance", "p0": 9, "p1": 13, "paras": ["The mission of Westmoor University is to prepare students for purposeful lives through rigorous teaching, applied research and service to the region. The statement was last reviewed by the Board of Trustees in October 2024 and reaffirmed without change; the catalog and the website carry the approved wording.", "The mission guides planning at every level. Each unit plan opens with the mission and names the mission elements it serves; the 2025–2030 Strategic Plan maps its four goals to the three mission commitments, and the budget hearings each spring ask every division to show that occurence.", "Publication of the mission is consistent across media. The comittee responsible for the catalog compares the mission text in the catalog, the website and the student handbook before each printing, and the links from the website to the Board resolution are checked quarterly."], "ev": [["Board resolution reaffirming the mission, Oct 2024", "PDF", "2 pages"], ["Strategic Plan 2025–2030", "PDF", "38 pages"], ["Westmoor Catalog 2025–26, p. 3", "PDF", "1 page"]], "marks": [{"i": 1, "q": "Each unit plan opens with the mission and names the mission elements it serves; the 2025–2030 Strategic Plan maps its four goals to the three mission commitments, and the budget hearings each spring ask every division to show that occurence.", "mk": "1", "label": "Finding: spelling"}, {"i": 2, "q": "Publication of the mission is consistent across media.", "mk": "2", "label": "Finding: spelling"}]}, {"code": "3.1", "title": "Governing Board", "chip": "Compliance", "p0": 14, "p1": 15, "paras": ["Westmoor University is governed by a Board of Trustees of fourteen members, a majority of whom have no contractual, employment or personal financial interest in the institution. The Board's authority, composition and terms of service are set out in its bylaws, most recently amended in June 2025. Trustees serve staggered three-year terms, limited to three consecutive terms, so that no more than one third of the Board turns over in any year.", "The Board is independent of the administration and of any external body that could exert undue influence over the institution. The President is the only employee who sits on the Board, and does so without a vote. When a matter bears on the President's compensation or evaluation, the Board meets in executive session without the President present. Every trustee files an annual disclosure under the Conflict of Interest Policy. The most recent disclosures were reviewed by the Governance Committee in September, and two recusals were recorded in the minutes.", "Each year the Board evaluates its own performance against the duties in its bylaws, using a structured self-assessment completed by every trustee. The most recent evaluation identified onboarding for new trustees as an area for improvement, and the Governance Committee has since introduced a half-day orientation. Table 3.1 below lists the current composition of the Board."], "ev": [["Board Bylaws (amended June 2025)", "PDF", "18 pages"], ["Conflict of Interest Policy", "PDF", "6 pages"], ["Board Minutes, 12 Sep 2025", "PDF", "14 pages"], ["Board Self-Evaluation 2025", "DOCX", "9 pages"]], "marks": [{"i": 1, "q": "The most recent disclosures were reviewed by the Governance Committee in September, and two recusals were recorded in the minutes.", "mk": "1", "label": "Open comment 1"}, {"i": 2, "q": "Table 3.1 below lists the current composition of the Board.", "mk": "2", "label": "Finding: table wider than the page"}]}, {"code": "3.2", "title": "Board Oversight", "chip": "Compliance", "p0": 16, "p1": 20, "paras": ["The Board exercises oversight of the institution's mission, financial resources and academic quality through four standing committees: Academic Affairs, Finance and Audit, Governance, and Student Success. Each committee has a written charter approved by the full Board and reviewed every three years.", "The Finance and Audit Committee receives the external audit directly from the auditors, without management present, and reports its findings to the full Board. The most recent audit carried an unmodified opinion. The Academic Affairs Committee reviews programme outcomes each spring and approved the closure of two low-enrolment certificates in 2025 on the strength of that review.", "Board minutes record attendance, motions and votes for every meeting, and are published to trustees within ten working days. Executive sessions are minuted separately and held by the Board secretary."], "ev": [["Committee Charters", "PDF", "11 pages"], ["Audit Committee Minutes, 3 Oct 2025", "PDF", "5 pages"], ["Audited financial statements FY2025", "PDF", "46 pages"]], "marks": []}, {"code": "3.3", "title": "Administrative Staff", "chip": "", "p0": 21, "p1": 21, "paras": ["No response has been written for this standard yet. It is held by Writer Tracy Hall and is due on 20 Oct 2026."], "ev": [], "marks": []}, {"code": "4.1", "title": "Institutional Planning", "chip": "Compliance", "p0": 22, "p1": 40, "paras": ["Westmoor University engages in ongoing, comprehensive and integrated planning that incorporates a systematic review of mission, goals and outcomes. The 2025–2030 Strategic Plan was built over eighteen months with input from every division, the Faculty Senate, the Student Government and the Board, and is reviewed by the Planning Council each semester.", "All academic and administrative units complete annual plans that are reviewed by the Office of Institutional Effectiveness. Each plan sets measurable targets, reports results against the prior year, and names the budget requests that follow from them; the Budget Committee receives the plans before it allocates discretionary funds.", "Results are used. Since 2023 the planning cycle has produced the writing-intensive course requirement, the consolidation of three advising offices into one, and the reallocation of 1.2 million dollars to student success initiatives, each traceable to a documented plan and its outcome data."], "ev": [["Strategic Plan 2025–2030", "PDF", "38 pages"], ["Unit plan template and schedule", "DOCX", "6 pages"], ["Planning Council minutes 2025–26", "PDF", "22 pages"]], "marks": []}, {"code": "4.2", "title": "Assessment of Outcomes", "chip": "Compliance", "p0": 41, "p1": 66, "paras": ["The University identifies expected outcomes for every educational programme, assesses the extent to which it achieves them, and provides evidence of improvement based on the analysis of results. Each of the 64 degree programmes maintains an assessment plan in the Taskstream system with at least three learning outcomes, direct measures and annual targets.", "Every programme completed its assessment cycle in 2024–25. Results are reported to the Assessment Council in October, which rates each report on a four-point rubric and returns feedback to the programme by December; 58 of 64 reports met the standard on the first round and the remaining six after revision.", "Assessment results drive change. The Nursing programme added a simulation module after NCLEX pass rates fell below target in 2023; the History programme redesigned its capstone after rubric scores on argumentation stayed flat for two years. Figure 4.2 summarises the three-year trend for the twelve largest programmes."], "ev": [["Assessment Handbook 2025", "PDF", "42 pages"], ["Assessment report 2024–25 · 1 of 3 expected", "PDF", "15 pages"], ["Programme review schedule · missing", "—", "—"]], "marks": [{"i": 1, "q": "Every programme completed its assessment cycle in 2024–25.", "mk": "1", "label": "Finding: unsupported claim"}, {"i": 2, "q": "Figure 4.2 summarises the three-year trend for the twelve largest programmes.", "mk": "2", "label": "Finding: oversized image"}]}, {"code": "5.1", "title": "Faculty Qualifications", "chip": "Compliance", "p0": 67, "p1": 99, "paras": ["Westmoor University employs 298 full-time faculty members and 211 part-time instructors, each qualified for the courses they teach by earned degrees, professional licensure, documented experience or a combination recorded in the faculty credentials roster.", "The Provost's office verifies credentials before any appointment. Official transcripts are held in the Office of Academic Affairs; where a faculty member teaches outside the discipline of the terminal degree, a written justification is prepared by the dean and approved by the Provost. Forty-one such justifications are on file for 2025–26.", "The roster is reviewed each fall against the schedule of classes. In 2025 the review found three instructors assigned to courses outside their verified qualifications; two were reassigned and one justification was approved before the term began."], "ev": [["Faculty credentials roster, fall 2025", "XLSX", "512 rows"], ["Credential verification procedure", "PDF", "4 pages"], ["Justification letters 2025–26 (sample)", "PDF", "9 pages"]], "marks": []}, {"code": "5.2", "title": "Faculty Evaluation", "chip": "Compliance", "p0": 100, "p1": 112, "paras": ["All faculty members are evaluated regularly, with the criteria and the procedures published in the Faculty Handbook. Tenure-track faculty are reviewed biennially by the department chair and the dean; tenured faculty undergo post-tenure review every five years; part-time instructors are evaluated each term through student ratings and a classroom observation.", "Evaluation informs development and decisions. Each review ends with a written plan agreed between the faculty member and the chair; the Center for Teaching supports the plans with workshops and peer coaching. Over the cycle, 14 faculty members received development plans and 11 completed them.", "Student ratings are one input among several and are read alongside peer observation, course materials and scholarly activity. The Faculty Senate reviewed the instrument in 2024 and the revised form was adopted for fall 2025."], "ev": [["Faculty Handbook, section 6", "PDF", "14 pages"], ["Evaluation schedule 2025–26", "XLSX", "2 sheets"], ["Center for Teaching annual report", "PDF", "8 pages"]], "marks": [{"i": 0, "q": "Tenure-track faculty are reviewed biennially by the department chair and the dean; tenured faculty undergo post-tenure review every five years; part-time instructors are evaluated each term through student ratings and a classroom observation.", "mk": "1", "label": "Open comment"}]}, {"code": "6.1", "title": "Financial Resources", "chip": "Compliance", "p0": 113, "p1": 130, "paras": ["The University has sound financial resources and a demonstrated, stable financial base to support its mission and the scope of its programmes. Total net assets grew from 184 million dollars in FY2021 to 211 million in FY2025; the composite financial index has remained above 3.0 in every year of the cycle.", "The operating budget of 96 million dollars for FY2026 is balanced and supports 312 full-time faculty, the academic programmes and student services at current levels. Revenue is diversified across tuition (61 per cent), state appropriation (22 per cent), auxiliary services and gifts. Table 6.1 presents the five-year operating results.", "The endowment of 74 million dollars is managed under a spending policy of 4.5 per cent of a twelve-quarter average, approved by the Board's Finance and Audit Committee. Figure 6.1 shows the endowment and the annual draw since 2019."], "ev": [["Audited financial statements FY2021–FY2025", "PDF", "46 pages"], ["Operating budget FY2026", "PDF", "28 pages"], ["Endowment spending policy", "PDF", "3 pages"]], "marks": [{"i": 1, "q": "Table 6.1 presents the five-year operating results.", "mk": "1", "label": "Finding: table wider than the page"}, {"i": 2, "q": "Figure 6.1 shows the endowment and the annual draw since 2019.", "mk": "2", "label": "Finding: oversized image"}]}, {"code": "6.2", "title": "Physical Resources", "chip": "Compliance", "p0": 131, "p1": 150, "paras": ["Westmoor University operates physical resources that serve the needs of its programmes, support services and mission-related activities. The main campus comprises 38 buildings on 212 acres, with 1.9 million gross square feet, 62 per cent of which has been renovated or built since 2010.", "A ten-year facilities master plan, adopted in 2022, sets priorities for deferred maintenance, accessibility and the science building replacement that opened in August 2025. Capital projects are approved by the Board on the recommendation of the Finance and Audit Committee and reported against budget each quarter.", "Safety and accessibility are reviewed annually by the Office of Facilities with the campus police and the disability services office. The 2025 review closed 41 of 46 findings carried from the prior year."], "ev": [], "marks": [{"i": 1, "q": "A ten-year facilities master plan, adopted in 2022, sets priorities for deferred maintenance, accessibility and the science building replacement that opened in August 2025.", "mk": "1", "label": "Finding: expected evidence count not set"}]}, {"code": "6.3", "title": "Library and Learning Resources", "chip": "Compliance", "p0": 151, "p1": 170, "paras": ["The Westmoor Library provides, and supports student and faculty access to, library and learning resources appropriate to the programmes offered. Collections comprise 410,000 print volumes, 1.1 million e-books and 68,000 periodical titles, with 24-hour access to electronic resources through the campus authentication system.", "Professional librarians work with every academic department. Each programme has a liaison librarian who reviews the collection against the curriculum annually, teaches information-literacy sessions embedded in required courses, and reports usage and satisfaction data to the Library Committee.", "Learning resources extend beyond the library. The Writing Center, the Tutoring Center and the Digital Media Lab are open evenings and weekends, and online students reach the same services through scheduled video sessions; the 2025 student survey rated access to learning resources at 4.4 of 5."], "ev": [["Library annual report 2024–25", "PDF", "26 pages"], ["Liaison librarian programme description", "PDF", "3 pages"], ["Student survey 2025, learning resources", "XLSX", "4 sheets"]], "marks": []}, {"code": "Documents", "title": "Documents cited in this report", "chip": "", "p0": 171, "p1": 180, "paras": ["A numbered list of every document cited in the narratives, with its type, length and the standards that cite it. Documents are attached in the order they first appear: Board Bylaws (amended June 2025) · Conflict of Interest Policy · Board Minutes, 12 Sep 2025 · Board Self-Evaluation 2025 · Committee Charters · Audit Committee Minutes, 3 Oct 2025 · Audited financial statements FY2021–FY2025 · Strategic Plan 2025–2030 · Assessment Handbook 2025 · Faculty credentials roster, fall 2025 · Faculty Handbook, section 6 · Operating budget FY2026 · Library annual report 2024–25."], "ev": [], "marks": []}, {"code": "Links", "title": "Links, objectives and outcomes", "chip": "", "p0": 181, "p1": 184, "paras": ["Every hyperlink in the report, every linked objective and every linked outcome, grouped by standard, with the date each link was last checked (16 Oct 2026). 212 items checked; none changed since the readiness run."], "ev": [], "marks": []}];
+    var SEC = (typeof st.cur === "number") ? st.cur : 4; var SECD = SECTIONS[SEC] || SECTIONS[4];
+    var RVP = SECD.paras; var RVF = SECD.marks; var SEC_CODE = SECD.code; var SEC_TITLE = SECD.title;
+    var rvcAll = st.rvc || []; var rvc = rvcAll.filter(function(c){ return (c.sec === undefined ? 4 : c.sec) === SEC; }); var rvsel = (st.rvsel && st.rvsel.sec === SEC) ? st.rvsel : null;
+    function closestP(n){ while (n && n.nodeType !== 1) n = n.parentNode; while (n && !(n.tagName === 'P' && n.hasAttribute('data-rvp'))) n = n.parentNode; return n; }
+    function offsetIn(p, node, off){
+      var total = 0, found = false;
+      function walk(n){
+        if (found) return;
+        if (n === node) { if (n.nodeType === 3) { total += off; } else { var k = 0; for (var c = n.firstChild; c && k < off; c = c.nextSibling, k++) walk(c); } found = true; return; }
+        if (n.nodeType === 3) { total += n.nodeValue.length; return; }
+        if (n.nodeType === 1 && n.hasAttribute('data-mk')) return;
+        for (var c2 = n.firstChild; c2; c2 = c2.nextSibling) walk(c2);
+      }
+      walk(p); return total;
+    }
+    self._rvSel = function(){
+      var sl = window.getSelection ? window.getSelection() : null;
+      if (!sl || sl.isCollapsed || !sl.rangeCount) return;
+      var r = sl.getRangeAt(0); var p = closestP(r.startContainer); if (!p) return;
+      var i = parseInt(p.getAttribute('data-rvp'), 10);
+      var start = offsetIn(p, r.startContainer, r.startOffset);
+      var pe = closestP(r.endContainer); var end = (pe === p) ? offsetIn(p, r.endContainer, r.endOffset) : RVP[i].length;
+      if (end <= start) return;
+      var text = RVP[i].slice(start, end);
+      if (!text.trim()) return;
+      self.setState({ rvsel: { sec: SEC, i: i, start: start, end: end, text: text }, rvdraft: '' });
+    };
+    if (!self._rvBound && typeof document !== 'undefined') { self._rvBound = true;
+      document.addEventListener('mouseup', function(){ setTimeout(function(){ self._rvSel(); }, 0); });
+      document.addEventListener('keyup', function(e){ if (e.shiftKey || e.key === 'Shift') self._rvSel(); }); }
+    function evVal(e){ var raw = (e && e.target && e.target.value !== undefined) ? e.target.value : e; if (typeof raw === 'string') return raw; if (raw && typeof raw.value === 'string') return raw.value; if (raw && typeof raw.text === 'string') return raw.text; if (raw && raw.target && typeof raw.target.value === 'string') return raw.target.value; return ''; }
+    function clearSel(){ try { window.getSelection().removeAllRanges(); } catch (e) {} }
+    function sentencesOf(T){ var out = [], s0 = 0; for (var k = 0; k < T.length; k++) { var ch = T.charAt(k); if ((ch === '.' || ch === '!' || ch === '?') && (k + 1 === T.length || T.charAt(k + 1) === ' ')) { out.push({ s: s0, e: k + 1 }); s0 = k + 1; while (s0 < T.length && T.charAt(s0) === ' ') s0++; k = s0 - 1; } } if (s0 < T.length) out.push({ s: s0, e: T.length }); return out; }
+    function pickSentence(i, sn){ var T = RVP[i]; var cur = rvsel && rvsel.i === i ? rvsel : null; var ns, ne;
+      if (cur && (sn.s < cur.start || sn.e > cur.end)) { ns = Math.min(cur.start, sn.s); ne = Math.max(cur.end, sn.e); } else { ns = sn.s; ne = sn.e; }
+      self.setState({ rvsel: { sec: SEC, i: i, start: ns, end: ne, text: T.slice(ns, ne) }, rvdraft: '' }); }
+    var rvParas = RVP.map(function(T, i){
+      var sents = sentencesOf(T);
+      var ranges = RVF.filter(function(f){ return f.i === i; }).map(function(f){ var s0 = T.indexOf(f.q); return { s: s0, e: s0 + f.q.length, kind: 'f', mk: f.mk, label: f.label }; })
+        .concat(rvc.map(function(c, k){ return { s: c.start, e: c.end, kind: 'c', mk: String.fromCharCode(65 + k), label: 'Your comment ' + String.fromCharCode(65 + k), c: c }; }).filter(function(x){ return x.c.i === i; }));
+      var cuts = [0, T.length]; ranges.forEach(function(r){ cuts.push(r.s, r.e); }); sents.forEach(function(x){ cuts.push(x.s, x.e); }); if (rvsel && rvsel.i === i) cuts.push(rvsel.start, rvsel.end);
+      cuts = cuts.filter(function(v, k, arr){ return arr.indexOf(v) === k; }).sort(function(a, b){ return a - b; });
+      var segs = [];
+      for (var k = 0; k + 1 < cuts.length; k++) { var s0 = cuts[k], e0 = cuts[k + 1]; if (e0 <= s0) continue;
+        var cov = ranges.filter(function(r){ return r.s <= s0 && r.e >= e0; });
+        var cls = cov.map(function(r){ return r.kind === 'f' ? 'fmark' : 'rv'; }).filter(function(v, j, arr){ return arr.indexOf(v) === j; }).join(' ');
+        var ending = ranges.filter(function(r){ return r.e === e0; });
+        var inSel = rvsel && rvsel.i === i && rvsel.start <= s0 && rvsel.end >= e0; if (inSel) cls += ' sel';
+        var sn = null; for (var q = 0; q < sents.length; q++) { if (sents[q].s <= s0 && sents[q].e >= e0) { sn = sents[q]; break; } }
+        var pick = (function(sn2){ return function(e){ if (e && e.type === 'keydown') { if (e.key !== 'Enter' && e.key !== ' ') return; e.preventDefault(); } if (sn2) pickSentence(i, sn2); }; })(sn);
+        segs.push({ t: T.slice(s0, e0), cls: (cls + (sn ? ' sent' : '')).trim(), pick: pick, isSent: !!sn, isPlain: !sn, inSel: !!inSel, hasMk: ending.length > 0, mk: ending.map(function(r){ return r.mk; }).join(' '), mkCls: ending.length && ending[0].kind === 'c' ? 'mkb' : 'mk', mkLabel: ending.map(function(r){ return r.label; }).join(', ') }); }
+      return { i: i, segs: segs, hasSel: !!(rvsel && rvsel.i === i) };
+    });
+    var nextLetter = String.fromCharCode(65 + rvc.length);
+    var rvList = rvc.map(function(c, k){ return { letter: String.fromCharCode(65 + k), text: c.text, quote: c.quote.length > 90 ? c.quote.slice(0, 88) + '…' : c.quote, para: 'paragraph ' + (c.i + 1),
+      remove: function(){ var n = rvcAll.filter(function(x){ return x !== c; }); self.setState({ rvc: n }); } }; });
+    var hasOverall = !!st.rvoHas;
+    var rvN = rvc.length + (hasOverall ? 1 : 0);
+    var draftOk = !!(st.rvdraft && st.rvdraft.trim());
+    Object.assign(base, {
+      rvParas: rvParas, rvHasSel: !!rvsel, rvSelText: rvsel ? (rvsel.text.length > 140 ? rvsel.text.slice(0, 138) + '…' : rvsel.text) : '', rvSelWhere: rvsel ? ('paragraph ' + (rvsel.i + 1) + ' · ' + (rvsel.end - rvsel.start) + ' characters') : '',
+      rvDraft: st.rvdraft || '', rvSetDraft: function(e){ self._rvDraftLive = evVal(e); }, rvDraftEmpty: !draftOk,
+      rvAddLabel: 'Add as comment ' + nextLetter,
+      rvAdd: function(){ var cur = self.state.rvsel; var txt = String(self._rvDraftLive || '').trim(); if (!cur) return; if (!txt) txt = 'Please check this passage.'; var n = (self.state.rvc || []).slice(); n.push({ sec: SEC, i: cur.i, start: cur.start, end: cur.end, quote: cur.text, text: txt }); self._rvDraftLive = ''; clearSel(); self.setState({ rvc: n, rvsel: null, rvdraft: '' }); },
+      rvCancel: function(){ self._rvDraftLive = ''; clearSel(); self.setState({ rvsel: null, rvdraft: '' }); },
+      rvSel: function(){ setTimeout(function(){ self._rvSel(); }, 0); },
+      rvList: rvList, rvHasList: rvc.length > 0, rvEmpty: rvc.length === 0,
+      rvO: st.rvo || '', rvSetO: function(e){ self._rvOLive = evVal(e); }, rvSetOCommit: function(e){ var v = evVal(e); self._rvOLive = v; var has = !!(v && v.trim() && v.indexOf('[probe') !== 0); if (has !== !!st.rvoHas) self.setState({ rvoHas: has, rvo: v }); else self.setState({ rvo: v }); },
+      rvN: rvN, rvNone: rvN === 0, rvSome: rvN > 0,
+      rvHead: 'Your review of ' + SEC_CODE + ' · ' + rvc.length + (rvc.length === 1 ? ' comment in the text' : ' comments in the text') + (hasOverall ? ' · overall comment' : '') + ' · not sent yet',
+      rvHeadLine: rvN ? ('your review: ' + rvN + (rvN === 1 ? ' comment drafted' : ' comments drafted')) : 'no review comments yet',
+      rvOthers: (rvcAll.length - rvc.length) ? ((rvcAll.length - rvc.length) + ' more on other standards') : '', secCode: SEC_CODE, secTitle: SEC_TITLE, secHeading: SEC_CODE.match(/^\d/) ? (SEC_CODE + ' ' + SEC_TITLE) : SEC_TITLE, secChip: SECD.chip, secHasChip: !!SECD.chip, secEv: SECD.ev.map(function(e){ return { n: e[0], t: e[1], p: e[2] }; }), secHasEv: SECD.ev.length > 0, secPageLine: SECD.p0 === SECD.p1 ? ('Page ' + SECD.p0 + ' of 184') : ('Page ' + SECD.p0 + '\u2013' + SECD.p1 + ' of 184'), secFooterPage: 'Page ' + SECD.p0 + ' of 184', isSec31: SEC_CODE === '3.1', secHint: '', rvSendLabel: rvN ? ('Send back with ' + rvN + (rvN === 1 ? ' comment' : ' comments')) : ('Send back ' + SEC_CODE),
+      rvPostLabel: rvN ? ('Post ' + rvN + (rvN === 1 ? ' comment' : ' comments') + ' · stays Approved') : 'Post comments · stays Approved'
+    });
+
+    return base;
+  }
+}
+</script>
+</body>
+</html>

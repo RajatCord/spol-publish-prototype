@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Step 1 · Standards & content</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Poppins:wght@500;600&family=Source+Serif+4:wght@400;600&display=swap">
+<style>
+body{margin:0;background:#ffffff}
+a{color:#0b4f9c}a:hover{color:#083a73}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid #0b4f9c;outline-offset:2px}
+.rail :focus-visible,.btn.p:focus-visible{outline:2px solid #ffffff;box-shadow:0 0 0 4px #0b4f9c}
+.skip{position:absolute;left:8px;top:-60px;background:#fff;color:#0b2d4a;padding:10px 14px;border-radius:6px;font-size:14px;z-index:10}.skip:focus{top:8px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.app{container-type:inline-size;font-family:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;color:#15202b;background:#fff;min-height:100vh;font-size:13px;line-height:20px}
+.shell{display:flex;align-items:stretch;min-height:100vh}
+.rail{flex:0 0 56px;background:#0b2d4a;display:flex;flex-direction:column;align-items:center;gap:6px;padding-block:12px}
+.rail a{color:#b7c6d6;display:flex;padding:8px;border-radius:8px}.rail a:hover{color:#fff;background:#163c5e}.rail a[aria-current="page"]{color:#fff;background:#1b4a72}
+.logo{width:32px;height:32px;border-radius:8px;background:#fff;color:#0b2d4a;font:600 9px/1 Poppins,sans-serif;letter-spacing:.04em;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.main{flex:1 1 auto;min-width:0;display:flex;flex-direction:column}
+.hdr{display:flex;align-items:center;gap:4px;padding:0 20px;height:48px;border-bottom:1px solid #e6e9ee;box-sizing:border-box}
+.hdr h1{margin:0 20px 0 0;font:600 15px/20px Poppins,sans-serif;color:#15202b}
+.hdr nav{display:flex;gap:2px;align-self:stretch;align-items:stretch;overflow-x:auto}
+.hdr nav a{display:inline-flex;align-items:center;padding:0 10px;color:#5f6b7a;text-decoration:none;font-weight:500;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.hdr nav a:hover{color:#15202b}.hdr nav a[aria-current="page"]{color:#0b2d4a;border-bottom-color:#0b2d4a}
+.hdr .sp{flex-grow:1}
+.srch{display:flex;align-items:center;gap:6px;border:1px solid #d7dde5;border-radius:6px;height:30px;padding:0 8px;color:#6b7784;min-width:0;background:#fff}
+.srch input{border:0;outline:0;font:inherit;color:#15202b;background:transparent;width:150px;min-width:0}
+.icb{border:0;background:transparent;width:32px;height:32px;border-radius:6px;color:#5f6b7a;display:inline-flex;align-items:center;justify-content:center}.icb:hover{background:#f1f3f6;color:#15202b}
+.av{width:28px;height:28px;border-radius:50%;background:#0b2d4a;color:#fff;font-size:11px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;border:0;margin-left:4px}
+.pill{border:1px solid #d7dde5;background:#fff;border-radius:6px;height:30px;padding:0 10px;font-size:13px;color:#15202b;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.wz{display:flex;align-items:center;gap:16px;padding:0 20px;height:44px;border-bottom:1px solid #e6e9ee;box-sizing:border-box;background:#fafbfc}
+.crumb{display:inline-flex;align-items:center;gap:6px;color:#5f6b7a;white-space:nowrap;min-width:0}
+.crumb a{color:#5f6b7a;text-decoration:none}.crumb a:hover{color:#15202b}
+.crumb b{color:#15202b;font-weight:600}
+.stp{display:flex;align-items:center;gap:4px;list-style:none;margin:0 0 0 auto;padding:0;overflow-x:auto}
+.stp li{display:inline-flex;align-items:center;gap:6px;color:#5f6b7a;white-space:nowrap;padding:4px 8px;border-radius:6px}
+.stp li .n{width:18px;height:18px;border-radius:50%;border:1.5px solid #9aa6b3;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;box-sizing:border-box}
+.stp li[aria-current="step"]{color:#0b2d4a;font-weight:600;background:#e8eef5}.stp li[aria-current="step"] .n{background:#0b2d4a;border-color:#0b2d4a;color:#fff}
+.stp li.done .n{background:#1f7a4d;border-color:#1f7a4d;color:#fff}.stp li.done a{color:#5f6b7a;text-decoration:none}.stp li.done a:hover{color:#15202b}
+.stp .sep{color:#c4ccd5}
+.chip{display:inline-flex;align-items:center;gap:6px;height:20px;padding:0 8px;border-radius:4px;font-size:11px;font-weight:600;letter-spacing:.02em;white-space:nowrap;text-transform:uppercase}
+.chip.blue{background:#e8eef5;color:#0b2d4a}.chip.amber{background:#fdf3e2;color:#8a4b00}.chip.green{background:#e4f3ea;color:#1f6b45}.chip.grey{background:#eef1f4;color:#5f6b7a}.chip.red{background:#fdecea;color:#a1261a}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#1f7a4d;flex:0 0 7px}.dot.warn{background:#a86f00}.dot.todo{background:transparent;border:1.5px solid #9aa6b3;box-sizing:border-box}.dot.blue{background:#0b4f9c}.dot.red{background:#c0392b}
+.st{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:#5f6b7a;white-space:nowrap}.st.hot{color:#8a4b00}
+.body{padding:20px 24px 28px;display:flex;flex-direction:column;gap:20px;max-width:1480px;box-sizing:border-box;width:100%}
+.ph{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.ph h2{margin:0;font:600 20px/28px Poppins,sans-serif;color:#15202b}
+.ph p{margin:2px 0 0;color:#5f6b7a;max-width:70ch}
+.ph .sp{flex-grow:1}
+.h3{display:flex;align-items:baseline;gap:10px;padding-bottom:6px;border-bottom:1px solid #e6e9ee}
+.h3 h3{margin:0;font:600 14px/20px Poppins,sans-serif}
+.h3 .m{color:#5f6b7a;font-size:12px}.h3 .sp{flex-grow:1}
+.eyebrow{font-size:11px;line-height:16px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#5f6b7a}
+.meta{font-size:12px;line-height:16px;color:#5f6b7a}
+.note{font-size:12px;line-height:16px;color:#5f6b7a;margin:0}
+.btn{border:1px solid transparent;border-radius:6px;height:32px;padding:0 12px;font-size:13px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;box-sizing:border-box;white-space:nowrap;background:#fff;color:#15202b}
+.btn.p{background:#0b2d4a;color:#fff}.btn.p:hover{background:#0a2540;color:#fff}
+.btn.s{border-color:#8a95a1;color:#15202b}.btn.s:hover{background:#f1f3f6}
+.btn.t{color:#0b4f9c;padding:0 6px}.btn.t:hover{text-decoration:underline}
+.btn.d{background:#a1261a;color:#fff}
+.btn[aria-disabled="true"]{background:#e6e9ee;color:#7b8794;border-color:transparent;cursor:not-allowed}
+.btn.s[aria-disabled="true"]{background:#fff;color:#9aa6b3;border-color:#e6e9ee}
+.btn.w{width:100%}
+.ctl{height:32px;border:1px solid #8a95a1;border-radius:6px;padding:0 10px;font:400 13px/20px 'IBM Plex Sans',system-ui,sans-serif;color:#15202b;background:#fff;box-sizing:border-box;width:100%;min-width:0}
+.ctl:hover{border-color:#9aa6b3}.ctl[readonly]{background:#f6f8fa;color:#3d4955}
+.selw{position:relative;display:block}.selw select{appearance:none;-webkit-appearance:none;padding-right:30px}
+.selw svg{position:absolute;right:9px;top:50%;transform:translateY(-50%);pointer-events:none;color:#5f6b7a}
+.lbl{font-size:12px;line-height:16px;font-weight:500;color:#3d4955;display:block;margin-bottom:4px}
+.segf{display:inline-flex;border:1px solid #8a95a1;border-radius:6px;overflow:hidden;height:30px;background:#fff}
+.segf button{border:0;background:transparent;padding:0 10px;font-size:12px;font-weight:500;color:#3d4955;border-left:1px solid #e6e9ee;display:inline-flex;align-items:center;gap:6px}
+.segf button:first-child{border-left:0}.segf button[aria-pressed="true"]{background:#0b2d4a;color:#fff}
+.segf .n{opacity:.75;font-weight:400}
+.cb{width:16px;height:16px;border:1.5px solid #9aa6b3;border-radius:4px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;background:#fff;color:#fff;flex:0 0 16px}
+.cb.on{background:#0b2d4a;border-color:#0b2d4a}.cb.mix{background:#0b2d4a;border-color:#0b2d4a}
+.cbb{border:0;background:transparent;padding:0;display:inline-flex;width:28px;height:28px;align-items:center;justify-content:center;border-radius:6px}
+.cbb:hover .cb{border-color:#0b2d4a}
+.rd{width:15px;height:15px;border-radius:50%;border:1.5px solid #9aa6b3;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;flex:0 0 15px;background:#fff}
+.rd[aria-checked="true"],[aria-checked="true"]>.rd{border-color:#0b2d4a}.rd[aria-checked="true"] i,[aria-checked="true"]>.rd i{display:block;width:7px;height:7px;border-radius:50%;background:#0b2d4a}
+.rad{display:flex;flex-direction:column;gap:6px}
+.rad button{display:grid;grid-template-columns:15px minmax(0,1fr);column-gap:10px;align-items:start;text-align:left;border:0;background:transparent;padding:3px 0;font-size:13px;color:#15202b;width:100%}
+.rad .rd{margin-top:3px}.rad .h{display:block;font-size:12px;line-height:16px;color:#5f6b7a}
+.tgl{width:32px;height:18px;border-radius:99px;border:0;background:#c9d1da;position:relative;padding:0;flex:0 0 32px}.tgl[aria-checked="true"]{background:#0b2d4a}.tgl i{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff}.tgl[aria-checked="true"] i{left:16px}
+.al{border-radius:6px;padding:8px 12px;font-size:12px;line-height:18px;display:flex;gap:8px;align-items:flex-start}
+.al.ok{background:#e4f3ea;color:#1f5e3d}.al.warn{background:#fdf3e2;color:#5c3b00}.al.info{background:#eef3f9;color:#0b2d4a}
+.ft{position:sticky;bottom:0;background:#fff;border-top:1px solid #e6e9ee;padding:10px 24px;display:flex;align-items:center;gap:10px;z-index:3}
+.ft .sp{flex-grow:1}.ft .why{font-size:12px;color:#5f6b7a}
+.row{display:grid;align-items:center;column-gap:16px;padding:0 12px;min-height:44px;border-bottom:1px solid #eceff3;position:relative}
+.row:hover{background:#f7f9fb}
+.row .tt{font-weight:600;color:#15202b;text-decoration:none}.row .tt:hover{color:#0b4f9c}.row .tt::after{content:"";position:absolute;inset:0}
+.row .ab{position:relative;z-index:1}
+.hrow{display:grid;column-gap:16px;padding:0 12px;height:32px;align-items:center;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#5f6b7a;border-bottom:1px solid #e6e9ee}
+.kv{display:grid;grid-template-columns:120px minmax(0,1fr);row-gap:6px;column-gap:12px;font-size:13px}.kv dt{color:#5f6b7a;margin:0}.kv dd{margin:0}
+.thumb{width:36px;height:46px;border-radius:2px;background:#fff;border:1px solid #c9d1da;position:relative;overflow:hidden;flex:0 0 36px;box-sizing:border-box}
+.thumb i{position:absolute;left:6px;right:6px;height:2px;background:#dfe4ea}.thumb b{position:absolute;left:6px;right:12px;top:6px;height:3px;background:#0b2d4a}
+.thumb .tag{position:absolute;left:0;right:0;bottom:0;background:#0b2d4a;color:#fff;font-size:7px;line-height:10px;font-weight:600;text-align:center;letter-spacing:.04em}
+.thumb.lg{width:64px;height:84px;flex-basis:64px}
+::placeholder{color:#5f6b7a;opacity:1}
+.srch{border-color:#8a95a1}.srch:focus-within{outline:2px solid #0b4f9c;outline-offset:2px}
+.cb,.rd{border-color:#6b7784}
+.tgl{background:#fff;border:1.5px solid #6b7784;box-sizing:border-box}.tgl i{background:#6b7784}.tgl[aria-checked="true"]{background:#0b2d4a;border-color:#0b2d4a}.tgl[aria-checked="true"] i{background:#fff}
+.segf button[aria-checked="true"]{background:#0b2d4a;color:#fff}
+.rail a[aria-current="page"]{box-shadow:inset 3px 0 0 #fff}
+.btn.p[aria-disabled="true"]{color:#5f6b7a}
+.ph p{max-width:64ch}
+.rad label{display:grid;grid-template-columns:15px minmax(0,1fr);column-gap:10px;align-items:start;text-align:left;padding:3px 0;font-size:13px;color:#15202b;width:100%;cursor:pointer;position:relative}
+.rad input,.rbl input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.rad input:checked+.rd,.rbl input:checked+.rd{border-color:#0b2d4a}.rad input:checked+.rd i,.rbl input:checked+.rd i{display:block;width:7px;height:7px;border-radius:50%;background:#0b2d4a}
+.rad input:focus-visible+.rd,.rbl input:focus-visible+.rd{outline:2px solid #0b4f9c;outline-offset:2px}
+.rbl{display:inline-flex;position:relative;width:28px;height:28px;align-items:center;justify-content:center;cursor:pointer}
+.btn.danger{color:#a1261a;border-color:#a1261a}
+@container (max-width: 1100px){ .hide-md{display:none!important} .wz{height:auto;flex-wrap:wrap;padding-block:6px;row-gap:4px} .stp{margin-left:0;flex-basis:100%} }
+@container (max-width: 640px){ .rail{display:none} .hdr{padding:0 12px} .hdr nav a{padding:0 8px} .hdr h1{margin-right:8px} .body{padding:16px} .ft{padding:10px 16px;flex-wrap:wrap} .ft .btn.p{width:100%;order:9} .stp li span.lb{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap} .stp li[aria-current="step"] span.lb{display:inline} .btn,.ctl{height:40px} .hide-sm{display:none!important} .row{grid-template-columns:minmax(0,1fr)!important;row-gap:4px;padding:10px 12px} .hrow{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)} }
+@container (min-width: 2200px){ .shell{zoom:1.15} }
+@container (min-width: 2800px){ .shell{zoom:1.35} }
+
+
+.tree{border-top:1px solid #e6e9ee}
+.g{display:grid;grid-template-columns:24px 28px minmax(0,1fr) auto;align-items:center;column-gap:4px;min-height:40px;border-bottom:1px solid #eceff3;padding-right:8px}
+.g.sec{background:#fafbfc}
+.g.sec .nm{font-weight:600}
+.g.std{grid-template-columns:24px 28px minmax(0,1fr) auto;padding-left:24px}
+.g.prt{grid-template-columns:24px 28px minmax(0,1fr) auto;padding-left:48px}
+.g.prt .nm{color:#3d4955}
+.g:hover{background:#f7f9fb}
+.g .cv{border:0;background:transparent;width:24px;height:24px;border-radius:4px;color:#5f6b7a;display:inline-flex;align-items:center;justify-content:center;padding:0}
+.g .cv:hover{background:#e6e9ee}
+.nm{display:flex;align-items:baseline;gap:8px;min-width:0}
+.nm .code{color:#5f6b7a;font-variant-numeric:tabular-nums;flex:0 0 auto;font-size:12px}
+.nm .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.g.sec .cnt{font-size:12px;color:#5f6b7a;font-weight:400;margin-left:4px;white-space:nowrap}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) 300px;column-gap:32px;align-items:start}
+.side{border-left:1px solid #e6e9ee;padding-left:24px;display:flex;flex-direction:column;gap:18px;position:sticky;top:12px}
+.mx{display:grid;grid-template-columns:minmax(0,1fr) repeat(3,62px);row-gap:2px;column-gap:4px;align-items:center;font-size:13px}
+.mx .hd{font-size:10px;line-height:12px;font-weight:600;color:#5f6b7a;text-transform:uppercase;letter-spacing:.04em;text-align:center;padding-bottom:4px}
+.mx .rb{display:flex;justify-content:center;height:28px;align-items:center}
+.tbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+@container (max-width: 1100px){ .cols{grid-template-columns:minmax(0,1fr)} .side{border-left:0;padding-left:0;position:static;border-top:1px solid #e6e9ee;padding-top:16px} }
+@container (max-width: 640px){ .g{min-height:44px} .nm .t{white-space:normal} }
+
+</style>
+</helmet>
+<div class="app"><div class="shell"><a href="#main" class="skip">Skip to main content</a>
+  <nav class="rail" aria-label="SPOL modules">
+    <span class="logo" role="img" aria-label="SPOL">SPOL</span>
+    <a href="#" aria-label="Home"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg></a><a href="#" aria-label="Planning"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg></a><a href="#" aria-label="Assessment"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg></a><a href="#" aria-label="Accreditation" aria-current="page"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M3 10l9-6 9 6M5 10v9M19 10v9M9 10v9M15 10v9M3 21h18"></path></svg></a><a href="#" aria-label="Reports"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><rect x="5" y="3" width="14" height="18" rx="2"></rect><path d="M9 8h6M9 12h6M9 16h4"></path></svg></a><a href="#" aria-label="Settings"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"></path></svg></a>
+  </nav>
+  <div class="main">
+    <header class="hdr">
+      <h1>Accreditation</h1>
+      <nav aria-label="Accreditation"><a href="#">Dashboard</a><a href="#">All Accreditation</a><a href="#">Create Cycle</a><a href="L0.dc.html" aria-current="page">Publish</a><a href="#">Document Repository</a></nav>
+      <span class="sp"></span>
+      
+      <button type="button" class="icb" aria-label="Help and Ask SPOL"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7M12 17h.01"></path></svg></button>
+      <button type="button" class="icb" aria-label="Notifications"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8M10 20a2 2 0 0 0 4 0"></path></svg></button>
+      <button type="button" class="av" aria-label="Alex Carter, account menu" aria-haspopup="true">AC</button>
+    </header>
+    <div class="wz">
+      <div class="crumb"><a href="L0.dc.html">Publish</a><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M9 6l6 6-6 6"></path></svg><b>Compliance Certification</b><span class="chip blue">Draft 4</span><span class="hide-md">· SACS 10-Year · 2024–2025</span></div>
+      <nav aria-label="Publish steps"><ol class="stp"><li aria-current="step"><span class="n" aria-hidden="true">1</span><span><span class="sr">Step 1 of 4: </span><span class="lb">Standards & content</span></span></li><li><span class="n" aria-hidden="true">2</span><span><span class="sr">Step 2: </span><span class="lb">Readiness check</span></span></li><li><span class="n" aria-hidden="true">3</span><span><span class="sr">Step 3: </span><span class="lb">Cover & signers</span></span></li><li><span class="n" aria-hidden="true">4</span><span><span class="sr">Step 4: </span><span class="lb">Preview & publish</span></span></li></ol></nav>
+      <span class="meta hide-md" style="display: inline-flex; align-items: center; gap: 5px; color: #1f7a4d;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M5 12l5 5L20 7"></path></svg><span style="color: #5f6b7a;">Saved</span></span>
+    </div>
+    <main id="main" tabindex="-1" class="body">
+      <div class="ph"><div><h2>Standards & content</h2><p>Choose which standards go into this report and what prints with them.</p></div><span class="sp"></span></div>
+      <div class="cols"><div style="display: flex; flex-direction: column; gap: 10px; min-width: 0;"><div class="h3" style="border-bottom: 0; padding-bottom: 0;"><h3 id="sth">Standards</h3><span class="m">{{selLine}} · <a href="#" onClick="{{filterNA}}">{{naLine}}</a></span></div><div class="tbar">
+  <label class="srch" style="flex: 1 1 200px; max-width: 280px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" placeholder="Search standards" aria-label="Search standards" value="{{q}}" onInput="{{setQ}}" style="width: 100%;"></label>
+  <div class="segf" role="group" aria-label="Show"><button type="button" aria-pressed="{{fAll}}" onClick="{{setAll}}">All <span class="n">12</span></button><button type="button" aria-pressed="{{fNA}}" onClick="{{setNA}}">Not approved <span class="n">3</span></button><button type="button" aria-pressed="{{fUn}}" onClick="{{setUn}}">Unselected <span class="n">{{nUn}}</span></button></div>
+  <span class="sp" style="flex-grow: 1;"></span>
+  <span class="meta">{{selLine}}</span>
+  <button type="button" class="btn t" style="height: 28px; font-size: 12px;" onClick="{{selectAll}}">Select all</button><button type="button" class="btn t" style="height: 28px; font-size: 12px;" onClick="{{clearAll}}">Clear all</button>
+  <div style="position: relative;"><button type="button" class="icb" style="border: 1px solid #c9d1da; width: 30px; height: 30px;" aria-label="More standard actions" aria-haspopup="menu" aria-expanded="{{tmOpen}}" onClick="{{toggleTm}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><circle cx="5" cy="12" r="1.6"></circle><circle cx="12" cy="12" r="1.6"></circle><circle cx="19" cy="12" r="1.6"></circle></svg></button>
+    <sc-if value="{{tmOpen}}" hint-placeholder-val="{{false}}"><div role="menu" style="position: absolute; right: 0; top: 34px; z-index: 6; min-width: 180px; background: #fff; border: 1px solid #d7dde5; border-radius: 6px; box-shadow: 0 8px 24px rgba(21,32,43,.12); padding: 4px; display: flex; flex-direction: column;"><button type="button" role="menuitem" class="btn t" style="justify-content: flex-start; color: #15202b;" onClick="{{selectAll}}">Select all</button><button type="button" role="menuitem" class="btn t" style="justify-content: flex-start; color: #15202b;" onClick="{{clearAll}}">Clear all</button><button type="button" role="menuitem" class="btn t" style="justify-content: flex-start; color: #15202b;" onClick="{{expandAll}}">Expand all</button><button type="button" role="menuitem" class="btn t" style="justify-content: flex-start; color: #15202b;" onClick="{{collapseAll}}">Collapse all</button></div></sc-if></div>
+</div>
+<div class="tree" aria-label="Standards" role="group">
+  <sc-for list="{{secs}}" as="s" hint-placeholder-count="6">
+    <div class="g sec">
+      <button type="button" class="cv" aria-label="{{s.toggleLabel}}" aria-expanded="{{s.open}}" onClick="{{s.toggle}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true" style="transform: rotate({{s.rot}}deg)"><path d="M6 9l6 6 6-6"></path></svg></button>
+      <button type="button" class="cbb" role="checkbox" aria-checked="{{s.cb.aria}}" aria-label="{{s.cbLabel}}" onClick="{{s.check}}"><span class="cb {{s.cb.cls}}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M5 12l5 5L20 7"></path></svg></span></button>
+      <span class="nm"><span class="code">{{s.n}}</span><span class="t">{{s.name}}</span><span class="cnt"><span class="sr">Selected: </span>{{s.count}} selected</span></span>
+      <span></span>
+    </div>
+    <sc-if value="{{s.open}}" hint-placeholder-val="{{true}}">
+      <sc-for list="{{s.items}}" as="i" hint-placeholder-count="2">
+        <div class="g std"><span></span><button type="button" class="cbb" role="checkbox" aria-checked="{{i.cb.aria}}" aria-label="{{i.cbLabel}}" onClick="{{i.check}}"><span class="cb {{i.cb.cls}}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M5 12l5 5L20 7"></path></svg></span></button><span class="nm"><span class="code">{{i.c}}</span><span class="t">{{i.n}}</span></span><span class="st {{i.hot}}"><span class="dot {{i.dot}}"></span>{{i.status}}</span></div>
+        <sc-for list="{{i.parts}}" as="p" hint-placeholder-count="0">
+        <div class="g prt"><span></span><button type="button" class="cbb" role="checkbox" aria-checked="{{p.cb.aria}}" aria-label="{{p.cbLabel}}" onClick="{{p.check}}"><span class="cb {{p.cb.cls}}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M5 12l5 5L20 7"></path></svg></span></button><span class="nm"><span class="code">{{p.c}}</span><span class="t">{{p.n}}</span></span><span class="st {{p.hot}}"><span class="dot {{p.dot}}"></span>{{p.status}}</span></div>
+        </sc-for>
+      </sc-for>
+    </sc-if>
+  </sc-for>
+</div>
+<sc-if value="{{noRows}}" hint-placeholder-val="{{false}}"><p class="note">No standards match.</p></sc-if>
+<p class="note" style="display: flex; gap: 6px; align-items: flex-start;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg><span>{{naNote}}</span></p></div><aside class="side" aria-labelledby="csh">
+  <div><h3 id="csh" class="eyebrow" style="margin: 0;">Content settings</h3><p class="note" style="margin-top: 4px;">What prints with each standard.</p></div>
+  <div class="mx" role="group" aria-label="Content settings">
+    <span></span><span class="hd">In narrative</span><span class="hd">All linked</span><span class="hd">Not published</span>
+    <span>Documents</span><span class="rb"><label class="rbl"><input type="radio" name="mx-documents" checked aria-label="Documents: linked in narrative"><span class="rd"><i></i></span></label></span><span class="rb"><label class="rbl"><input type="radio" name="mx-documents" aria-label="Documents: all linked"><span class="rd"><i></i></span></label></span><span class="rb"><label class="rbl"><input type="radio" name="mx-documents" aria-label="Documents: do not publish"><span class="rd"><i></i></span></label></span>
+    <span>Links</span><span class="rb"><label class="rbl"><input type="radio" name="mx-links" checked aria-label="Links: linked in narrative"><span class="rd"><i></i></span></label></span><span class="rb"><label class="rbl"><input type="radio" name="mx-links" aria-label="Links: all linked"><span class="rd"><i></i></span></label></span><span class="rb"><label class="rbl"><input type="radio" name="mx-links" aria-label="Links: do not publish"><span class="rd"><i></i></span></label></span>
+    <span>Objectives</span><span class="rb"><label class="rbl"><input type="radio" name="mx-objectives" aria-label="Objectives: linked in narrative"><span class="rd"><i></i></span></label></span><span class="rb"><label class="rbl"><input type="radio" name="mx-objectives" checked aria-label="Objectives: all linked"><span class="rd"><i></i></span></label></span><span class="rb"><label class="rbl"><input type="radio" name="mx-objectives" aria-label="Objectives: do not publish"><span class="rd"><i></i></span></label></span>
+    <span>Outcomes</span><span class="rb"><label class="rbl"><input type="radio" name="mx-outcomes" aria-label="Outcomes: linked in narrative"><span class="rd"><i></i></span></label></span><span class="rb"><label class="rbl"><input type="radio" name="mx-outcomes" checked aria-label="Outcomes: all linked"><span class="rd"><i></i></span></label></span><span class="rb"><label class="rbl"><input type="radio" name="mx-outcomes" aria-label="Outcomes: do not publish"><span class="rd"><i></i></span></label></span>
+  </div>
+  <div style="display: flex; gap: 10px; align-items: flex-start;"><button type="button" class="tgl" role="switch" aria-checked="true" aria-labelledby="leL" style="margin-top: 2px;"><i></i></button><div><span id="leL" style="font-weight: 500;">List documents and links at the end</span><p class="note">A numbered list after the last section.</p></div></div>
+  <div><h3 class="eyebrow" style="margin: 0;">Response type</h3>
+    <div class="rad" role="radiogroup" aria-label="Response type" style="margin-top: 8px;">
+      <label><input type="radio" name="rtype" checked><span class="rd"><i></i></span><span>Narrative<span class="h">The written response for each standard.</span></span></label>
+      <label><input type="radio" name="rtype"><span class="rd"><i></i></span><span>Institutional Effectiveness<span class="h">From the Institutional Effectiveness plan.</span></span></label>
+      <label><input type="radio" name="rtype"><span class="rd"><i></i></span><span>Institutional<span class="h">The institution-level response.</span></span></label>
+    </div>
+  </div>
+</aside></div>
+    </main>
+    <div class="ft"><a class="btn t" href="L0.dc.html">Save and exit</a><span class="sp"></span><a class="btn p" href="S2.dc.html">Next</a></div>
+  </div>
+</div></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1020}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = Object.assign({ av: false, ver: false, rowMenu: -1 }, { sel: {}, open: {}, filter: 'all', q: '', tm: false }); }
+  renderVals(){
+    var self = this, st = this.state;
+    var base = {
+      avOpen: st.av, toggleAv: function(){ self.setState({ av: !st.av, ver: false, rowMenu: -1 }); },
+      verOpen: st.ver, toggleVer: function(){ self.setState({ ver: !st.ver, av: false, rowMenu: -1 }); }
+    };
+    
+    var SECS = [
+      { n: '1', name: 'Integrity', items: [{ c: '1.1', n: 'Integrity', s: 'ok' }] },
+      { n: '2', name: 'Mission', items: [{ c: '2.1', n: 'Institutional Mission', s: 'ok' }] },
+      { n: '3', name: 'Governance and Administration', items: [{ c: '3.1', n: 'Governing Board', s: 'ok' }, { c: '3.2', n: 'Board Oversight', s: 'ok' }, { c: '3.3', n: 'Administrative Staff', s: 'todo' }] },
+      { n: '4', name: 'Institutional Effectiveness', items: [{ c: '4.1', n: 'Institutional Planning', s: 'ok' }, { c: '4.2', n: 'Assessment of Outcomes', s: 'rev', parts: [{ c: '4.2.a', n: 'Educational programs', s: 'rev' }, { c: '4.2.b', n: 'Administrative units', s: 'ok' }] }] },
+      { n: '5', name: 'Faculty', items: [{ c: '5.1', n: 'Faculty Qualifications', s: 'ok' }, { c: '5.2', n: 'Faculty Evaluation', s: 'ok' }] },
+      { n: '6', name: 'Resources', items: [{ c: '6.1', n: 'Financial Resources', s: 'ok' }, { c: '6.2', n: 'Physical Resources', s: 'rev' }, { c: '6.3', n: 'Library and Learning Resources', s: 'ok' }] }
+    ];
+    var STATUS = { ok: ['Approved', ''], rev: ['In review', 'warn'], todo: ['Not started', 'todo'] };
+    var sel = st.sel || {}, open = st.open || {};
+    function isSel(c){ return sel[c] !== false; }
+    function setSel(codes, v){ var n = Object.assign({}, sel); codes.forEach(function(c){ n[c] = v; }); self.setState({ sel: n }); }
+    var allStd = []; SECS.forEach(function(s){ s.items.forEach(function(i){ allStd.push(i); }); });
+    var q = (st.q || '').toLowerCase();
+    var nSel = allStd.filter(function(i){ return isSel(i.c); }).length, nUn = allStd.length - nSel;
+    function mk(it){ var stt = STATUS[it.s];
+      return { c: it.c, n: it.n, status: stt[0], dot: stt[1], hot: it.s === 'ok' ? '' : 'hot', sel: isSel(it.c), cb: isSel(it.c) ? { aria: 'true', cls: 'on' } : { aria: 'false', cls: '' }, cbLabel: 'Include ' + it.c + ' ' + it.n,
+        check: function(){ var codes = [it.c].concat((it.parts || []).map(function(p){ return p.c; })); setSel(codes, !isSel(it.c)); },
+        parts: (it.parts || []).map(mk) }; }
+    var secs = [];
+    SECS.forEach(function(s){
+      var visible = s.items.filter(function(i){
+        if (st.filter === 'na' && i.s === 'ok') return false;
+        if (st.filter === 'un' && isSel(i.c)) return false;
+        if (q && (i.c + ' ' + i.n).toLowerCase().indexOf(q) < 0) return false;
+        return true; });
+      if (!visible.length) return;
+      var codes = []; s.items.forEach(function(i){ codes.push(i.c); (i.parts || []).forEach(function(p){ codes.push(p.c); }); });
+      var k = s.items.filter(function(i){ return isSel(i.c); }).length;
+      var cb = k === s.items.length ? { aria: 'true', cls: 'on' } : k === 0 ? { aria: 'false', cls: '' } : { aria: 'mixed', cls: 'mix' };
+      var isOpen = open[s.n] !== false;
+      secs.push({ n: s.n, name: s.name, hid: 'sec' + s.n, count: k + ' of ' + s.items.length, open: isOpen, rot: isOpen ? 0 : -90,
+        toggle: function(){ var o = Object.assign({}, open); o[s.n] = !isOpen; self.setState({ open: o }); }, toggleLabel: (isOpen ? 'Collapse' : 'Expand') + ' section ' + s.n,
+        cb: cb, cbLabel: 'Select all standards in section ' + s.n, check: function(){ setSel(codes, k !== s.items.length); },
+        items: visible.map(mk) });
+    });
+    var na = allStd.filter(function(i){ return i.s !== 'ok' && isSel(i.c); });
+    var half = Math.ceil(secs.length / 2);
+    Object.assign(base, { secs: secs, colA: secs.slice(0, half), colB: secs.slice(half), noRows: secs.length === 0, nUn: nUn, selLine: nSel + ' of 12 selected', naLine: na.length + ' not approved',
+      naNote: na.length ? (na.length + ' selected standards are not approved yet (' + na.map(function(i){ return i.c; }).join(', ') + '). You can still publish an internal draft; a final needs every selected standard approved.') : 'Every selected standard is approved.',
+      q: st.q, setQ: function(e){ self.setState({ q: e.target.value }); },
+      fAll: st.filter === 'all', fNA: st.filter === 'na', fUn: st.filter === 'un',
+      setAll: function(){ self.setState({ filter: 'all' }); }, setNA: function(){ self.setState({ filter: 'na' }); }, setUn: function(){ self.setState({ filter: 'un' }); }, filterNA: function(e){ e.preventDefault(); self.setState({ filter: 'na' }); },
+      tmOpen: st.tm, toggleTm: function(){ self.setState({ tm: !st.tm }); },
+      selectAll: function(){ self.setState({ sel: {}, tm: false }); }, clearAll: function(){ var n = {}; allStd.forEach(function(i){ n[i.c] = false; (i.parts||[]).forEach(function(p){ n[p.c] = false; }); }); self.setState({ sel: n, tm: false }); },
+      expandAll: function(){ self.setState({ open: {}, tm: false }); }, collapseAll: function(){ var o = {}; SECS.forEach(function(s){ o[s.n] = false; }); self.setState({ open: o, tm: false }); } });
+
+    return base;
+  }
+}
+</script>
+</body>
+</html>

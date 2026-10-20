@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Publish · Accreditation · published</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Poppins:wght@500;600&family=Source+Serif+4:wght@400;600&display=swap">
+<style>
+body{margin:0;background:#ffffff}
+a{color:#0b4f9c}a:hover{color:#083a73}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid #0b4f9c;outline-offset:2px}
+.rail :focus-visible,.btn.p:focus-visible{outline:2px solid #ffffff;box-shadow:0 0 0 4px #0b4f9c}
+.skip{position:absolute;left:8px;top:-60px;background:#fff;color:#0b2d4a;padding:10px 14px;border-radius:6px;font-size:14px;z-index:10}.skip:focus{top:8px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.app{container-type:inline-size;font-family:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;color:#15202b;background:#fff;min-height:100vh;font-size:13px;line-height:20px}
+.shell{display:flex;align-items:stretch;min-height:100vh}
+.rail{flex:0 0 56px;background:#0b2d4a;display:flex;flex-direction:column;align-items:center;gap:6px;padding-block:12px}
+.rail a{color:#b7c6d6;display:flex;padding:8px;border-radius:8px}.rail a:hover{color:#fff;background:#163c5e}.rail a[aria-current="page"]{color:#fff;background:#1b4a72}
+.logo{width:32px;height:32px;border-radius:8px;background:#fff;color:#0b2d4a;font:600 9px/1 Poppins,sans-serif;letter-spacing:.04em;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.main{flex:1 1 auto;min-width:0;display:flex;flex-direction:column}
+.hdr{display:flex;align-items:center;gap:4px;padding:0 20px;height:48px;border-bottom:1px solid #e6e9ee;box-sizing:border-box}
+.hdr h1{margin:0 20px 0 0;font:600 15px/20px Poppins,sans-serif;color:#15202b}
+.hdr nav{display:flex;gap:2px;align-self:stretch;align-items:stretch;overflow-x:auto}
+.hdr nav a{display:inline-flex;align-items:center;padding:0 10px;color:#5f6b7a;text-decoration:none;font-weight:500;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.hdr nav a:hover{color:#15202b}.hdr nav a[aria-current="page"]{color:#0b2d4a;border-bottom-color:#0b2d4a}
+.hdr .sp{flex-grow:1}
+.srch{display:flex;align-items:center;gap:6px;border:1px solid #d7dde5;border-radius:6px;height:30px;padding:0 8px;color:#6b7784;min-width:0;background:#fff}
+.srch input{border:0;outline:0;font:inherit;color:#15202b;background:transparent;width:150px;min-width:0}
+.icb{border:0;background:transparent;width:32px;height:32px;border-radius:6px;color:#5f6b7a;display:inline-flex;align-items:center;justify-content:center}.icb:hover{background:#f1f3f6;color:#15202b}
+.av{width:28px;height:28px;border-radius:50%;background:#0b2d4a;color:#fff;font-size:11px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;border:0;margin-left:4px}
+.pill{border:1px solid #d7dde5;background:#fff;border-radius:6px;height:30px;padding:0 10px;font-size:13px;color:#15202b;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.wz{display:flex;align-items:center;gap:16px;padding:0 20px;height:44px;border-bottom:1px solid #e6e9ee;box-sizing:border-box;background:#fafbfc}
+.crumb{display:inline-flex;align-items:center;gap:6px;color:#5f6b7a;white-space:nowrap;min-width:0}
+.crumb a{color:#5f6b7a;text-decoration:none}.crumb a:hover{color:#15202b}
+.crumb b{color:#15202b;font-weight:600}
+.stp{display:flex;align-items:center;gap:4px;list-style:none;margin:0 0 0 auto;padding:0;overflow-x:auto}
+.stp li{display:inline-flex;align-items:center;gap:6px;color:#5f6b7a;white-space:nowrap;padding:4px 8px;border-radius:6px}
+.stp li .n{width:18px;height:18px;border-radius:50%;border:1.5px solid #9aa6b3;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;box-sizing:border-box}
+.stp li[aria-current="step"]{color:#0b2d4a;font-weight:600;background:#e8eef5}.stp li[aria-current="step"] .n{background:#0b2d4a;border-color:#0b2d4a;color:#fff}
+.stp li.done .n{background:#1f7a4d;border-color:#1f7a4d;color:#fff}.stp li.done a{color:#5f6b7a;text-decoration:none}.stp li.done a:hover{color:#15202b}
+.stp .sep{color:#c4ccd5}
+.chip{display:inline-flex;align-items:center;gap:6px;height:20px;padding:0 8px;border-radius:4px;font-size:11px;font-weight:600;letter-spacing:.02em;white-space:nowrap;text-transform:uppercase}
+.chip.blue{background:#e8eef5;color:#0b2d4a}.chip.amber{background:#fdf3e2;color:#8a4b00}.chip.green{background:#e4f3ea;color:#1f6b45}.chip.grey{background:#eef1f4;color:#5f6b7a}.chip.red{background:#fdecea;color:#a1261a}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#1f7a4d;flex:0 0 7px}.dot.warn{background:#a86f00}.dot.todo{background:transparent;border:1.5px solid #9aa6b3;box-sizing:border-box}.dot.blue{background:#0b4f9c}.dot.red{background:#c0392b}
+.st{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:#5f6b7a;white-space:nowrap}.st.hot{color:#8a4b00}
+.body{padding:20px 24px 28px;display:flex;flex-direction:column;gap:20px;max-width:1480px;box-sizing:border-box;width:100%}
+.ph{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.ph h2{margin:0;font:600 20px/28px Poppins,sans-serif;color:#15202b}
+.ph p{margin:2px 0 0;color:#5f6b7a;max-width:70ch}
+.ph .sp{flex-grow:1}
+.h3{display:flex;align-items:baseline;gap:10px;padding-bottom:6px;border-bottom:1px solid #e6e9ee}
+.h3 h3{margin:0;font:600 14px/20px Poppins,sans-serif}
+.h3 .m{color:#5f6b7a;font-size:12px}.h3 .sp{flex-grow:1}
+.eyebrow{font-size:11px;line-height:16px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#5f6b7a}
+.meta{font-size:12px;line-height:16px;color:#5f6b7a}
+.note{font-size:12px;line-height:16px;color:#5f6b7a;margin:0}
+.btn{border:1px solid transparent;border-radius:6px;height:32px;padding:0 12px;font-size:13px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;box-sizing:border-box;white-space:nowrap;background:#fff;color:#15202b}
+.btn.p{background:#0b2d4a;color:#fff}.btn.p:hover{background:#0a2540;color:#fff}
+.btn.s{border-color:#8a95a1;color:#15202b}.btn.s:hover{background:#f1f3f6}
+.btn.t{color:#0b4f9c;padding:0 6px}.btn.t:hover{text-decoration:underline}
+.btn.d{background:#a1261a;color:#fff}
+.btn[aria-disabled="true"]{background:#e6e9ee;color:#7b8794;border-color:transparent;cursor:not-allowed}
+.btn.s[aria-disabled="true"]{background:#fff;color:#9aa6b3;border-color:#e6e9ee}
+.btn.w{width:100%}
+.ctl{height:32px;border:1px solid #8a95a1;border-radius:6px;padding:0 10px;font:400 13px/20px 'IBM Plex Sans',system-ui,sans-serif;color:#15202b;background:#fff;box-sizing:border-box;width:100%;min-width:0}
+.ctl:hover{border-color:#9aa6b3}.ctl[readonly]{background:#f6f8fa;color:#3d4955}
+.selw{position:relative;display:block}.selw select{appearance:none;-webkit-appearance:none;padding-right:30px}
+.selw svg{position:absolute;right:9px;top:50%;transform:translateY(-50%);pointer-events:none;color:#5f6b7a}
+.lbl{font-size:12px;line-height:16px;font-weight:500;color:#3d4955;display:block;margin-bottom:4px}
+.segf{display:inline-flex;border:1px solid #8a95a1;border-radius:6px;overflow:hidden;height:30px;background:#fff}
+.segf button{border:0;background:transparent;padding:0 10px;font-size:12px;font-weight:500;color:#3d4955;border-left:1px solid #e6e9ee;display:inline-flex;align-items:center;gap:6px}
+.segf button:first-child{border-left:0}.segf button[aria-pressed="true"]{background:#0b2d4a;color:#fff}
+.segf .n{opacity:.75;font-weight:400}
+.cb{width:16px;height:16px;border:1.5px solid #9aa6b3;border-radius:4px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;background:#fff;color:#fff;flex:0 0 16px}
+.cb.on{background:#0b2d4a;border-color:#0b2d4a}.cb.mix{background:#0b2d4a;border-color:#0b2d4a}
+.cbb{border:0;background:transparent;padding:0;display:inline-flex;width:28px;height:28px;align-items:center;justify-content:center;border-radius:6px}
+.cbb:hover .cb{border-color:#0b2d4a}
+.rd{width:15px;height:15px;border-radius:50%;border:1.5px solid #9aa6b3;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;flex:0 0 15px;background:#fff}
+.rd[aria-checked="true"],[aria-checked="true"]>.rd{border-color:#0b2d4a}.rd[aria-checked="true"] i,[aria-checked="true"]>.rd i{display:block;width:7px;height:7px;border-radius:50%;background:#0b2d4a}
+.rad{display:flex;flex-direction:column;gap:6px}
+.rad button{display:grid;grid-template-columns:15px minmax(0,1fr);column-gap:10px;align-items:start;text-align:left;border:0;background:transparent;padding:3px 0;font-size:13px;color:#15202b;width:100%}
+.rad .rd{margin-top:3px}.rad .h{display:block;font-size:12px;line-height:16px;color:#5f6b7a}
+.tgl{width:32px;height:18px;border-radius:99px;border:0;background:#c9d1da;position:relative;padding:0;flex:0 0 32px}.tgl[aria-checked="true"]{background:#0b2d4a}.tgl i{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff}.tgl[aria-checked="true"] i{left:16px}
+.al{border-radius:6px;padding:8px 12px;font-size:12px;line-height:18px;display:flex;gap:8px;align-items:flex-start}
+.al.ok{background:#e4f3ea;color:#1f5e3d}.al.warn{background:#fdf3e2;color:#5c3b00}.al.info{background:#eef3f9;color:#0b2d4a}
+.ft{position:sticky;bottom:0;background:#fff;border-top:1px solid #e6e9ee;padding:10px 24px;display:flex;align-items:center;gap:10px;z-index:3}
+.ft .sp{flex-grow:1}.ft .why{font-size:12px;color:#5f6b7a}
+.row{display:grid;align-items:center;column-gap:16px;padding:0 12px;min-height:44px;border-bottom:1px solid #eceff3;position:relative}
+.row:hover{background:#f7f9fb}
+.row .tt{font-weight:600;color:#15202b;text-decoration:none}.row .tt:hover{color:#0b4f9c}.row .tt::after{content:"";position:absolute;inset:0}
+.row .ab{position:relative;z-index:1}
+.hrow{display:grid;column-gap:16px;padding:0 12px;height:32px;align-items:center;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#5f6b7a;border-bottom:1px solid #e6e9ee}
+.kv{display:grid;grid-template-columns:120px minmax(0,1fr);row-gap:6px;column-gap:12px;font-size:13px}.kv dt{color:#5f6b7a;margin:0}.kv dd{margin:0}
+.thumb{width:36px;height:46px;border-radius:2px;background:#fff;border:1px solid #c9d1da;position:relative;overflow:hidden;flex:0 0 36px;box-sizing:border-box}
+.thumb i{position:absolute;left:6px;right:6px;height:2px;background:#dfe4ea}.thumb b{position:absolute;left:6px;right:12px;top:6px;height:3px;background:#0b2d4a}
+.thumb .tag{position:absolute;left:0;right:0;bottom:0;background:#0b2d4a;color:#fff;font-size:7px;line-height:10px;font-weight:600;text-align:center;letter-spacing:.04em}
+.thumb.lg{width:64px;height:84px;flex-basis:64px}
+::placeholder{color:#5f6b7a;opacity:1}
+.srch{border-color:#8a95a1}.srch:focus-within{outline:2px solid #0b4f9c;outline-offset:2px}
+.cb,.rd{border-color:#6b7784}
+.tgl{background:#fff;border:1.5px solid #6b7784;box-sizing:border-box}.tgl i{background:#6b7784}.tgl[aria-checked="true"]{background:#0b2d4a;border-color:#0b2d4a}.tgl[aria-checked="true"] i{background:#fff}
+.segf button[aria-checked="true"]{background:#0b2d4a;color:#fff}
+.rail a[aria-current="page"]{box-shadow:inset 3px 0 0 #fff}
+.btn.p[aria-disabled="true"]{color:#5f6b7a}
+.ph p{max-width:64ch}
+.rad label{display:grid;grid-template-columns:15px minmax(0,1fr);column-gap:10px;align-items:start;text-align:left;padding:3px 0;font-size:13px;color:#15202b;width:100%;cursor:pointer;position:relative}
+.rad input,.rbl input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.rad input:checked+.rd,.rbl input:checked+.rd{border-color:#0b2d4a}.rad input:checked+.rd i,.rbl input:checked+.rd i{display:block;width:7px;height:7px;border-radius:50%;background:#0b2d4a}
+.rad input:focus-visible+.rd,.rbl input:focus-visible+.rd{outline:2px solid #0b4f9c;outline-offset:2px}
+.rbl{display:inline-flex;position:relative;width:28px;height:28px;align-items:center;justify-content:center;cursor:pointer}
+.btn.danger{color:#a1261a;border-color:#a1261a}
+@container (max-width: 1100px){ .hide-md{display:none!important} .wz{height:auto;flex-wrap:wrap;padding-block:6px;row-gap:4px} .stp{margin-left:0;flex-basis:100%} }
+@container (max-width: 640px){ .rail{display:none} .hdr{padding:0 12px} .hdr nav a{padding:0 8px} .hdr h1{margin-right:8px} .body{padding:16px} .ft{padding:10px 16px;flex-wrap:wrap} .ft .btn.p{width:100%;order:9} .stp li span.lb{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap} .stp li[aria-current="step"] span.lb{display:inline} .btn,.ctl{height:40px} .hide-sm{display:none!important} .row{grid-template-columns:minmax(0,1fr)!important;row-gap:4px;padding:10px 12px} .hrow{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)} }
+@container (min-width: 2200px){ .shell{zoom:1.15} }
+@container (min-width: 2800px){ .shell{zoom:1.35} }
+
+.row > *{min-width:0}
+.newpub{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:10px 16px;align-items:end;padding:14px 16px 10px;background:#fafbfc;border:1px solid #e6e9ee;border-radius:8px}
+.newpub .startc{display:flex;align-items:flex-end}
+.newpub .reqline{grid-column:1 / -1;display:flex;gap:12px;align-items:center;font-size:12px;min-height:18px}
+.req{color:#a1261a;font-weight:600}
+.tabs{display:inline-flex;gap:0;border-bottom:1px solid #e6e9ee}
+.tabs button{border:0;background:transparent;padding:6px 2px 8px;margin-right:20px;white-space:nowrap;font:500 13px/18px 'IBM Plex Sans',system-ui,sans-serif;color:#5f6b7a;border-bottom:2px solid transparent;cursor:pointer}
+.tabs button[aria-selected="true"]{color:#0b2d4a;border-bottom-color:#0b2d4a}
+.tabs .n{display:inline-block;min-width:18px;padding:0 5px;border-radius:9px;background:#eef1f4;color:#5f6b7a;font-size:11px;line-height:18px;text-align:center;margin-left:4px}
+.tabs button[aria-selected="true"] .n{background:#0b2d4a;color:#fff}
+.menu{top:calc(100% + 4px)}
+.ov{position:fixed;inset:0;background:rgba(21,32,43,.4);z-index:30;display:flex;align-items:center;justify-content:center;padding:16px}
+.dlg{background:#fff;border-radius:8px;width:100%;max-width:560px;box-shadow:0 16px 40px rgba(21,32,43,.24);display:flex;flex-direction:column}
+.dlg .dh{padding:16px 20px 8px}.dlg .df{padding:12px 20px 16px;display:flex;gap:8px;justify-content:flex-end}
+@container (max-width: 1100px){ .row.rp,.hrow.rp{grid-template-columns:minmax(0,1fr) 80px 190px 110px 32px!important} .row.rp>:nth-child(4),.hrow.rp>:nth-child(4){display:none} .row.rq,.hrow.rq{grid-template-columns:minmax(0,1fr) 80px 70px 150px 110px 32px!important} .row.rq>:nth-child(4),.hrow.rq>:nth-child(4){display:none} }
+@container (max-width: 640px){ .row{position:relative;padding-right:44px} .row > *:not(.ab){grid-column:1} .row .ab{position:absolute;top:10px;right:0} .newpub{grid-template-columns:minmax(0,1fr)!important} }
+</style>
+</helmet>
+<div class="app"><div class="shell"><a href="#main" class="skip">Skip to main content</a>
+  <nav class="rail" aria-label="SPOL modules">
+    <span class="logo" role="img" aria-label="SPOL">SPOL</span>
+    <a href="#" aria-label="Home"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg></a><a href="#" aria-label="Planning"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg></a><a href="#" aria-label="Assessment"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg></a><a href="#" aria-label="Accreditation" aria-current="page"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M3 10l9-6 9 6M5 10v9M19 10v9M9 10v9M15 10v9M3 21h18"></path></svg></a><a href="#" aria-label="Reports"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><rect x="5" y="3" width="14" height="18" rx="2"></rect><path d="M9 8h6M9 12h6M9 16h4"></path></svg></a><a href="#" aria-label="Settings"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"></path></svg></a>
+  </nav>
+  <div class="main">
+    <header class="hdr">
+      <h1>Accreditation</h1>
+      <nav aria-label="Accreditation"><a href="#">Dashboard</a><a href="#">All Accreditation</a><a href="#">Create Cycle</a><a href="L0.dc.html" aria-current="page">Publish</a><a href="#">Document Repository</a></nav>
+      <span class="sp"></span>
+      <label class="srch hide-sm"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" placeholder="Search" aria-label="Search accreditation"></label>
+        <button type="button" class="pill hide-md" aria-label="Cycle 2024–2025, current. Change cycle">2024–2025 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M6 9l6 6 6-6"></path></svg></button>
+      <button type="button" class="icb" aria-label="Help and Ask SPOL"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7M12 17h.01"></path></svg></button>
+      <button type="button" class="icb" aria-label="Notifications"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8M10 20a2 2 0 0 0 4 0"></path></svg></button>
+      <button type="button" class="av" aria-label="Alex Carter, account menu" aria-haspopup="true">AC</button>
+    </header>
+    <sc-if value="{{delOpen}}" hint-placeholder-val="{{false}}"><div class="ov"><div class="dlg" role="alertdialog" aria-modal="true" aria-labelledby="ddh" aria-describedby="ddd" style="max-width: 440px;"><div class="dh"><h3 id="ddh" style="margin: 0; font: 600 16px/24px Poppins, sans-serif;">Delete {{delLabel}}?</h3><p id="ddd" class="note" style="margin-top: 4px;">This can't be undone. The deletion is recorded in the audit trail.</p></div><div class="df"><button type="button" class="btn s" autofocus onClick="{{cancelDelete}}">Cancel</button><button type="button" class="btn p" style="background: #a1261a; border-color: #a1261a;" onClick="{{cancelDelete}}">Delete draft</button></div></div></div></sc-if><main id="main" tabindex="-1" class="body"><div class="ph"><div><h2>Publish</h2><p>Start a publication, or pick up a draft where you left off.</p></div></div>
+  <section aria-labelledby="newh" class="newpub">
+    <h3 id="newh" class="sr">New publication</h3>
+    <div><label class="lbl" for="src">Source <span class="req" aria-hidden="true">*</span></label><span class="selw"><select id="src" class="ctl" required aria-required="true"><option>SACSCOC-2018</option><option>ACEN-2023 (Nursing)</option></select><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M6 9l6 6 6-6"></path></svg></span></div>
+    <div><label class="lbl" for="cyc">Cycle <span class="req" aria-hidden="true">*</span></label><span class="selw"><select id="cyc" class="ctl" required aria-required="true"><option>2024–2025 (Current)</option><option>2022–2023</option></select><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M6 9l6 6 6-6"></path></svg></span></div>
+    <div><label class="lbl" for="tpl">Report template <span class="req" aria-hidden="true">*</span></label><span class="selw"><select id="tpl" class="ctl" required aria-required="true" value="{{tpl}}" onChange="{{setTpl}}"><option value="">Select a template…</option><option value="t10">SACS 10-Year</option><option value="t5">SACS Fifth-Year</option><option value="tsub">SACS Substantive Change</option><option value="tgen">Generic</option></select><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M6 9l6 6 6-6"></path></svg></span></div>
+    <div class="startc"><sc-if value="{{ready}}" hint-placeholder-val="{{false}}"><a class="btn p" href="S1.dc.html" style="height: 32px;">Start publication</a></sc-if><sc-if value="{{notReady}}" hint-placeholder-val="{{true}}"><span class="btn p" role="button" aria-disabled="true" aria-describedby="sth" style="height: 32px;">Start publication</span></sc-if></div>
+    <div class="reqline"><span class="meta"><span class="req" aria-hidden="true">*</span> Required</span><span style="flex-grow: 1;"></span><sc-if value="{{notReady}}" hint-placeholder-val="{{true}}"><span class="note" id="sth" role="status">Choose a report template to start</span></sc-if><sc-if value="{{ready}}" hint-placeholder-val="{{false}}"><span class="note" role="status">Opens step 1 with your choices filled in</span></sc-if></div>
+  </section>
+  <section aria-labelledby="drh" style="display: flex; flex-direction: column; gap: 10px;"><div class="h3" style="align-items: center;"><h3 id="drh" class="sr">Publications</h3><div role="tablist" aria-label="Publications" class="tabs"><button type="button" role="tab" aria-selected="{{tabProg}}" aria-controls="tp-prog" onClick="{{goProg}}">In progress <span class="n">2</span></button><button type="button" role="tab" aria-selected="{{tabPub}}" aria-controls="tp-pub" onClick="{{goPub}}">Published <span class="n">4</span></button></div><span class="sp"></span><label class="srch" style="height: 28px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" placeholder="Search" aria-label="Search publications" style="width: 140px;"></label></div>
+  <sc-if value="{{tabProg}}" hint-placeholder-val="{{true}}"><div id="tp-prog" role="tabpanel"><div role="table" aria-label="Publications in progress">
+    <div class="hrow rp" role="row" style="grid-template-columns: minmax(0,1fr) 90px 230px 150px 110px 32px;"><span role="columnheader">Report</span><span role="columnheader">Version</span><span role="columnheader">Where it is</span><span role="columnheader">Owner</span><span role="columnheader">Last edited</span><span></span></div>
+    <sc-for list="{{progRows}}" as="r" hint-placeholder-count="3"><div class="row rp" role="row" style="grid-template-columns: minmax(0,1fr) 90px 230px 150px 110px 32px;">
+      <div role="cell" style="min-width: 0;"><a class="tt" href="{{r.href}}">{{r.t}}</a><span class="meta" style="display: block;">{{r.m}}</span></div>
+      <div role="cell" style="font-weight: 500;">{{r.v}}</div>
+      <div role="cell" class="meta" style="color: #15202b;">{{r.step}}</div>
+      <div role="cell" class="meta">{{r.who}}</div>
+      <div role="cell" class="meta">{{r.when}}</div>
+      <div role="cell" class="ab" style="position: relative;"><button type="button" class="icb" style="width: 28px; height: 28px;" aria-label="More actions for {{r.t}}, {{r.v}}" aria-haspopup="menu" aria-expanded="{{r.menuOpen}}" onClick="{{r.toggleMenu}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><circle cx="5" cy="12" r="1.6"></circle><circle cx="12" cy="12" r="1.6"></circle><circle cx="19" cy="12" r="1.6"></circle></svg></button><sc-if value="{{r.menuOpen}}" hint-placeholder-val="{{false}}"><div class="menu r" role="menu" aria-label="Actions for {{r.v}}"><a role="menuitem" href="{{r.href}}">Open<span class="mm">Resume at {{r.step}}</span></a><button type="button" role="menuitem" onClick="{{r.closeMenu}}">Rename publication</button><button type="button" role="menuitem" onClick="{{r.closeMenu}}">Duplicate as new draft</button><button type="button" role="menuitem" style="color: #a1261a;" onClick="{{r.askDelete}}">Delete draft<span class="mm">Confirms first · recorded</span></button></div></sc-if></div>
+    </div></sc-for>
+  </div></div></sc-if>
+  <sc-if value="{{tabPub}}" hint-placeholder-val="{{false}}"><div id="tp-pub" role="tabpanel"><div role="table" aria-label="Published versions">
+    <div class="hrow rq" role="row" style="grid-template-columns: minmax(0,1fr) 90px 80px 100px 150px 110px 32px;"><span role="columnheader">Report</span><span role="columnheader">Version</span><span role="columnheader">Format</span><span role="columnheader">Pages</span><span role="columnheader">Published by</span><span role="columnheader">Published on</span><span></span></div>
+    <sc-for list="{{pubRows}}" as="r" hint-placeholder-count="3"><div class="row rq" role="row" style="grid-template-columns: minmax(0,1fr) 90px 80px 100px 150px 110px 32px;">
+      <div role="cell" style="min-width: 0;"><a class="tt" href="S4b.dc.html">{{r.t}}</a><span class="meta" style="display: block;">{{r.m}}</span></div>
+      <div role="cell" style="font-weight: 500;">{{r.v}}</div>
+      <div role="cell" class="meta">{{r.fmt}}</div>
+      <div role="cell" class="meta">{{r.pages}}</div>
+      <div role="cell" class="meta">{{r.who}}</div>
+      <div role="cell" class="meta">{{r.when}}</div>
+      <div role="cell" class="ab" style="position: relative;"><button type="button" class="icb" style="width: 28px; height: 28px;" aria-label="More actions for {{r.t}}, {{r.v}}" aria-haspopup="menu" aria-expanded="{{r.menuOpen}}" onClick="{{r.toggleMenu}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><circle cx="5" cy="12" r="1.6"></circle><circle cx="12" cy="12" r="1.6"></circle><circle cx="19" cy="12" r="1.6"></circle></svg></button><sc-if value="{{r.menuOpen}}" hint-placeholder-val="{{false}}"><div class="menu r" role="menu" aria-label="Actions for {{r.v}}"><a role="menuitem" href="S4b.dc.html">Open</a><button type="button" role="menuitem" onClick="{{r.closeMenu}}">Download {{r.fmt}}</button><button type="button" role="menuitem" onClick="{{r.closeMenu}}">Copy link</button><sc-if value="{{r.isFinal}}" hint-placeholder-val="{{false}}"><button type="button" role="menuitem" style="color: #a1261a;" onClick="{{r.closeMenu}}">Withdraw final<span class="mm">Coordinator · confirms first</span></button></sc-if><sc-if value="{{r.notFinal}}" hint-placeholder-val="{{true}}"><span class="mm" style="padding: 6px 10px;">Published versions can't be deleted</span></sc-if></div></sc-if></div>
+    </div></sc-for>
+  </div></div></sc-if></section></main>
+    
+  </div>
+</div></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = Object.assign({ av: false, ver: false, rowMenu: -1 }, { tpl: '', tab: 'pub', rowMenu: -1, del: -1 }); }
+  renderVals(){
+    var self = this, st = this.state;
+    var base = {
+      avOpen: st.av, toggleAv: function(){ self.setState({ av: !st.av, ver: false, rowMenu: -1 }); },
+      verOpen: st.ver, toggleVer: function(){ self.setState({ ver: !st.ver, av: false, rowMenu: -1 }); }
+    };
+    
+    var PROG = [{"t": "Substantive Change: Online MBA", "m": "SACS Substantive Change \u00b7 2024\u20132025", "v": "Draft 2", "step": "Step 1 \u00b7 Standards & content", "who": "Priya Natarajan", "when": "11 Oct 2026", "href": "S1.dc.html"}, {"t": "Compliance Certification", "m": "SACS 10-Year \u00b7 2024\u20132025", "v": "Draft 2", "step": "Step 1 \u00b7 Standards & content", "who": "Alex Carter", "when": "24 Sep 2026", "href": "S1.dc.html"}], PUB = [{"t": "Compliance Certification", "m": "SACS 10-Year \u00b7 2024\u20132025", "v": "Draft 4", "fmt": "PDF", "pages": "184 pages", "who": "Alex Carter", "when": "17 Oct 2026", "isFinal": false, "notFinal": true}, {"t": "Compliance Certification", "m": "SACS 10-Year \u00b7 2024\u20132025", "v": "Draft 3", "fmt": "PDF", "pages": "184 pages", "who": "Alex Carter", "when": "10 Oct 2026", "isFinal": false, "notFinal": true}, {"t": "Fifth-Year Interim Report", "m": "SACS Fifth-Year \u00b7 2024\u20132025", "v": "Final 1", "fmt": "PDF", "pages": "96 pages", "who": "Priya Natarajan", "when": "2 Oct 2026", "isFinal": true, "notFinal": false}, {"t": "Compliance Certification", "m": "SACS 10-Year \u00b7 2024\u20132025", "v": "Draft 1", "fmt": "PDF", "pages": "171 pages", "who": "Alex Carter", "when": "17 Sep 2026", "isFinal": false, "notFinal": true}];
+    function mkRows(list, prefix){ return list.map(function(r, i){ var key = prefix + i; return Object.assign({}, r, { menuOpen: st.rowMenu === key, toggleMenu: function(){ self.setState({ rowMenu: st.rowMenu === key ? -1 : key }); }, closeMenu: function(){ self.setState({ rowMenu: -1 }); }, askDelete: function(){ self.setState({ rowMenu: -1, del: i }); } }); }); }
+    var dl = st.del >= 0 ? PROG[st.del] : null;
+    Object.assign(base, { tpl: st.tpl, setTpl: function(e){ self.setState({ tpl: e.target.value }); }, ready: !!st.tpl, notReady: !st.tpl,
+      tabProg: st.tab === 'prog', tabPub: st.tab === 'pub', goProg: function(){ self.setState({ tab: 'prog', rowMenu: -1 }); }, goPub: function(){ self.setState({ tab: 'pub', rowMenu: -1 }); },
+      progRows: mkRows(PROG, 'p'), pubRows: mkRows(PUB, 'q'),
+      delOpen: !!dl, delLabel: dl ? (dl.v + ' of ' + dl.t) : '', cancelDelete: function(){ self.setState({ del: -1 }); } });
+    return base;
+  }
+}
+</script>
+</body>
+</html>
