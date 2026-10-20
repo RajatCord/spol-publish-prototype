@@ -208,8 +208,7 @@ button{font-family:inherit;cursor:pointer}
 </helmet>
 <div class="app"><a href="#main" class="skip">Skip to main content</a>
   
-    <h1 class="sr">Reading mode · Compliance Certification Draft 4</h1>
-<sc-if value="{{ordOpen}}" hint-placeholder-val="{{false}}"><div class="ov"><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="orh" aria-describedby="ord" style="max-width: 560px;">
+    <sc-if value="{{ordOpen}}" hint-placeholder-val="{{false}}"><div class="ov"><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="orh" aria-describedby="ord" style="max-width: 560px;">
   <div class="dh"><h3 id="orh" style="margin: 0; font: 600 16px/24px Poppins, sans-serif;">Order sections</h3><p id="ord" class="note" style="margin-top: 4px;">Move a standard up or down to change where it prints. Cover and Contents stay first; Documents and Links stay last (set in Step 1). Standard numbers do not change; the contents and page numbers are rebuilt.</p></div>
   <div class="db">
     <ol class="ordl" aria-label="Sections in print order"><sc-for list="{{ordRows}}" as="r" hint-placeholder-count="16"><li class="{{r.cls}}"><span class="n">{{r.num}}</span><span>{{r.full}}<sc-if value="{{r.moved}}" hint-placeholder-val="{{false}}"> <span class="chip grey" style="margin-left: 6px;">moved</span></sc-if></span><sc-if value="{{r.fixed}}" hint-placeholder-val="{{false}}"><span class="meta">fixed</span></sc-if><sc-if value="{{r.movable}}" hint-placeholder-val="{{true}}"><span class="mv"><button type="button" aria-label="Move {{r.full}} up" aria-disabled="{{r.noUp}}" onClick="{{r.up}}">↑</button><button type="button" aria-label="Move {{r.full}} down" aria-disabled="{{r.noDown}}" onClick="{{r.down}}">↓</button></span></sc-if></li></sc-for></ol>
@@ -217,7 +216,7 @@ button{font-family:inherit;cursor:pointer}
   </div>
   <div class="df"><button type="button" class="btn t" aria-disabled="{{ordIsTemplate}}" onClick="{{ordReset}}">Reset to template order</button><span style="flex-grow: 1;"></span><button type="button" class="btn s" autofocus onClick="{{ordCancel}}">Cancel</button><button type="button" class="btn p" aria-disabled="{{ordSame}}" onClick="{{ordApply}}">Apply order</button></div>
 </div></div></sc-if>
-    <header class="rd-top" aria-label="Reading mode">
+    <header class="rd-top" aria-label="Reading mode"><h1 class="sr">Reading mode · Compliance Certification Draft 4</h1>
       <a href="S4.dc.html" class="btn s" style="height: 28px; font-size: 12px;" autofocus><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M6 6l12 12M18 6L6 18"></path></svg>Exit reading mode</a>
       <span class="crumb" style="white-space: nowrap;"><b>Compliance Certification</b></span>
       <span class="secnav" role="group" aria-label="Section"><button type="button" class="btn s" style="height: 28px; width: 28px; padding: 0;" aria-label="Previous section" aria-disabled="{{noPrev}}" onClick="{{prevSec}}">‹</button><span class="selw"><select class="ctl" style="height: 28px; font-size: 12px; width: 300px;" aria-label="Go to section" value="{{curIdx}}" onChange="{{goSec}}"><sc-for list="{{pages}}" as="p" hint-placeholder-count="3"><option value="{{p.idx}}">{{p.optLabel}}</option></sc-for></select></span><button type="button" class="btn s" style="height: 28px; width: 28px; padding: 0;" aria-label="Next section" aria-disabled="{{noNext}}" onClick="{{nextSec}}">›</button></span>
