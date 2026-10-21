@@ -1,0 +1,21 @@
+# SPOL Publish prototype
+
+> Clickable static prototype of the SPOL Accreditation Publish workflow (landing, four steps, published state) with its specification set. All people, institutions and documents are fictional.
+
+## Specifications (Markdown, for ingestion)
+
+- [Developer handoff](https://rajatcord.github.io/spol-publish-prototype/docs/handoff.md): data model, states and gates, every screen control by control, API, credits and ledger, audit, accessibility, acceptance tests, answers for the build team (report download format, comment structure, send-back email, severity definitions, free checks), open questions, iteration log.
+- [AI call spec](https://rajatcord.github.io/spol-publish-prototype/docs/ai-spec.md): the three model calls (reviewer analysis, consistency, Auto-format), schemas, validation, keys and versions, cost, safety, quality gates.
+- [How AI readiness works](https://rajatcord.github.io/spol-publish-prototype/docs/dossier.md): the user-facing dossier.
+- [Flows](https://rajatcord.github.io/spol-publish-prototype/docs/flows.md): every path through the workflow, screen by screen.
+
+## Same documents as HTML
+
+- https://rajatcord.github.io/spol-publish-prototype/docs/handoff.html
+- https://rajatcord.github.io/spol-publish-prototype/docs/ai-spec.html
+- https://rajatcord.github.io/spol-publish-prototype/docs/dossier.html
+- https://rajatcord.github.io/spol-publish-prototype/docs/flows.html
+
+## Prototype
+
+- Index of the 28 screens: https://rajatcord.github.io/spol-publish-prototype/
