@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>SPOL AI Credit Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Poppins:wght@500;600&display=swap">
+<style>
+:root{--bg:#f6f7f9;--surface:#fff;--fg:#15202b;--muted:#5b6878;--line:#dfe4ea;--accent:#0b2d4a;--accent-soft:#e7eef7;--ai:#5b3df5;--ai-soft:#f1eeff;--good:#1f7a4d;--good-soft:#e4f3ea;--warn:#8a4b00;--warn-soft:#fdf3e2;--display:"Poppins",system-ui,sans-serif;--body:"IBM Plex Sans",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10161e;--surface:#18212c;--fg:#e7ebf0;--muted:#9aa6b6;--line:#2a3441;--accent:#9cc2ee;--accent-soft:#1b2a3c;--ai:#b9a9ff;--ai-soft:#251f45;--good:#7fd1a5;--good-soft:#14302a;--warn:#f0c27a;--warn-soft:#3a2d12;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#10161e;--surface:#18212c;--fg:#e7ebf0;--muted:#9aa6b6;--line:#2a3441;--accent:#9cc2ee;--accent-soft:#1b2a3c;--ai:#b9a9ff;--ai-soft:#251f45;--good:#7fd1a5;--good-soft:#14302a;--warn:#f0c27a;--warn-soft:#3a2d12;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 var(--body)}
+a{color:var(--accent)}
+.hero{background:linear-gradient(180deg,var(--accent-soft),var(--bg));border-bottom:1px solid var(--line)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+.hero .wrap{padding-top:56px;padding-bottom:40px}
+.eyebrow{font:600 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font:600 clamp(30px,5vw,46px)/1.15 var(--display);margin:12px 0 14px;letter-spacing:-.01em}
+h2{font:600 26px/1.25 var(--display);margin:0 0 6px}
+h3{font:600 18px/1.3 var(--display);margin:28px 0 8px}
+.lead{font-size:19px;max-width:70ch;color:var(--fg)}
+.meta{color:var(--muted);font-size:14px}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:22px;font-size:14px}
+nav.toc a{text-decoration:none;color:var(--muted)}nav.toc a:hover,nav.toc a:focus-visible{color:var(--accent);text-decoration:underline}
+section{padding:48px 0;border-bottom:1px solid var(--line)}
+section .kicker{color:var(--muted);margin:0 0 22px;max-width:72ch}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:28px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.tile b{display:block;font:600 28px/1.1 var(--display);color:var(--accent);margin-bottom:6px}
+.tile span{font-size:14px;color:var(--muted)}
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.card h4{font:600 16px/1.3 var(--display);margin:0 0 6px}
+.card p{margin:0;font-size:15px;color:var(--muted)}
+.card.ai{border-color:color-mix(in srgb,var(--ai) 35%,var(--line));background:var(--ai-soft)}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface);margin:12px 0 4px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;vertical-align:top;padding:10px 14px;border-bottom:1px solid var(--line)}
+th{font:600 12px/1.3 var(--body);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:color-mix(in srgb,var(--surface) 85%,var(--bg))}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.free{color:var(--good);font-weight:600}
+ul.tight{padding-left:20px;margin:8px 0}ul.tight li{margin:4px 0}
+.callout{border-radius:12px;padding:14px 18px;margin:18px 0;font-size:15px}
+.callout.good{background:var(--good-soft)}.callout.warn{background:var(--warn-soft)}.callout.info{background:var(--accent-soft)}
+.copy{font-family:var(--body);background:var(--surface);border:1px dashed var(--line);border-radius:10px;padding:2px 8px;white-space:nowrap}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+@media (max-width:760px){.two{grid-template-columns:1fr}.hero .wrap{padding-top:36px}section{padding:36px 0}}
+.bar{display:grid;grid-template-columns:200px 1fr 70px;gap:12px;align-items:center;font-size:14px;margin:8px 0}
+.bar .track{height:10px;border-radius:5px;background:var(--line);position:relative;overflow:hidden}
+.bar .fill{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:5px}
+.bar .fill.p90{background:color-mix(in srgb,var(--accent) 35%,transparent)}
+@media (max-width:560px){.bar{grid-template-columns:1fr 60px}.bar .track{grid-column:1 / -1;order:3}}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:12px}
+ol.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 18px 14px 58px;position:relative}
+ol.steps li::before{content:counter(s);position:absolute;left:18px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--surface);font:600 14px/28px var(--display);text-align:center}
+footer{padding:32px 0 56px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">SPOL · AI strategy · 22 Oct 2026</div>
+    <h1>AI included, priced in credits, run by SPOL</h1>
+    <p class="lead">Every SPOL module carries an annual allowance of AI credits for the whole institution. Users see what an AI action costs before they run it; they never choose a model, a provider or a setting. SPOL routes each action to the right model, absorbs the cost risk, and keeps the price as it is today: one price per module, as many users as the institution wants.</p>
+    <nav class="toc" aria-label="Contents"><a href="#principles">Principles</a><a href="#market">Market</a><a href="#cost">What AI costs</a><a href="#credits">The credit</a><a href="#pricing">Pricing</a><a href="#economics">Economics</a><a href="#experience">Experience</a><a href="#trust">Trust and data</a><a href="#backend">Behind the scenes</a><a href="#risks">Risks</a><a href="#finance">Finance</a><a href="#rollout">Rollout</a><a href="#decisions">Decisions</a></nav>
+    <div class="tiles" aria-label="Key numbers">
+      <div class="tile"><b>200</b><span>credits included per $1,000 of annual module fee (minimum 1,500)</span></div>
+      <div class="tile"><b>$0.10</b><span>list value of one credit; every weight keeps worst-case model cost at or below 60 % of it</span></div>
+      <div class="tile"><b>≤ 1 %</b><span>of contract value spent on model fees, even in a full self-study year</span></div>
+      <div class="tile"><b>0</b><span>model choices, tokens or surprise invoices anywhere in the product</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section id="principles" aria-labelledby="h-principles">
+  <h2 id="h-principles">Seven principles</h2>
+  <p class="kicker">Everything below follows from these. If a later decision contradicts one, the principle wins.</p>
+  <div class="pillars">
+    <div class="card"><h4>Included, not sold separately</h4><p>AI is part of every module. There is no AI tier, no AI seat and no per-user charge. Adding users never costs more.</p></div>
+    <div class="card"><h4>One unit, one number</h4><p>Credits only. Never tokens, never dollars on a working screen, never two meters.</p></div>
+    <div class="card"><h4>The cost is on the button</h4><p>Every paid action shows its credits before it runs. Small helpers are free and say nothing.</p></div>
+    <div class="card"><h4>SPOL chooses the model</h4><p>No model picker, no "fast or thorough" switch, no bring-your-own key. SPOL routes, pins, tests and pays.</p></div>
+    <div class="card"><h4>Never more than the quote</h4><p>A failed run costs nothing; an unfinished one is refunded; a stored result is free to view again.</p></div>
+    <div class="card"><h4>No surprise at the deadline</h4><p>Work in the two weeks before a submission is never stopped by the allowance, and grace use is never billed.</p></div>
+    <div class="card ai"><h4>Suggest, never act</h4><p>AI output changes nothing until a person accepts it. Every AI action is recorded and can be disclosed to an accreditor.</p></div>
+  </div>
+</section>
+
+<section id="market" aria-labelledby="h-market">
+  <h2 id="h-market">What the market does</h2>
+  <p class="kicker">Accreditation vendors do not publish AI pricing. General SaaS has converged on a predictable base fee with an AI allowance inside it, metered in credits, with packs above it. Pure per-action billing and paid AI seats are the shapes buyers resist.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Vendor</th><th>AI pricing shape</th><th>What it tells SPOL</th></tr></thead>
+    <tbody>
+      <tr><td><a href="https://www.watermarkinsights.com/resources/blog/ai-statement/">Watermark</a> Planning &amp; Self-Study</td><td>Custom quote; AI inside the product, opt-in, outputs disclosed and overridable</td><td>The competitor to beat. AI is already in the self-study workflow (<a href="https://support.watermarkinsights.com/hc/en-us/articles/54518908523291-Planning-Self-Study-Release-Notes-for-August-20-2026">Aug 2026 release</a>) with no visible meter, and its price is quoted, so AI supports price rather than replacing it</td></tr>
+      <tr><td><a href="https://www.capterra.com/p/10039129/Weave-Accreditation/">Weave</a></td><td>Per accreditation or per year; no AI found</td><td>No AI offer to match at the low end</td></tr>
+      <tr><td><a href="https://www.supered.io/blog/agentforce-pricing/">Salesforce Agentforce</a></td><td>Flex Credits, per conversation or per seat; about $0.10 a standard action</td><td>Several meters that cannot be mixed: the confusion to avoid</td></tr>
+      <tr><td><a href="https://vantaige.io/blog/hubspot-breeze-vs-salesforce-agentforce-2026">HubSpot Breeze</a></td><td>Seats plus credits at $0.01; credits expire monthly</td><td>Monthly expiry is a known irritant; annual is the norm institutions can budget</td></tr>
+      <tr><td><a href="https://chronic.digital/blog/crm-ai-credits-pricing-trap">Atlassian Rovo</a></td><td>Allowance bundled per seat tier; overage from Dec 2026</td><td>The clearest "included allowance, simple unit" model</td></tr>
+      <tr><td><a href="https://coworker.ai/blog/notion-ai-pricing">Notion</a>, <a href="https://resources.rework.com/libraries/ai-terms/what-is-zoom-ai-companion">Zoom</a></td><td>AI included in the paid plan</td><td>Inclusion is where general software has landed</td></tr>
+      <tr><td>Microsoft 365 Copilot</td><td>Add-on seat, about $30 per user per month</td><td>The cost higher education pushes back on (<a href="https://internet2.edu/sean-obrien-on-the-rising-costs-of-ai-in-higher-education/">Internet2</a>)</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout info"><b>What buyers object to</b> is not credits but opaque credits: units nobody can explain, monthly expiry, several meters, and running out mid-task without warning (<a href="https://metronome.com/blog/beyond-the-seat-architecting-hybrid-ai-pricing-without-the-chaos">Metronome</a>, <a href="https://www.getmonetizely.com/articles/the-beginners-cheat-sheet-to-ai-pricing-models-in-2026-a1e1e">Monetizely</a>). Procurement is told to expect consumption pricing and insist on caps (<a href="https://letsdatascience.com/news/generative-ai-upends-enterprise-software-licensing-models-f620b093">coverage of Gartner, Jul 2026</a>). SPOL answers both: one annual allowance, fixed weights, a hard ceiling.</div>
+</section>
+
+<section id="cost" aria-labelledby="h-cost">
+  <h2 id="h-cost">What AI costs SPOL</h2>
+  <p class="kicker">At <a href="https://claude.com/pricing">current list prices</a> per million tokens (Sonnet 5.5 $2 in / $10 out, Opus 5.5 $4 / $20, Haiku 5.5 $0.10 / $0.50 under 100K-token prompts, five times that above), with reasoning tokens counted as output, for a large SACSCOC report of about 400 pages and 70 standards.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Action</th><th>Model tier</th><th class="num">Cost per run, typical–p90</th><th class="num">Credits</th><th class="num">p90 as % of credit value</th></tr></thead>
+    <tbody>
+      <tr><td>Ask SPOL, spelling, grammar, style, the 13 readiness checks</td><td>Small / licensed</td><td class="num">under $0.002</td><td class="num free">Free</td><td class="num">—</td></tr>
+      <tr><td>Improve wording, Suggest support, Privacy check, Alt text</td><td>Small</td><td class="num">$0.0005–0.002</td><td class="num free">Free</td><td class="num">—</td></tr>
+      <tr><td>Attachment check</td><td>Standard</td><td class="num">$0.03–0.06 per 25 pages</td><td class="num">1 per 25 pages</td><td class="num">60 %</td></tr>
+      <tr><td>Check coverage, Brief me</td><td>Standard</td><td class="num">$0.06–0.10</td><td class="num">2</td><td class="num">50 %</td></tr>
+      <tr><td>Draft a reply to feedback</td><td>Standard</td><td class="num">$0.03–0.06</td><td class="num">2</td><td class="num">30 %</td></tr>
+      <tr><td>Group feedback by theme</td><td>Standard</td><td class="num">$0.06–0.12</td><td class="num">3</td><td class="num">40 %</td></tr>
+      <tr><td>Draft the response (each generation)</td><td>Standard, reasoning</td><td class="num">$0.12–0.25</td><td class="num">5</td><td class="num">50 %</td></tr>
+      <tr><td>AI readiness, per standard (report cached across standards)</td><td>Standard, reasoning</td><td class="num">$0.06–0.12</td><td class="num">3</td><td class="num">40 %</td></tr>
+      <tr><td>AI readiness, cross-standard pass per 24 standards</td><td>Large</td><td class="num">$0.15–0.35</td><td class="num">6</td><td class="num">58 %</td></tr>
+      <tr><td>Auto-format</td><td>Small</td><td class="num">$0.03–0.13 per 200 pages</td><td class="num">4 per 200 pages</td><td class="num">33 %</td></tr>
+      <tr><td>Reviewer preview (whole-report critique)</td><td>Large, reasoning</td><td class="num">$0.65–1.20 per 200 pages</td><td class="num">24 per 200 pages</td><td class="num">50 %</td></tr>
+    </tbody>
+  </table></div>
+  <p class="meta">Weights scale with size where the work does: per standard, per 25 pages, per 200 pages. A 12-standard AI readiness run is 42 credits; a 70-standard run is 228. Anything above a size band ceiling is split before it runs, never billed as an overrun.</p>
+  <h3>Cost against credit value, worst case</h3>
+  <div role="img" aria-label="p90 model cost as a share of credit value, for each paid action; all at or below 60 percent">
+    <div class="bar"><span>Attachment check</span><span class="track"><i class="fill" style="width:60%"></i></span><span class="num">60 %</span></div>
+    <div class="bar"><span>Cross-standard pass</span><span class="track"><i class="fill" style="width:58%"></i></span><span class="num">58 %</span></div>
+    <div class="bar"><span>Draft the response</span><span class="track"><i class="fill" style="width:50%"></i></span><span class="num">50 %</span></div>
+    <div class="bar"><span>Check coverage, Brief me</span><span class="track"><i class="fill" style="width:50%"></i></span><span class="num">50 %</span></div>
+    <div class="bar"><span>Reviewer preview</span><span class="track"><i class="fill" style="width:50%"></i></span><span class="num">50 %</span></div>
+    <div class="bar"><span>AI readiness, per standard</span><span class="track"><i class="fill" style="width:40%"></i></span><span class="num">40 %</span></div>
+    <div class="bar"><span>Group feedback</span><span class="track"><i class="fill" style="width:40%"></i></span><span class="num">40 %</span></div>
+    <div class="bar"><span>Auto-format</span><span class="track"><i class="fill" style="width:33%"></i></span><span class="num">33 %</span></div>
+    <div class="bar"><span>Draft a reply</span><span class="track"><i class="fill" style="width:30%"></i></span><span class="num">30 %</span></div>
+  </div>
+  <div class="callout good"><b>The rule that sets every weight:</b> the modelled p90 cost of an action, reasoning and retries included, stays at or below 60 % of the credit value of its weight. An internal alert fires when any action's p90 passes that line for a week; the fix is engineering (caching, a smaller tier) or a new action, never a mid-term price change.</div>
+</section>
+
+<section id="credits" aria-labelledby="h-credits">
+  <h2 id="h-credits">The credit</h2>
+  <div class="two">
+    <div>
+      <h3>What it is</h3>
+      <ul class="tight">
+        <li><b>One credit is worth $0.10</b> at pack prices. That is the only conversion anyone outside SPOL ever needs, and it appears only on the coordinator's purchasing screen.</li>
+        <li><b>Weights are small whole numbers,</b> fixed for the contract term, printed on the action, scaled by size where the work scales.</li>
+        <li><b>One pool per institution,</b> shared by every user and every module, renewed at the start of the institution's own fiscal year.</li>
+        <li><b>Quoted before, charged after.</b> The quote places a hold; the charge is never above it; a failure releases it.</li>
+        <li><b>Stored results are free.</b> Re-running AI readiness charges only standards whose text or evidence changed; a re-run caused by SPOL changing a model or prompt is free.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>What is always free</h3>
+      <ul class="tight">
+        <li>Spelling, grammar, punctuation and style, as you type and at readiness.</li>
+        <li>Ask SPOL, the product help.</li>
+        <li>The thirteen readiness checks, send back, comments, reminders, publishing in every format.</li>
+        <li>Improve wording, Suggest support, Privacy check and Alt text. They cost SPOL a fraction of a cent, and accessibility and privacy work should never be rationed.</li>
+        <li>Viewing any stored AI result, by anyone in the institution.</li>
+      </ul>
+    </div>
+  </div>
+  <h3>Rollover and the accreditation cycle</h3>
+  <p>Accreditation work comes in waves: a quiet year, then a self-study year, then a fifth-year report. Unused included credits roll over once, and the balance is capped at twice the annual allowance. Quiet years fund the busy one without a purchase. Purchased credits last 12 months from purchase.</p>
+</section>
+
+<section id="pricing" aria-labelledby="h-pricing">
+  <h2 id="h-pricing">Pricing</h2>
+  <p class="kicker">One price per module for unlimited users stays. AI adds an allowance to each module, a modest lift in list price to carry it, and packs for institutions that use more.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Element</th><th>Proposal</th></tr></thead>
+    <tbody>
+      <tr><td>List price</td><td>Rises 8 % for new contracts when AI becomes generally available. Existing customers receive the allowance at renewal under their standard escalator, capped at 5 %.</td></tr>
+      <tr><td>Included allowance</td><td>200 credits per $1,000 of annual module fee, minimum 1,500, rounded to the nearest 500, pooled across the institution's modules. A $25,000 Accreditation module carries 5,000; a $10,000 module carries 2,000.</td></tr>
+      <tr><td>Rollover</td><td>Unused included credits roll over once; balance capped at twice the annual allowance.</td></tr>
+      <tr><td>First-year promise</td><td>If an institution uses up its included allowance in its first contract year, SPOL tops it up once, free, by up to half the allowance.</td></tr>
+      <tr><td>Deadline grace</td><td>In the 14 days before a submission date recorded in the cycle (not one a user sets), every action keeps running past zero, up to a quarter of the annual allowance, once per cycle, never billed and never taken from next year.</td></tr>
+      <tr><td>Packs</td><td>2,500 credits for $375 · 10,000 for $1,200 · 25,000 for $2,500. Prices fixed for the term; each fits under a typical purchasing-card limit; the 10,000 pack can be quoted as a fixed line item for a self-study year.</td></tr>
+      <tr><td>AI reserve</td><td>Instead of card top-ups: a not-to-exceed amount on the purchase order, drawn only on use and invoiced quarterly in arrears.</td></tr>
+      <tr><td>Overage</td><td>None without a pack or reserve. At zero, paid actions pause; free actions and stored results keep working.</td></tr>
+      <tr><td>Consortia and systems</td><td>Each member keeps its own allowance; the consortium may buy a shared pack, with usage shown per member.</td></tr>
+      <tr><td>Weight protection</td><td>Weights are fixed for the term. At renewal SPOL may revise them on 90 days' notice, never reducing the number of actions the included allowance covers by more than 15 %. When models get cheaper, SPOL raises the allowance at renewal rather than repricing mid-term.</td></tr>
+      <tr><td>Exit</td><td>Unused purchased credits are refunded pro rata at termination.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="economics" aria-labelledby="h-economics">
+  <h2 id="h-economics">Economics, one institution</h2>
+  <p class="kicker">A large SACSCOC institution on the Accreditation module at $25,000 a year (5,000 included credits), using the weights above. Model cost assumes the p90 column, so real cost will be lower.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Year</th><th>What happens</th><th class="num">Credits</th><th class="num">Model cost, worst case</th><th class="num">Share of contract</th></tr></thead>
+    <tbody>
+      <tr><td>Quiet year</td><td>Drafting help, coverage checks, a few readiness runs</td><td class="num">≈ 1,500</td><td class="num">≈ $75</td><td class="num">0.3 %</td></tr>
+      <tr><td>Self-study year</td><td>70 standards drafted twice, 200 replies, 300 coverage checks, 500 evidence documents checked, one full readiness run and ten partial ones, 15 Auto-formats and 3 reviewer previews of 400 pages</td><td class="num">≈ 4,000</td><td class="num">≈ $200</td><td class="num">0.8 %</td></tr>
+      <tr><td>Self-study year after a quiet one</td><td>Rolled-over 3,500 plus 5,000 included covers it with room to spare</td><td class="num">8,500 available</td><td class="num">—</td><td class="num">—</td></tr>
+      <tr><td>Heavy user buying a pack</td><td>10,000 pack used in full</td><td class="num">10,000</td><td class="num">≤ $600</td><td class="num">revenue $1,200</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout good"><b>The line that matters:</b> an 8 % list lift on a $25,000 module is $2,000 a year against at most $200 of model cost in the busiest year. AI is a margin contributor from day one, not a cost SPOL hides. At portfolio level the target is AI cost of goods below 3 % of contract value, with a review triggered if it is crossed.</div>
+</section>
+
+<section id="experience" aria-labelledby="h-experience">
+  <h2 id="h-experience">The experience</h2>
+  <p class="kicker">A writer should never need to know what a model is, and a coordinator should never be surprised by a number.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Who</th><th>Sees</th><th>Never sees</th></tr></thead>
+    <tbody>
+      <tr><td>Writer, reviewer</td><td>The cost on each paid action before it runs; a status line in the AI menu: <span class="copy">AI included in your institution's plan</span>, or <span class="copy">Institution AI allowance running low</span> below 20 %; a plain reason when an action is unavailable</td><td>Balances, money, packs, models, providers, tokens</td></tr>
+      <tr><td>Coordinator, AI admin</td><td>The balance and renewal date; usage by action, module, role and unit; alerts at 75, 90 and 100 %; packs and the AI reserve; monthly limits by role; the institution AI switch and the drafting switch; the AI-involvement report and a credit ledger export</td><td>Model names on everyday screens (they appear in the audit trail and the AI-involvement report)</td></tr>
+      <tr><td>CIO, procurement, data steward</td><td>An order form and AI addendum: provider, US processing, zero data retention, no training, named sub-processors with 30 days' notice, the allowance and weight protection; HECVAT and VPAT with AI sections</td><td>Any model, key or endpoint setting; there is nothing to configure</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Words on screen</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Moment</th><th>Copy</th></tr></thead>
+    <tbody>
+      <tr><td>A paid action</td><td><span class="copy">Draft the response · 5 credits</span> (read aloud as "Draft the response, uses 5 credits")</td></tr>
+      <tr><td>A size-based action</td><td><span class="copy">Reviewer preview · 48 credits for 400 pages</span></td></tr>
+      <tr><td>An action that cannot be undone for credit</td><td><span class="copy">Uses 4 credits. Undo won't return them.</span></td></tr>
+      <tr><td>After a run</td><td><span class="copy">5 credits used</span></td></tr>
+      <tr><td>Allowance used up</td><td><span class="copy">This year's AI allowance is used up. Alex Carter has been told. Spelling, Ask SPOL, the readiness checks and saved results still work.</span></td></tr>
+      <tr><td>Coordinator alert</td><td><span class="copy">AI allowance at 90 % · 500 credits left until 1 Jul 2027 · Manage</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="meta">Commercial words stay off working screens: no "quote", "settle", "grace", "heavy", "overage" or "refund" in front of a writer. The free readiness checks are called readiness checks; anything paid carries the word AI.</p>
+</section>
+
+<section id="trust" aria-labelledby="h-trust">
+  <h2 id="h-trust">Trust, data and the accreditor</h2>
+  <div class="pillars">
+    <div class="card"><h4>Drafting is opt-in</h4><p>Draft the response and Draft a reply are off until a coordinator turns them on for a module. AI text is labelled "AI draft, not yet reviewed" until a person edits or accepts it.</p></div>
+    <div class="card"><h4>Ready to disclose</h4><p>The AI-involvement report exports as a disclosure appendix: what AI suggested, what a person accepted, per standard. It supports institutions answering accreditor guidance on AI, such as SACSCOC's December 2024 statement, which keeps responsibility for accuracy with the institution.</p></div>
+    <div class="card"><h4>Usage is not surveillance</h4><p>Usage is reported by role and unit. Person-level detail is visible only to named AI admins, kept 90 days, never shows prompt text, and by contract is never used in personnel evaluation.</p></div>
+    <div class="card"><h4>One data statement</h4><p>The provider keeps nothing and trains on nothing. SPOL's logs hold metadata only. AI results the user keeps live in the institution's own records under its retention rules. Original files are never sent; document checks send extracted text with names tokenised.</p></div>
+    <div class="card"><h4>FERPA</h4><p>SPOL acts as a school official. Student work in the Assessment module is excluded from AI or de-identified before it is sent, and that quality is tested after de-identification.</p></div>
+    <div class="card"><h4>Opt-outs</h4><p>An institution switch for all AI, a switch for narrative drafting, and a per-section opt-out a writer can set on their own work.</p></div>
+  </div>
+</section>
+
+<section id="backend" aria-labelledby="h-backend">
+  <h2 id="h-backend">What SPOL takes care of</h2>
+  <p class="kicker">The promise that users never think about models is only true if this works every day.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Area</th><th>How SPOL runs it</th></tr></thead>
+    <tbody>
+      <tr><td>Routing</td><td>A routing table, one row per action: model and version, reasoning effort, output cap, task budget, prompt version, size bands. Light actions run at low reasoning effort. The table is versioned and frozen for an institution's report until that report is submitted.</td></tr>
+      <tr><td>Ledger</td><td>A quote places a hold keyed by an invocation id the client creates. Automatic retries and route failover reuse the same key, so they never charge twice. Balance, monthly limits and grace are checked in one transaction, so concurrent users cannot overdraw the pool. A cancelled stream is charged once half of its output has been shown.</td></tr>
+      <tr><td>Cost control</td><td>Input caps per action, splitting above a size band, prompt caching of the report across standards, batch pricing for scheduled work only. An internal spend limit per run stops and refunds rather than overruns.</td></tr>
+      <tr><td>Model changes</td><td>A golden set per action and per accreditor (citation precision at least 95 %, no invented evidence, readiness flags changing on fewer than 5 % of unchanged standards); two weeks in shadow, a 10 % canary, one-step rollback. A model retirement is planned as a migration months ahead, never discovered mid-cycle.</td></tr>
+      <tr><td>Routes</td><td>Claude models from Anthropic through more than one cloud. Failover goes only to routes in contracted regions with zero retention confirmed; otherwise the action stops. Every route is a named sub-processor. Failover is tested every quarter.</td></tr>
+      <tr><td>Telemetry</td><td>Every call records tenant, action, model, prompt version, route, tokens by kind, stop reason, retries and cost against a versioned price table. Reconciled daily with provider usage reports and cloud bills to within 2 %. A tenant alert fires when spend passes five times its seven-day baseline.</td></tr>
+      <tr><td>Freshness</td><td>A stored result is keyed to the input, the model and the prompt version, so a change to any of them makes it out of date rather than silently stale. Truncated output is detected and shown as incomplete, never as finished.</td></tr>
+      <tr><td>Peaks</td><td>Submission dates cluster. Capacity is reserved ahead of known deadlines, long runs queue with an estimated time, and off-peak work moves to scheduled batch.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="risks" aria-labelledby="h-risks">
+  <h2 id="h-risks">Risks and guardrails</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Risk</th><th>Guardrail</th></tr></thead>
+    <tbody>
+      <tr><td>Token use is higher than modelled (reasoning, regeneration, larger reports)</td><td>Weights set from pilot p90, the 60 % rule, size-scaled weights, an alert per action</td></tr>
+      <tr><td>One user or script burns the pool</td><td>Monthly limits by role, per-user rate limits, Ask SPOL limited to product help with an input cap</td></tr>
+      <tr><td>Writers ration AI</td><td>Small helpers free; status line instead of a balance; rollover; first-year promise</td></tr>
+      <tr><td>Work stops before a deadline</td><td>Grace tied to recorded submission dates, never billed, once per cycle</td></tr>
+      <tr><td>Legitimate content refused (Clery, Title IX, counselling, clinical, biosafety)</td><td>Refusal shows as "couldn't check, no charge"; these topics are in every golden set</td></tr>
+      <tr><td>Evidence documents carrying planted instructions</td><td>Documents treated as data; injection reported as a finding; tested at every model change</td></tr>
+      <tr><td>Readiness results drift after a model change</td><td>Flag-stability threshold in the golden set; frozen routing per report; free re-runs when SPOL changes a model</td></tr>
+      <tr><td>A cheaper model tempts a mid-cycle swap</td><td>Changes only through the golden set and canary, never mid-report</td></tr>
+      <tr><td>A pinned model is retired before a self-study is submitted</td><td>Retirement calendar watched; migration scheduled outside an institution's submission window</td></tr>
+      <tr><td>Accreditors tighten AI rules</td><td>Drafting off by default, institution switch, disclosure report</td></tr>
+      <tr><td>Single provider</td><td>Several cloud routes to the same models; an abstraction that allows a second provider per action after it passes that action's golden set</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="finance" aria-labelledby="h-finance">
+  <h2 id="h-finance">Finance and contract</h2>
+  <div class="two">
+    <div>
+      <h3>Revenue recognition</h3>
+      <ul class="tight">
+        <li>Included credits are part of the subscription and recognised over the term.</li>
+        <li>Purchased credits are deferred and recognised as used; unused credits at expiry are recognised as breakage under a written policy.</li>
+        <li>Pro-rata refund of purchased credits at termination, as some state rules require.</li>
+      </ul>
+      <h3>Margin controls</h3>
+      <ul class="tight">
+        <li>Fully loaded AI cost of goods: model fees, infrastructure, telemetry, the language-check licence, support and cloud route premiums.</li>
+        <li>Target AI cost below 3 % of contract value; a review is triggered above it.</li>
+        <li>Pack margin at least 55 % at worst-case cost.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Contract package</h3>
+      <ul class="tight">
+        <li>An AI addendum: provider, US processing, zero retention on every route, no training, sub-processors with 30 days' notice, model change log.</li>
+        <li>FERPA school-official terms; state contract riders.</li>
+        <li>Allowance, rollover, grace, first-year promise and weight protection written in.</li>
+        <li>Pack prices fixed for the term; AI reserve against a purchase order.</li>
+        <li>No use of usage data in personnel evaluation.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="rollout" aria-labelledby="h-rollout">
+  <h2 id="h-rollout">Rollout</h2>
+  <ol class="steps">
+    <li><b>Pilot.</b> Six to eight institutions across sizes and cycle stages, on Accreditation, allowance on, packs off, drafting opt-in. Measure credits per institution per month at p50, p90 and p99, tokens per action with reasoning, regeneration rates and refusals. Exit when twelve weeks of data are in and every action meets the 60 % rule at p90.</li>
+    <li><b>Set the numbers.</b> Weights and the allowance formula fixed from pilot data; the 8 % list lift approved with sales against real competitor quotes; contract package and AI addendum signed off by legal.</li>
+    <li><b>General availability.</b> Allowance in every module; packs and the AI reserve on; the coordinator console, alerts, ledger export and AI-involvement report live.</li>
+    <li><b>Consortia and multi-year.</b> Shared packs for systems, weight protection in multi-year terms, the year-end summary of what AI did.</li>
+  </ol>
+</section>
+
+<section id="decisions" aria-labelledby="h-decisions">
+  <h2 id="h-decisions">Decisions for leadership</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Decision</th><th>Recommendation</th></tr></thead>
+    <tbody>
+      <tr><td>Lift list price to carry AI</td><td>Yes, 8 % for new contracts; existing customers at renewal within the escalator cap</td></tr>
+      <tr><td>Allowance formula</td><td>200 credits per $1,000 of module fee, minimum 1,500, confirmed at pilot</td></tr>
+      <tr><td>Pack prices</td><td>2,500 for $375, 10,000 for $1,200, 25,000 for $2,500</td></tr>
+      <tr><td>Rollover of included credits</td><td>Once, capped at twice the allowance</td></tr>
+      <tr><td>Drafting default</td><td>Off until a coordinator turns it on</td></tr>
+      <tr><td>What writers see</td><td>Cost on each paid action and a status line; the number stays with coordinators</td></tr>
+      <tr><td>The credit year</td><td>The institution's own fiscal year</td></tr>
+      <tr><td>Pilot cohort and exit date</td><td>Six to eight institutions; decision twelve weeks after the pilot starts</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+</main>
+<footer>
+  <div class="wrap">
+    <p>Prices are Anthropic list prices as of October 2026 and vendor figures are from public listings; both should be rechecked before contracts are drafted. Sources: <a href="https://claude.com/pricing">Claude pricing</a> · <a href="https://www.watermarkinsights.com/resources/blog/ai-statement/">Watermark AI statement</a> · <a href="https://support.watermarkinsights.com/hc/en-us/articles/54518908523291-Planning-Self-Study-Release-Notes-for-August-20-2026">Watermark release notes</a> · <a href="https://www.capterra.com/p/10039129/Weave-Accreditation/">Weave on Capterra</a> · <a href="https://www.supered.io/blog/agentforce-pricing/">Agentforce pricing</a> · <a href="https://vantaige.io/blog/hubspot-breeze-vs-salesforce-agentforce-2026">HubSpot Breeze</a> · <a href="https://chronic.digital/blog/crm-ai-credits-pricing-trap">Atlassian Rovo</a> · <a href="https://coworker.ai/blog/notion-ai-pricing">Notion AI</a> · <a href="https://resources.rework.com/libraries/ai-terms/what-is-zoom-ai-companion">Zoom AI</a> · <a href="https://internet2.edu/sean-obrien-on-the-rising-costs-of-ai-in-higher-education/">Internet2</a> · <a href="https://letsdatascience.com/news/generative-ai-upends-enterprise-software-licensing-models-f620b093">Generative AI licensing</a> · <a href="https://metronome.com/blog/beyond-the-seat-architecting-hybrid-ai-pricing-without-the-chaos">Metronome</a> · <a href="https://www.getmonetizely.com/articles/the-beginners-cheat-sheet-to-ai-pricing-models-in-2026-a1e1e">Monetizely</a></p>
+    <p>SPOL · AI credit strategy · 22 Oct 2026</p>
+  </div>
+</footer>
+</body>
+</html>
