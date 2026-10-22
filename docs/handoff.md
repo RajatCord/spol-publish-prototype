@@ -39,9 +39,10 @@ The functional specification for the polished Publish workflow, as prototyped. I
 2. **Prototype** (interactive, 24 screens plus sizes): [live site](https://rajatcord.github.io/spol-publish-prototype/) · [canvas](../index.html).
 3. **Flows**, every path screen by screen: [flows](flows.html).
 4. **How AI readiness works**, the user-facing dossier that also ships as the in-product help panel: [dossier](dossier.html).
-5. **AI behaviour specification** (what the two AI features read, return and never do; cost; safety; quality bar): [AI spec](ai-spec.html).
-6. **PRD** R10, R14, R15, R24–R30: [PRD](https://claude.ai/artifact/TZEpQk1SHaK6j5TkxqZZj5).
-7. **Engineering notes**: the earlier, technical version of this handoff (data model, service contracts, ledger rules, per-control accessibility attributes). Kept for the build team's own design work; where it and this page differ, this page wins.
+5. **The readiness checks** (the thirteen free checks, one by one, with severity and the score) and **The AI checks** (the five AI checks, findings, decisions, cost): [readiness checks](readiness-checks.html) · [AI checks](ai-checks.html).
+6. **AI behaviour specification** (what the two AI features read, return and never do; cost; safety; quality bar): [AI spec](ai-spec.html).
+7. **PRD** R10, R14, R15, R24–R30: [PRD](https://claude.ai/artifact/TZEpQk1SHaK6j5TkxqZZj5).
+8. **Engineering notes**: the earlier, technical version of this handoff (data model, service contracts, ledger rules, per-control accessibility attributes). Kept for the build team's own design work; where it and this page differ, this page wins.
 
 ## People and roles
 
@@ -488,7 +489,7 @@ Westmoor University; source SACSCOC-2018; template "Compliance Certification"; c
 
 | Date | Change |
 | --- | --- |
-| 22 Oct 2026 | Rewritten as a functional specification. Data structures, service contracts, ledger rules and per-control accessibility attributes moved to the engineering notes. |
+| 22 Oct 2026 | Two companion documents added: the readiness checks (free) and the AI checks. Rewritten as a functional specification. Data structures, service contracts, ledger rules and per-control accessibility attributes moved to the engineering notes. |
 | 21 Oct 2026 | Answers for the build team: the readiness report workbook, comment structure, the send-back email, severity definitions, the free checks mapped to the v6.0.0.8 build. Markdown copies of every document published beside the HTML. |
 | 20 Oct 2026 | Send all back with AI recommendations as comments; the dossier linked from the AI panel in every state; the Auto-format dialog relaid out; Order sections; output options. Accessibility audit of the live site: every finding fixed. |
 | 19 Oct 2026 | Free checks aligned with WProofreader; four rule checks added; language checks never labelled AI. |
