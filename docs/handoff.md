@@ -1,6 +1,6 @@
 ---
 title: "SPOL Publish · functional handoff"
-source: https://rajatcord.github.io/spol-publish-prototype/docs/handoff.html
+source: handoff.html
 format: markdown export of the HTML document; tables are pipe tables; the HTML remains the reference rendering
 ---
 

@@ -5,6 +5,8 @@
 ## Specifications (Markdown, for ingestion)
 
 - [Functional handoff](https://rajatcord.github.io/spol-publish-prototype/docs/handoff.md): scope, roles, concepts, rules that apply everywhere, each screen control by control with acceptance, checks and findings (free checks, severity, score, report download), AI behaviour summary, comments and send back with the email, credits as the coordinator sees them, what is recorded, accessibility and copy, scenarios, open questions, change log.
+- [The readiness checks](https://rajatcord.github.io/spol-publish-prototype/docs/readiness-checks.md): the thirteen free checks, each with what it looks at, the finding it reports, severity, who fixes it; the score; where findings go; mapping to the v6 build.
+- [The AI checks](https://rajatcord.github.io/spol-publish-prototype/docs/ai-checks.md): the five AI checks, what the AI is given, what a finding carries, why it can be trusted, decisions, the AI score, a run, cost, Auto-format, limits.
 - [AI behaviour spec](https://rajatcord.github.io/spol-publish-prototype/docs/ai-spec.md): what AI readiness and Auto-format read, return, cost and never do; privacy and safety; the quality bar; what is recorded; limits.
 - [How AI readiness works](https://rajatcord.github.io/spol-publish-prototype/docs/dossier.md): the user-facing dossier.
 - [Flows](https://rajatcord.github.io/spol-publish-prototype/docs/flows.md): every path through the workflow, screen by screen.
@@ -17,6 +19,8 @@
 ## Same documents as HTML
 
 - https://rajatcord.github.io/spol-publish-prototype/docs/handoff.html
+- https://rajatcord.github.io/spol-publish-prototype/docs/readiness-checks.html
+- https://rajatcord.github.io/spol-publish-prototype/docs/ai-checks.html
 - https://rajatcord.github.io/spol-publish-prototype/docs/ai-spec.html
 - https://rajatcord.github.io/spol-publish-prototype/docs/dossier.html
 - https://rajatcord.github.io/spol-publish-prototype/docs/flows.html
