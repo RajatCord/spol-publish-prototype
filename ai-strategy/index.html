@@ -63,7 +63,7 @@ footer{padding:32px 0 56px;color:var(--muted);font-size:13px}
 <body>
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">SPOL · AI strategy · 22 Oct 2026</div>
+    <div class="eyebrow">SPOL · AI strategy · 23 Oct 2026</div>
     <h1>AI included, priced in credits, run by SPOL</h1>
     <p class="lead">Every SPOL module carries an annual allowance of AI credits for the whole institution. Users see what an AI action costs before they run it; they never choose a model, a provider or a setting. SPOL routes each action to the right model, absorbs the cost risk, and keeps the price as it is today: one price per module, as many users as the institution wants.</p>
     <nav class="toc" aria-label="Contents"><a href="#principles">Principles</a><a href="#market">Market</a><a href="#cost">What AI costs</a><a href="#credits">The credit</a><a href="#pricing">Pricing</a><a href="#economics">Economics</a><a href="#experience">Experience</a><a href="#trust">Trust and data</a><a href="#backend">Behind the scenes</a><a href="#risks">Risks</a><a href="#finance">Finance</a><a href="#rollout">Rollout</a><a href="#decisions">Decisions</a></nav>
@@ -153,7 +153,7 @@ footer{padding:32px 0 56px;color:var(--muted);font-size:13px}
       <ul class="tight">
         <li><b>One credit is worth $0.10</b> at pack prices. That is the only conversion anyone outside SPOL ever needs, and it appears only on the coordinator's purchasing screen.</li>
         <li><b>Weights are small whole numbers,</b> fixed for the contract term, printed on the action, scaled by size where the work scales.</li>
-        <li><b>One pool per institution,</b> shared by every user and every module, renewed at the start of the institution's own fiscal year.</li>
+        <li><b>One pool per institution,</b> shared by every user and every module, renewed at the start of the institution's own fiscal year; what is left at year end expires.</li>
         <li><b>Quoted before, charged after.</b> The quote places a hold; the charge is never above it; a failure releases it.</li>
         <li><b>Stored results are free.</b> Re-running AI readiness charges only standards whose text or evidence changed; a re-run caused by SPOL changing a model or prompt is free.</li>
       </ul>
@@ -169,27 +169,27 @@ footer{padding:32px 0 56px;color:var(--muted);font-size:13px}
       </ul>
     </div>
   </div>
-  <h3>Rollover and the accreditation cycle</h3>
-  <p>Accreditation work comes in waves: a quiet year, then a self-study year, then a fifth-year report. Unused included credits roll over once, and the balance is capped at twice the annual allowance. Quiet years fund the busy one without a purchase. Purchased credits last 12 months from purchase.</p>
+  <h3>Expiry and the accreditation cycle</h3>
+  <p>Credits belong to a credit year, the institution's own fiscal year within the contract term. <b>Unused credits, included and purchased alike, expire at the end of the credit year.</b> Nothing carries into the next year, so every year starts from the same allowance and the balance always means one thing. Accreditation work still comes in waves, so the allowance is sized to cover a full self-study year on its own, and a self-study year that needs more is planned ahead with a pack quoted as a fixed line item. The renewal date and the expiry date are the same, and the coordinator is reminded 60 and 30 days before.</p>
 </section>
 
 <section id="pricing" aria-labelledby="h-pricing">
   <h2 id="h-pricing">Pricing</h2>
-  <p class="kicker">One price per module for unlimited users stays. AI adds an allowance to each module, a modest lift in list price to carry it, and packs for institutions that use more.</p>
+  <p class="kicker">One price per module for unlimited users stays. AI adds an annual allowance to each module, a modest lift in list price to carry it, and packs for institutions that use more. Credits are for the year they are issued in.</p>
   <div class="tablewrap"><table>
     <thead><tr><th>Element</th><th>Proposal</th></tr></thead>
     <tbody>
       <tr><td>List price</td><td>Rises 8 % for new contracts when AI becomes generally available. Existing customers receive the allowance at renewal under their standard escalator, capped at 5 %.</td></tr>
       <tr><td>Included allowance</td><td>200 credits per $1,000 of annual module fee, minimum 1,500, rounded to the nearest 500, pooled across the institution's modules. A $25,000 Accreditation module carries 5,000; a $10,000 module carries 2,000.</td></tr>
-      <tr><td>Rollover</td><td>Unused included credits roll over once; balance capped at twice the annual allowance.</td></tr>
+      <tr><td>Expiry</td><td>Unused credits, included and purchased, expire at the end of the credit year. No rollover.</td></tr>
       <tr><td>First-year promise</td><td>If an institution uses up its included allowance in its first contract year, SPOL tops it up once, free, by up to half the allowance.</td></tr>
       <tr><td>Deadline grace</td><td>In the 14 days before a submission date recorded in the cycle (not one a user sets), every action keeps running past zero, up to a quarter of the annual allowance, once per cycle, never billed and never taken from next year.</td></tr>
-      <tr><td>Packs</td><td>2,500 credits for $375 · 10,000 for $1,200 · 25,000 for $2,500. Prices fixed for the term; each fits under a typical purchasing-card limit; the 10,000 pack can be quoted as a fixed line item for a self-study year.</td></tr>
+      <tr><td>Packs</td><td>2,500 credits for $375 · 10,000 for $1,200 · 25,000 for $2,500. Prices fixed for the term; each fits under a typical purchasing-card limit; a pack expires with the credit year it is bought in, so the purchase screen shows the expiry date before checkout; the 10,000 pack can be quoted as a fixed line item for a self-study year.</td></tr>
       <tr><td>AI reserve</td><td>Instead of card top-ups: a not-to-exceed amount on the purchase order, drawn only on use and invoiced quarterly in arrears.</td></tr>
       <tr><td>Overage</td><td>None without a pack or reserve. At zero, paid actions pause; free actions and stored results keep working.</td></tr>
       <tr><td>Consortia and systems</td><td>Each member keeps its own allowance; the consortium may buy a shared pack, with usage shown per member.</td></tr>
       <tr><td>Weight protection</td><td>Weights are fixed for the term. At renewal SPOL may revise them on 90 days' notice, never reducing the number of actions the included allowance covers by more than 15 %. When models get cheaper, SPOL raises the allowance at renewal rather than repricing mid-term.</td></tr>
-      <tr><td>Exit</td><td>Unused purchased credits are refunded pro rata at termination.</td></tr>
+      <tr><td>Exit</td><td>If the contract ends before the credit year does, unused purchased credits are refunded pro rata.</td></tr>
     </tbody>
   </table></div>
 </section>
@@ -202,7 +202,7 @@ footer{padding:32px 0 56px;color:var(--muted);font-size:13px}
     <tbody>
       <tr><td>Quiet year</td><td>Drafting help, coverage checks, a few readiness runs</td><td class="num">≈ 1,500</td><td class="num">≈ $75</td><td class="num">0.3 %</td></tr>
       <tr><td>Self-study year</td><td>70 standards drafted twice, 200 replies, 300 coverage checks, 500 evidence documents checked, one full readiness run and ten partial ones, 15 Auto-formats and 3 reviewer previews of 400 pages</td><td class="num">≈ 4,000</td><td class="num">≈ $200</td><td class="num">0.8 %</td></tr>
-      <tr><td>Self-study year after a quiet one</td><td>Rolled-over 3,500 plus 5,000 included covers it with room to spare</td><td class="num">8,500 available</td><td class="num">—</td><td class="num">—</td></tr>
+      <tr><td>Unused at year end</td><td>Credits left over in a quiet year expire; the next year starts again at 5,000</td><td class="num">≈ 3,500 expire</td><td class="num">$0</td><td class="num">—</td></tr>
       <tr><td>Heavy user buying a pack</td><td>10,000 pack used in full</td><td class="num">10,000</td><td class="num">≤ $600</td><td class="num">revenue $1,200</td></tr>
     </tbody>
   </table></div>
@@ -272,7 +272,7 @@ footer{padding:32px 0 56px;color:var(--muted);font-size:13px}
     <tbody>
       <tr><td>Token use is higher than modelled (reasoning, regeneration, larger reports)</td><td>Weights set from pilot p90, the 60 % rule, size-scaled weights, an alert per action</td></tr>
       <tr><td>One user or script burns the pool</td><td>Monthly limits by role, per-user rate limits, Ask SPOL limited to product help with an input cap</td></tr>
-      <tr><td>Writers ration AI</td><td>Small helpers free; status line instead of a balance; rollover; first-year promise</td></tr>
+      <tr><td>Writers ration AI</td><td>Small helpers free; status line instead of a balance; an allowance sized for a self-study year; first-year promise</td></tr>
       <tr><td>Work stops before a deadline</td><td>Grace tied to recorded submission dates, never billed, once per cycle</td></tr>
       <tr><td>Legitimate content refused (Clery, Title IX, counselling, clinical, biosafety)</td><td>Refusal shows as "couldn't check, no charge"; these topics are in every golden set</td></tr>
       <tr><td>Evidence documents carrying planted instructions</td><td>Documents treated as data; injection reported as a finding; tested at every model change</td></tr>
@@ -292,7 +292,7 @@ footer{padding:32px 0 56px;color:var(--muted);font-size:13px}
       <h3>Revenue recognition</h3>
       <ul class="tight">
         <li>Included credits are part of the subscription and recognised over the term.</li>
-        <li>Purchased credits are deferred and recognised as used; unused credits at expiry are recognised as breakage under a written policy.</li>
+        <li>Purchased credits are deferred and recognised as used; unused credits are recognised as breakage at the end of the credit year in which they expire, under a written policy.</li>
         <li>Pro-rata refund of purchased credits at termination, as some state rules require.</li>
       </ul>
       <h3>Margin controls</h3>
@@ -307,7 +307,7 @@ footer{padding:32px 0 56px;color:var(--muted);font-size:13px}
       <ul class="tight">
         <li>An AI addendum: provider, US processing, zero retention on every route, no training, sub-processors with 30 days' notice, model change log.</li>
         <li>FERPA school-official terms; state contract riders.</li>
-        <li>Allowance, rollover, grace, first-year promise and weight protection written in.</li>
+        <li>Allowance, year-end expiry, grace, first-year promise and weight protection written in.</li>
         <li>Pack prices fixed for the term; AI reserve against a purchase order.</li>
         <li>No use of usage data in personnel evaluation.</li>
       </ul>
@@ -333,7 +333,7 @@ footer{padding:32px 0 56px;color:var(--muted);font-size:13px}
       <tr><td>Lift list price to carry AI</td><td>Yes, 8 % for new contracts; existing customers at renewal within the escalator cap</td></tr>
       <tr><td>Allowance formula</td><td>200 credits per $1,000 of module fee, minimum 1,500, confirmed at pilot</td></tr>
       <tr><td>Pack prices</td><td>2,500 for $375, 10,000 for $1,200, 25,000 for $2,500</td></tr>
-      <tr><td>Rollover of included credits</td><td>Once, capped at twice the allowance</td></tr>
+      <tr><td>Unused credits</td><td>Expire at the end of the credit year, included and purchased alike</td></tr>
       <tr><td>Drafting default</td><td>Off until a coordinator turns it on</td></tr>
       <tr><td>What writers see</td><td>Cost on each paid action and a status line; the number stays with coordinators</td></tr>
       <tr><td>The credit year</td><td>The institution's own fiscal year</td></tr>
@@ -346,7 +346,7 @@ footer{padding:32px 0 56px;color:var(--muted);font-size:13px}
 <footer>
   <div class="wrap">
     <p>Prices are Anthropic list prices as of October 2026 and vendor figures are from public listings; both should be rechecked before contracts are drafted. Sources: <a href="https://claude.com/pricing">Claude pricing</a> · <a href="https://www.watermarkinsights.com/resources/blog/ai-statement/">Watermark AI statement</a> · <a href="https://support.watermarkinsights.com/hc/en-us/articles/54518908523291-Planning-Self-Study-Release-Notes-for-August-20-2026">Watermark release notes</a> · <a href="https://www.capterra.com/p/10039129/Weave-Accreditation/">Weave on Capterra</a> · <a href="https://www.supered.io/blog/agentforce-pricing/">Agentforce pricing</a> · <a href="https://vantaige.io/blog/hubspot-breeze-vs-salesforce-agentforce-2026">HubSpot Breeze</a> · <a href="https://chronic.digital/blog/crm-ai-credits-pricing-trap">Atlassian Rovo</a> · <a href="https://coworker.ai/blog/notion-ai-pricing">Notion AI</a> · <a href="https://resources.rework.com/libraries/ai-terms/what-is-zoom-ai-companion">Zoom AI</a> · <a href="https://internet2.edu/sean-obrien-on-the-rising-costs-of-ai-in-higher-education/">Internet2</a> · <a href="https://letsdatascience.com/news/generative-ai-upends-enterprise-software-licensing-models-f620b093">Generative AI licensing</a> · <a href="https://metronome.com/blog/beyond-the-seat-architecting-hybrid-ai-pricing-without-the-chaos">Metronome</a> · <a href="https://www.getmonetizely.com/articles/the-beginners-cheat-sheet-to-ai-pricing-models-in-2026-a1e1e">Monetizely</a></p>
-    <p>SPOL · AI credit strategy · 22 Oct 2026</p>
+    <p>SPOL · AI credit strategy · 23 Oct 2026</p>
   </div>
 </footer>
 </body>
