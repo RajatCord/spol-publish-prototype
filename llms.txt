@@ -4,10 +4,15 @@
 
 ## Specifications (Markdown, for ingestion)
 
-- [Developer handoff](https://rajatcord.github.io/spol-publish-prototype/docs/handoff.md): data model, states and gates, every screen control by control, API, credits and ledger, audit, accessibility, acceptance tests, answers for the build team (report download format, comment structure, send-back email, severity definitions, free checks), open questions, iteration log.
-- [AI call spec](https://rajatcord.github.io/spol-publish-prototype/docs/ai-spec.md): the three model calls (reviewer analysis, consistency, Auto-format), schemas, validation, keys and versions, cost, safety, quality gates.
+- [Functional handoff](https://rajatcord.github.io/spol-publish-prototype/docs/handoff.md): scope, roles, concepts, rules that apply everywhere, each screen control by control with acceptance, checks and findings (free checks, severity, score, report download), AI behaviour summary, comments and send back with the email, credits as the coordinator sees them, what is recorded, accessibility and copy, scenarios, open questions, change log.
+- [AI behaviour spec](https://rajatcord.github.io/spol-publish-prototype/docs/ai-spec.md): what AI readiness and Auto-format read, return, cost and never do; privacy and safety; the quality bar; what is recorded; limits.
 - [How AI readiness works](https://rajatcord.github.io/spol-publish-prototype/docs/dossier.md): the user-facing dossier.
 - [Flows](https://rajatcord.github.io/spol-publish-prototype/docs/flows.md): every path through the workflow, screen by screen.
+
+## Reference for the build team (not the specification)
+
+- [Engineering notes](https://rajatcord.github.io/spol-publish-prototype/docs/engineering-notes.md): the earlier technical handoff (proposed data model, service contracts, ledger rules, audit entry names, per-control accessibility attributes).
+- [AI engineering spec](https://rajatcord.github.io/spol-publish-prototype/docs/engineering-ai-spec.md): prompts, answer formats, verification rules, keys and versions, cost model.
 
 ## Same documents as HTML
 
@@ -15,6 +20,8 @@
 - https://rajatcord.github.io/spol-publish-prototype/docs/ai-spec.html
 - https://rajatcord.github.io/spol-publish-prototype/docs/dossier.html
 - https://rajatcord.github.io/spol-publish-prototype/docs/flows.html
+- https://rajatcord.github.io/spol-publish-prototype/docs/engineering-notes.html
+- https://rajatcord.github.io/spol-publish-prototype/docs/engineering-ai-spec.html
 
 ## Prototype
 
