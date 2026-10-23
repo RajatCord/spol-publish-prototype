@@ -30,28 +30,47 @@ table{border-collapse:collapse;width:100%;font-size:.88rem}th,td{text-align:left
 
 <main>
 <header>
-  <div class="eyebrow">Specification · Readiness checks (free) · v2 · 23 Oct 2026</div>
+  <div class="eyebrow">Specification · Readiness checks (free) · v3 · 23 Oct 2026</div>
   <h1>The readiness checks</h1>
-  <p class="meta" style="margin-top:.5rem">The thirteen checks SPOL runs on a report before it is published. They cost nothing, use no credits and are never labelled AI. This page says what each one looks at, what it reports, how severe a finding is, who fixes it and how, and how the findings add up to the readiness score. The AI checks are a separate document.</p>
-  <nav class="toc" aria-label="Sections" style="margin-top:.8rem"><a href="#when">When they run</a> · <a href="#produce">What they produce</a> · <a href="#checks">The thirteen checks</a> · <a href="#severity">Severity</a> · <a href="#parts">The six parts</a> · <a href="#score">The score</a> · <a href="#travel">Where findings go</a> · <a href="#status">Check status and messages</a> · <a href="#acceptance">Acceptance</a> · <a href="#v6">Mapping to the v6 build</a></nav>
+  <p class="meta" style="margin-top:.5rem">SPOL runs thirteen checks on a report before it is published, grouped into six categories. Each category is worth a fixed share of the readiness score out of 100. The checks cost nothing, use no credits and are never labelled AI. This page defines the six categories, then each check within its category: what it looks at, what it reports, how severe a finding is and who fixes it. It ends with how the findings add up to the score. The AI checks are a separate document.</p>
+  <nav class="toc" aria-label="Sections" style="margin-top:.8rem"><a href="#categories">The six categories</a> · <a href="#when">When they run</a> · <a href="#produce">What they produce</a> · <a href="#checks">The checks, by category</a> · <a href="#severity">Severity and points</a> · <a href="#score">The score</a> · <a href="#travel">Where findings go</a> · <a href="#status">Check status and messages</a> · <a href="#acceptance">Acceptance</a> · <a href="#v6">Mapping to the v6 build</a></nav>
 </header>
 
 <section class="tldr" aria-labelledby="t">
   <h2 id="t">In short</h2>
   <ul>
-    <li><b>Thirteen checks, two engines.</b> SPOL's own rules check structure, links, evidence, placeholders, the cover and open work. WProofreader, licensed by SPOL, checks spelling, grammar, punctuation and style.</li>
+    <li><b>Six categories, thirteen checks, one score.</b> Evidence 25, Completeness 20, Review 15, Language 10, Print and export 15, Accessibility 15. The weights add up to 100, and the score is the sum of the six categories.</li>
+    <li><b>Each category can lose only its own share.</b> A category loses points only for its own findings, averaged over the standards it applies to. One standard can only lose its own slice of a category.</li>
     <li><b>A check answers a question a machine can settle</b> without judgment: is something present, well-formed, within a limit, unresolved. Anything that needs reading goes to the AI checks instead.</li>
-    <li><b>Six parts, one score.</b> The thirteen checks are grouped into six parts, each worth a fixed share of 100. A part can only lose its own share, and one standard can only lose its own slice of a part.</li>
-    <li><b>Findings never block a draft.</b> They travel to the writer through Send back, or are fixed in Preview by Auto-format, or are listed in the report download.</li>
+    <li><b>Two engines.</b> SPOL's own rules run eleven of the checks. WProofreader, licensed by SPOL, runs the two Language checks.</li>
+    <li><b>Findings never block a draft.</b> They travel to the writer through Send back, are fixed in Preview by Auto-format, or are listed in the report download. Approvals decide whether a final can go; they are shown beside the score, not inside it.</li>
   </ul>
+</section>
+
+<section id="categories" aria-labelledby="h-cat">
+  <h2 id="h-cat">The six categories</h2>
+  <p>Each category answers one question a coordinator asks before publishing, carries a fixed weight, and contains only its own checks. Every check belongs to exactly one category.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Category</th><th>The question it answers</th><th>Checks</th><th>Weight</th><th>Applies to</th></tr></thead>
+    <tbody>
+      <tr><td><b>Evidence</b></td><td>Is every claim backed by something a reviewer can open?</td><td>1 Missing attachments · 2 Link validation</td><td>25</td><td>Each standard with a response</td></tr>
+      <tr><td><b>Completeness</b></td><td>Is everything that should print actually there?</td><td>3 Placeholder text · 4 Required cover fields</td><td>20</td><td>Each selected standard, and the report itself (the cover)</td></tr>
+      <tr><td><b>Review</b></td><td>Is anything still being discussed or edited?</td><td>5 Open comments and unresolved edits</td><td>15</td><td>Each standard with a response</td></tr>
+      <tr><td><b>Language</b></td><td>Does it read correctly?</td><td>6 Spelling, grammar and punctuation · 7 Style</td><td>10</td><td>Each standard with a response</td></tr>
+      <tr><td><b>Print and export</b></td><td>Will it print and export cleanly?</td><td>8 Table format · 9 Image sizes · 10 Illegal characters · 11 Hidden text</td><td>15</td><td>Each standard with a response, and the report itself (output file name, hidden text)</td></tr>
+      <tr><td><b>Accessibility</b></td><td>Can everyone read it?</td><td>12 Alt text · 13 Headings</td><td>15</td><td>Each standard with a response</td></tr>
+      <tr><td colspan="3"><b>Total</b></td><td><b>100</b></td><td></td></tr>
+    </tbody>
+  </table></div>
+  <p class="meta">Why these weights: evidence is what an accreditor judges a standard on; completeness is what makes a report submittable; review, print and export, and accessibility each carry a real cost if missed; language matters least to the outcome and is mostly fixed as people type. The weights are set by SPOL, are the same for every institution, and are printed in "How the score is built" on the dashboard.</p>
 </section>
 
 <section id="when" aria-labelledby="h-when">
   <h2 id="h-when">When they run</h2>
   <ul>
-    <li><b>On the Readiness step,</b> every time the person presses Run checks again, and automatically the first time Step 2 opens for a draft. All thirteen run together on the current content ("Checking {n} of {m} sections", with Cancel). A run finishes within ten minutes or reports "Checks couldn't finish · Run again" and keeps the previous result on screen.</li>
-    <li><b>As you type,</b> for the language checks only: WProofreader marks spelling, grammar, punctuation and style in the All Accreditation response editor with the same dictionaries the readiness run uses, so most language findings never reach Publish.</li>
-    <li><b>Before AI readiness,</b> if the rules result is out of date, the rules run again first ("Running checks first…").</li>
+    <li><b>On the Readiness step,</b> every time the person presses Run checks again, and automatically the first time Step 2 opens for a draft. All thirteen checks run together on the current content ("Checking {n} of {m} sections", with Cancel). A run finishes within ten minutes or reports "Checks couldn't finish · Run again" and keeps the previous result on screen.</li>
+    <li><b>As you type,</b> for the two Language checks only: WProofreader marks spelling, grammar, punctuation and style in the All Accreditation response editor with the same dictionaries the readiness run uses, so most Language findings never reach Publish.</li>
+    <li><b>Before AI readiness,</b> if the result is out of date, the checks run again first ("Running checks first…").</li>
     <li><b>The result goes out of date</b> when anything that affects the report changes: the selection, content settings or response type; a standard's narrative, evidence or comments; Auto-format or an edit in Preview; a send back that leaves a standard out; a standard returning. The old result stays visible with "Out of date · Run again".</li>
   </ul>
 </section>
@@ -59,214 +78,226 @@ table{border-collapse:collapse;width:100%;font-size:.88rem}th,td{text-align:left
 <section id="produce" aria-labelledby="h-produce">
   <h2 id="h-produce">What they produce</h2>
   <ul>
-    <li><b>Findings on standards.</b> Each finding names the standard, the check, the severity, where it is (page, paragraph or element), what is wrong in one line, and what would fix it. They appear under the standard's row on Readiness, in the Review panel, in the send-back comment and in the report download.</li>
-    <li><b>Report-wide findings.</b> Things that belong to the document rather than to one standard: hidden text removed, formatting counted once in the Formatting bar. They are shown where they are acted on (Preview, the download) and count once, on the report itself, in the part they belong to (Print and export for hidden text and file names, Completeness for the cover).</li>
-    <li><b>The readiness score</b> out of 100, built from six parts, each shown as a bar with its points ("Evidence 21 / 25"), and the sum printed beside the ring ("21 + 18 + 14 + 9 + 13 + 14 = 89").</li>
-    <li><b>Two verdicts</b>, separate from the score: "Internal draft: ready" (unless no standard is selected) and "Final: ready" or "Final: not yet · {codes} not approved". Approvals decide Final; they are shown beside the score ("Approvals 9 of 12") but are not part of it.</li>
+    <li><b>Findings.</b> Each finding names its category, its check, the standard (or "Report" for the cover and output), the severity, where it is (page, paragraph or element), what is wrong in one line, and what would fix it.</li>
+    <li><b>Six category scores,</b> each shown as a bar with its points ("Evidence 21 / 25").</li>
+    <li><b>The readiness score</b> out of 100, the sum of the six category scores, printed beside the ring as that sum ("21 + 18 + 14 + 9 + 13 + 14 = 89").</li>
+    <li><b>Two verdicts,</b> separate from the score: "Internal draft: ready" (unless no standard is selected) and "Final: ready" or "Final: not yet · {codes} not approved". Approvals decide Final and are shown beside the score ("Approvals 9 of 12 · they decide Final, not the score").</li>
     <li><b>A recommendation paragraph</b> assembled from the findings with templated sentences, no AI: "Publish an internal draft now. For a final: send 4.2 and 6.2 back for evidence, get 3.3 written…"</li>
     <li><b>The Excel download</b> of the whole run, described under <a href="#travel">Where findings go</a>.</li>
   </ul>
 </section>
 
 <section id="checks" aria-labelledby="h-checks">
-  <h2 id="h-checks">The thirteen checks</h2>
-  <p>Each check below gives what it looks at, what a finding says, the severity rule, who fixes it and what the check never does.</p>
+  <h2 id="h-checks">The checks, by category</h2>
+  <p>Within each category, each check gives what it looks at, what a finding says, the severity rule and who fixes it. The full severity table follows in <a href="#severity">Severity and points</a>.</p>
 
-  <h3>1 · Spelling, grammar and punctuation</h3>
+  <h3>Evidence · weight 25</h3>
+
+  <h4>1 · Missing attachments</h4>
   <ul>
-    <li><b>Engine:</b> WProofreader, with SPOL's accreditation dictionary (accreditor names, standard titles, terms such as QEP and IE) and the institution's own dictionary (programme names, acronyms, people).</li>
-    <li><b>Looks at:</b> every narrative passage of every selected standard; not the evidence files, not the cover.</li>
-    <li><b>Finding:</b> "Spelling · paragraph 2 · "occurence" → "occurrence"". One finding per word occurrence; the same word misspelt five times is five findings, because each needs a change.</li>
-    <li><b>Severity:</b> Medium for a misspelt word in neither dictionary; Low for grammar and punctuation, and for a word only the institution's dictionary knows.</li>
-    <li><b>Fixed by:</b> the writer, accepting or rejecting the suggestion in the editor. Publish never changes the text.</li>
-    <li><b>Never:</b> labelled AI, counted in credits, or rewritten automatically. The dashboard names the engine once: "language checks by WProofreader".</li>
+    <li><b>Looks at:</b> the number of evidence documents attached to each standard with a response, against the number the coordinator set as expected, and whether every cited file still exists.</li>
+    <li><b>Finding:</b> "Expected document missing · Evidence list · Assessment report 2024–25 · expected 3 attachments, 1 attached" or "Expected evidence count not set · 0 documents".</li>
+    <li><b>Severity:</b> High when the expected count is set and nothing is attached, when no expected count is set at all (the standard cannot be judged complete), or when a cited file was deleted after upload; Medium for fewer than expected; Low for more than expected.</li>
+    <li><b>Fixed by:</b> the writer uploads; the coordinator sets the expected count.</li>
   </ul>
 
-  <h3>2 · Style</h3>
+  <h4>2 · Link validation</h4>
+  <ul>
+    <li><b>Looks at:</b> every hyperlink, linked SPOL document, evidence file reference, and every reference to an objective or outcome in the standard.</li>
+    <li><b>Finding:</b> "Changed link · paragraph 5 · Mission statement page now redirects; the text still reads as before" or "Broken link · Board Minutes, 12 Sep 2025 · the document no longer exists".</li>
+    <li><b>Severity:</b> High when a linked SPOL document or evidence file no longer exists or cannot be opened; Medium for an external address that fails twice, or a reference to a deleted objective or outcome; Low for a redirect or a certificate warning.</li>
+    <li><b>Fixed by:</b> the writer relinks; a Validate button re-checks one link without a full run.</li>
+  </ul>
+
+  <h3>Completeness · weight 20</h3>
+
+  <h4>3 · Placeholder text</h4>
+  <ul>
+    <li><b>Looks at:</b> the narrative of each selected standard, and the cover, for text that was never replaced: bracketed or templated placeholders such as "[Name of Institution]" or "&lt;&lt; Enter address here &gt;&gt;", "TBD", "lorem".</li>
+    <li><b>Finding:</b> "Placeholder · cover · "[Name of Institution]"".</li>
+    <li><b>Severity:</b> High, always: a placeholder in print is the most visible failure a reviewer can see.</li>
+    <li><b>Fixed by:</b> the writer, or Step 3 for the cover.</li>
+    <li><b>A standard not started</b> has nothing to print. It scores 0 in Completeness without a finding being raised; its row says "No response yet".</li>
+  </ul>
+
+  <h4>4 · Required cover fields</h4>
+  <ul>
+    <li><b>Looks at:</b> the institution name and address, the preparer, the required signers and the submit date on the cover. Counted on the report itself.</li>
+    <li><b>Finding:</b> "Cover · Accreditation Liaison · no one holds this role · Assign in Admin".</li>
+    <li><b>Severity:</b> High when a required field is missing (blocks a final, never a draft); Medium when a signer is named but their date is unsigned.</li>
+    <li><b>Fixed by:</b> Step 3, or Admin for the profile and role holders. Also listed under "Before you publish" on Step 4.</li>
+  </ul>
+
+  <h3>Review · weight 15</h3>
+
+  <h4>5 · Open comments and unresolved edits</h4>
+  <ul>
+    <li><b>Looks at:</b> the comment thread and the pending tracked changes of each standard with a response.</li>
+    <li><b>Finding:</b> "Open comment · paragraph 2 · "Clarify the recusal rule." · Priya Natarajan, 15 Oct 2026", quoting the comment with its author and date.</li>
+    <li><b>Severity:</b> Medium. Nothing undecided should go to print.</li>
+    <li><b>Fixed by:</b> resolving the comment in the thread or accepting the edit in the editor.</li>
+  </ul>
+
+  <h3>Language · weight 10</h3>
+
+  <h4>6 · Spelling, grammar and punctuation</h4>
+  <ul>
+    <li><b>Engine:</b> WProofreader, with SPOL's accreditation dictionary (accreditor names, standard titles, terms such as QEP and IE) and the institution's own dictionary (programme names, acronyms, people).</li>
+    <li><b>Looks at:</b> every narrative passage of each standard with a response; not the evidence files, not the cover.</li>
+    <li><b>Finding:</b> "Spelling · paragraph 2 · "occurence" → "occurrence"". One finding per word occurrence: the same word misspelt five times is five findings, because each needs a change.</li>
+    <li><b>Severity:</b> Medium for a misspelt word in neither dictionary; Low for grammar and punctuation, and for a word only the institution's dictionary knows.</li>
+    <li><b>Fixed by:</b> the writer, accepting or rejecting the suggestion in the editor. Publish never changes the text, never labels this AI and never charges credits; the dashboard names the engine once: "language checks by WProofreader".</li>
+  </ul>
+
+  <h4>7 · Style</h4>
   <ul>
     <li><b>Engine:</b> WProofreader style-guide rules: SPOL's accreditation style guide (third person, one name for the accreditor, date form, no first-person plural) plus rules the institution adds in its admin panel.</li>
     <li><b>Finding:</b> "Style · paragraph 3 · "We believe" · first person; the style guide uses "the University"", with the rule's name.</li>
-    <li><b>Severity:</b> Low, except rules the institution marked "required", which are Medium.</li>
-    <li><b>Fixed by:</b> the writer. Not checked when no style guide is configured.</li>
+    <li><b>Severity:</b> Medium for a rule the institution marked "required"; Low for every other rule.</li>
+    <li><b>Fixed by:</b> the writer.</li>
   </ul>
 
-  <h3>3 · Link validation</h3>
-  <ul>
-    <li><b>Looks at:</b> every hyperlink, linked SPOL document, evidence file reference, and every reference to an objective or outcome in the selected standards.</li>
-    <li><b>Finding:</b> "Changed link · paragraph 5 · Mission statement page now redirects; the text still reads as before" or "Broken link · Board Minutes, 12 Sep 2025 · the document no longer exists".</li>
-    <li><b>Severity:</b> High when a linked SPOL document or evidence file no longer exists or cannot be opened (the reader would hit a dead end); Medium for an external address that fails twice or a reference to a deleted objective or outcome; Low for a redirect or a certificate warning.</li>
-    <li><b>Fixed by:</b> the writer relinks; a Validate button re-checks one link without a full run. Not checked when there is no network or the target needs a sign-in.</li>
-  </ul>
+  <h3>Print and export · weight 15</h3>
 
-  <h3>4 · Table format</h3>
+  <h4>8 · Table format</h4>
   <ul>
     <li><b>Looks at:</b> every table against the template's printable page width and page breaks.</li>
     <li><b>Finding:</b> "Table wider than the page · Table 3.1 · Board composition, page 15 · 7 columns at 100 % exceed the print width; Auto-format can scale or turn it landscape".</li>
-    <li><b>Severity:</b> High when cells would be cut off at full size; Medium for a missing header row or a row split across pages; Low when it fits only after scaling below 85 % (Auto-format will turn the page landscape instead).</li>
-    <li><b>Fixed by:</b> Auto-format in Preview, which shows before and after. One finding per table, never per cell.</li>
+    <li><b>Severity:</b> High when cells would be cut off at full size; Medium for a missing header row or a row split across pages; Low when it fits only after scaling below 85 % (Auto-format turns the page landscape instead).</li>
+    <li><b>Fixed by:</b> Auto-format in Preview, which shows every change before and after.</li>
   </ul>
 
-  <h3>5 · Image sizes</h3>
+  <h4>9 · Image sizes</h4>
   <ul>
     <li><b>Looks at:</b> every image's dimensions, file size and resolution at the size it prints.</li>
     <li><b>Finding:</b> "Oversized image · Figure 4.2, page 61 · 4.1 MB · limit 1 MB; Auto-format can resize it".</li>
     <li><b>Severity:</b> High when larger than the page so it would be cropped; Medium when over 1 MB or too low a resolution to print; Low when within limits but without a caption.</li>
-    <li><b>Fixed by:</b> Auto-format in Preview (resampled to the page width, nothing cropped). Not checked when the image file is missing, which the Missing attachments check reports instead.</li>
+    <li><b>Fixed by:</b> Auto-format in Preview (resampled to the page width, nothing cropped). A missing image file is reported by Missing attachments instead.</li>
   </ul>
 
-  <h3>6 · Alt text</h3>
+  <h4>10 · Illegal characters</h4>
   <ul>
-    <li><b>Looks at:</b> every image for a text alternative.</li>
-    <li><b>Finding:</b> "Alt text missing · Figure 6.1, page 119".</li>
-    <li><b>Severity:</b> Medium for a missing alternative; Low when the alternative is just the file name.</li>
-    <li><b>Fixed by:</b> the writer in the editor. Counted in the Accessibility bar.</li>
-  </ul>
-
-  <h3>7 · Headings</h3>
-  <ul>
-    <li><b>Looks at:</b> the document outline as it will print.</li>
-    <li><b>Finding:</b> "Heading level · "Results", page 62 · H4 directly under H2 · one level skipped".</li>
-    <li><b>Severity:</b> Medium for a skipped level or an empty heading; Low for duplicate numbering.</li>
-    <li><b>Fixed by:</b> Auto-format in Preview (the words are unchanged). Counted in the Accessibility bar.</li>
-  </ul>
-
-  <h3>8 · Illegal characters</h3>
-  <ul>
-    <li><b>Looks at:</b> file names of evidence and of the output, and the narrative, against the character list kept in System Settings.</li>
+    <li><b>Looks at:</b> the file names of evidence (on each standard) and of the output (on the report itself), and the narrative, against the character list kept in System Settings.</li>
     <li><b>Finding:</b> "Illegal character · Board Minutes 12/09/2025.pdf · "/" is not allowed in a file name" or "Illegal character · paragraph 4 · a control character that breaks export".</li>
     <li><b>Severity:</b> High for a file name the export or file system rejects; Medium for a narrative character on the institution's list that breaks export or rendering; Low for one SPOL substitutes silently (smart quotes, non-breaking spaces).</li>
     <li><b>Fixed by:</b> Auto-format substitutes file-name characters; the writer fixes narrative ones.</li>
   </ul>
 
-  <h3>9 · Missing attachments</h3>
+  <h4>11 · Hidden text</h4>
   <ul>
-    <li><b>Looks at:</b> the number of evidence documents attached to each selected standard against the number the coordinator set as expected.</li>
-    <li><b>Finding:</b> "Expected document missing · Evidence list · Assessment report 2024–25 · expected 3 attachments, 1 attached" or "Expected evidence count not set · 0 documents".</li>
-    <li><b>Severity:</b> High when the expected count is set and nothing is attached, or when no expected count is set at all (the standard cannot be judged complete); Medium for fewer than expected; Low for more than expected.</li>
-    <li><b>Fixed by:</b> the writer uploads; the coordinator sets the expected count. Not checked for a standard not started. A cited file that was deleted after upload is also reported here, as High.</li>
-  </ul>
-
-  <h3>10 · Placeholder text</h3>
-  <ul>
-    <li><b>Looks at:</b> the narrative and the cover for text that was never replaced: bracketed or templated placeholders such as "[Name of Institution]" or "&lt;&lt; Enter address here &gt;&gt;", "TBD", "lorem".</li>
-    <li><b>Finding:</b> "Placeholder · cover · "[Name of Institution]"".</li>
-    <li><b>Severity:</b> High, always: a placeholder in print is the most visible failure a reviewer can see.</li>
-    <li><b>Fixed by:</b> the writer, or Step 3 for the cover.</li>
-  </ul>
-
-  <h3>11 · Required cover fields</h3>
-  <ul>
-    <li><b>Looks at:</b> the institution name and address, the preparer, the required signers and the submit date on the cover.</li>
-    <li><b>Finding:</b> "Cover · Accreditation Liaison · no one holds this role · Assign in Admin".</li>
-    <li><b>Severity:</b> High when a required field is missing (blocks a final, never a draft); Medium when a signer is named but their date is unsigned.</li>
-    <li><b>Fixed by:</b> Step 3, or Admin for the profile and role holders. Listed under "Before you publish" on Step 4.</li>
-  </ul>
-
-  <h3>12 · Open comments and unresolved edits</h3>
-  <ul>
-    <li><b>Looks at:</b> the comment thread and the pending tracked changes of each selected standard.</li>
-    <li><b>Finding:</b> "Open comment · paragraph 2 · "Clarify the recusal rule." · Priya Natarajan, 15 Oct 2026", quoting the comment with its author and date.</li>
-    <li><b>Severity:</b> Medium. Nothing undecided should go to print.</li>
-    <li><b>Fixed by:</b> resolving the comment in the thread or accepting the edit in the editor. Counted in the Comments bar. Not checked when the comment service is unavailable.</li>
-  </ul>
-
-  <h3>13 · Hidden text</h3>
-  <ul>
-    <li><b>Looks at:</b> the whole document, on every run, for text that would not print or would not be seen: white-on-white, zero-size, zero-width characters, text outside the page, hidden comments in the markup.</li>
-    <li><b>Finding:</b> report-wide, "Hidden text removed from 2.1 · see the standard", shown as a banner on Readiness and in the download.</li>
-    <li><b>Severity:</b> High, counted on the report itself in Print and export. The text is removed from what is sent to print and to AI; the standard itself is unchanged so the writer can see what was there.</li>
+    <li><b>Looks at:</b> the whole document, on every run, for text that would not print or would not be seen: white-on-white, zero-size, zero-width characters, text outside the page, hidden comments in the markup. Counted on the report itself.</li>
+    <li><b>Finding:</b> "Hidden text removed from 2.1 · see the standard", shown as a banner on Readiness and in the download.</li>
+    <li><b>Severity:</b> High. The text is removed from what is sent to print and to AI; the standard in All Accreditation is unchanged so the writer can see what was there.</li>
     <li><b>Why it exists:</b> it protects the institution from accidental leftovers and from text planted to steer a reader or an AI.</li>
+  </ul>
+
+  <h3>Accessibility · weight 15</h3>
+
+  <h4>12 · Alt text</h4>
+  <ul>
+    <li><b>Looks at:</b> every image for a text alternative.</li>
+    <li><b>Finding:</b> "Alt text missing · Figure 6.1, page 119".</li>
+    <li><b>Severity:</b> Medium for a missing alternative; Low when the alternative is just the file name.</li>
+    <li><b>Fixed by:</b> the writer in the editor.</li>
+  </ul>
+
+  <h4>13 · Headings</h4>
+  <ul>
+    <li><b>Looks at:</b> the document outline as it will print.</li>
+    <li><b>Finding:</b> "Heading level · "Results", page 62 · H4 directly under H2 · one level skipped".</li>
+    <li><b>Severity:</b> Medium for a skipped level or an empty heading; Low for duplicate numbering.</li>
+    <li><b>Fixed by:</b> Auto-format in Preview (the words are unchanged).</li>
   </ul>
 </section>
 
 <section id="severity" aria-labelledby="h-sev">
-  <h2 id="h-sev">Severity, in one table</h2>
-  <p>Three levels, one meaning each, applied by the rule, never by a person. <b>High</b>: the published document would be wrong, incomplete or unprintable for a reviewer, or a final could not be submitted. <b>Medium</b>: a reviewer would notice and ask, or evidence or review is incomplete. <b>Low</b>: polish, fixed by a tool or safely ignored.</p>
+  <h2 id="h-sev">Severity and points</h2>
+  <p>Three levels, one meaning each, applied by the rule, never by a person, and each worth a fixed number of points in its category's score.</p>
   <div class="tablewrap"><table>
-    <thead><tr><th>Check</th><th>High</th><th>Medium</th><th>Low</th><th>Not checked when</th></tr></thead>
+    <thead><tr><th>Level</th><th>Meaning</th><th>Points</th></tr></thead>
     <tbody>
-      <tr><td>Spelling, grammar, punctuation</td><td>—</td><td>Misspelt word in neither dictionary</td><td>Grammar, punctuation; a word only the institution's dictionary knows</td><td>Language service unavailable; narrative empty</td></tr>
-      <tr><td>Style</td><td>—</td><td>A rule the institution marked required</td><td>Every other rule</td><td>No style guide</td></tr>
-      <tr><td>Link validation</td><td>SPOL document or evidence file gone or unreadable</td><td>External address failing twice; deleted objective or outcome</td><td>Redirect; certificate warning</td><td>No network; target needs sign-in</td></tr>
-      <tr><td>Table format</td><td>Wider than the printable page</td><td>No header row; row split across pages</td><td>Fits only below 85 %</td><td>Width cannot be measured</td></tr>
-      <tr><td>Image sizes</td><td>Larger than the page</td><td>Over 1 MB; too low a resolution</td><td>No caption</td><td>File missing</td></tr>
-      <tr><td>Alt text</td><td>—</td><td>No alternative</td><td>Alternative is the file name</td><td>—</td></tr>
-      <tr><td>Headings</td><td>—</td><td>Skipped level; empty heading</td><td>Duplicate numbering</td><td>—</td></tr>
-      <tr><td>Illegal characters</td><td>File name the export rejects</td><td>Narrative character on the institution's list</td><td>Character SPOL substitutes</td><td>—</td></tr>
-      <tr><td>Missing attachments</td><td>Nothing attached; or no expected count set; or a cited file deleted</td><td>Fewer than expected</td><td>More than expected</td><td>Standard not started</td></tr>
-      <tr><td>Placeholder text</td><td>Any placeholder</td><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>Required cover fields</td><td>A required field missing</td><td>Signer named, date unsigned</td><td>—</td><td>—</td></tr>
-      <tr><td>Open comments and edits</td><td>—</td><td>Open comment or pending edit</td><td>—</td><td>Comment service unavailable</td></tr>
-      <tr><td>Hidden text</td><td>Found and removed (report-wide)</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td><b>High</b></td><td>The published document would be wrong, incomplete or unprintable for a reviewer, or a final could not be submitted</td><td>3</td></tr>
+      <tr><td><b>Medium</b></td><td>A reviewer would notice and ask, or evidence or review is incomplete</td><td>1</td></tr>
+      <tr><td><b>Low</b></td><td>Polish, fixed by a tool or safely ignored</td><td>0</td></tr>
     </tbody>
   </table></div>
-  <p><b>One finding per element.</b> A table with nine wide columns is one finding; a figure that is both oversized and uncaptioned is one finding at the higher severity; a word misspelt five times is five, because each is a separate change. Counts on the dashboard and in the download are counts of findings, never of cells, words or characters.</p>
-</section>
-
-<section id="parts" aria-labelledby="h-parts">
-  <h2 id="h-parts">The six parts</h2>
-  <p>Each part answers one question a coordinator asks before publishing, carries a fixed weight, and contains only its own checks. The weights add up to 100.</p>
   <div class="tablewrap"><table>
-    <thead><tr><th>Part</th><th>The question it answers</th><th>Checks</th><th>Weight</th><th>Applies to</th></tr></thead>
+    <thead><tr><th>Category</th><th>Check</th><th>High</th><th>Medium</th><th>Low</th><th>Not checked when</th></tr></thead>
     <tbody>
-      <tr><td><b>Evidence</b></td><td>Is every claim backed by something a reviewer can open?</td><td>Missing attachments · Link validation</td><td>25</td><td>Each standard with a response</td></tr>
-      <tr><td><b>Completeness</b></td><td>Is everything that should print actually there?</td><td>Placeholder text · Required cover fields</td><td>20</td><td>Each selected standard, and the report itself (cover)</td></tr>
-      <tr><td><b>Review</b></td><td>Is anything still being discussed or edited?</td><td>Open comments and unresolved edits</td><td>15</td><td>Each standard with a response</td></tr>
-      <tr><td><b>Language</b></td><td>Does it read correctly?</td><td>Spelling, grammar and punctuation · Style</td><td>10</td><td>Each standard with a response</td></tr>
-      <tr><td><b>Print and export</b></td><td>Will it print and export cleanly?</td><td>Table format · Image sizes · Illegal characters · Hidden text</td><td>15</td><td>Each standard with a response, and the report itself (file names, hidden text)</td></tr>
-      <tr><td><b>Accessibility</b></td><td>Can everyone read it?</td><td>Alt text · Headings</td><td>15</td><td>Each standard with a response</td></tr>
+      <tr><td rowspan="2">Evidence</td><td>1 Missing attachments</td><td>Nothing attached; no expected count set; a cited file deleted</td><td>Fewer than expected</td><td>More than expected</td><td>Standard not started</td></tr>
+      <tr><td>2 Link validation</td><td>SPOL document or evidence file gone or unreadable</td><td>External address failing twice; deleted objective or outcome</td><td>Redirect; certificate warning</td><td>No network; target needs sign-in</td></tr>
+      <tr><td rowspan="2">Completeness</td><td>3 Placeholder text</td><td>Any placeholder</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>4 Required cover fields</td><td>A required field missing</td><td>Signer named, date unsigned</td><td>—</td><td>—</td></tr>
+      <tr><td>Review</td><td>5 Open comments and unresolved edits</td><td>—</td><td>Open comment or pending edit</td><td>—</td><td>Comment service unavailable</td></tr>
+      <tr><td rowspan="2">Language</td><td>6 Spelling, grammar, punctuation</td><td>—</td><td>Misspelt word in neither dictionary</td><td>Grammar, punctuation; a word only the institution's dictionary knows</td><td>Language service unavailable</td></tr>
+      <tr><td>7 Style</td><td>—</td><td>A rule the institution marked required</td><td>Every other rule</td><td>No style guide configured</td></tr>
+      <tr><td rowspan="4">Print and export</td><td>8 Table format</td><td>Wider than the printable page</td><td>No header row; row split across pages</td><td>Fits only below 85 %</td><td>Width cannot be measured</td></tr>
+      <tr><td>9 Image sizes</td><td>Larger than the page</td><td>Over 1 MB; too low a resolution</td><td>No caption</td><td>Image file missing</td></tr>
+      <tr><td>10 Illegal characters</td><td>File name the export rejects</td><td>Narrative character on the institution's list</td><td>Character SPOL substitutes</td><td>—</td></tr>
+      <tr><td>11 Hidden text</td><td>Found and removed</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td rowspan="2">Accessibility</td><td>12 Alt text</td><td>—</td><td>No alternative</td><td>Alternative is the file name</td><td>—</td></tr>
+      <tr><td>13 Headings</td><td>—</td><td>Skipped level; empty heading</td><td>Duplicate numbering</td><td>—</td></tr>
     </tbody>
   </table></div>
-  <p class="meta">Why these weights: evidence is what an accreditor judges a standard on; completeness is what makes a report submittable; review, print and accessibility each carry a real cost if missed; language matters least to the outcome and is mostly fixed as people type. The weights are set by SPOL, the same for every institution, and printed in "How the score is built".</p>
+  <p><b>One finding per element.</b> A table with nine wide columns is one finding; a figure that is both oversized and uncaptioned is one finding at the higher severity; a word misspelt five times is five, because each is a separate change. Every count on the dashboard and in the download is a count of findings, never of cells, words or characters.</p>
 </section>
 
 <section id="score" aria-labelledby="h-score">
   <h2 id="h-score">The score</h2>
-  <h3>Points for a finding</h3>
-  <p>High = 3 points · Medium = 1 point · Low = 0 points. A unit (one standard, or the report itself) that collects 6 or more points in a part has used up that part entirely; nothing beyond 6 counts, so a single badly broken standard cannot drag a part below what that standard is worth.</p>
+  <h3>Units</h3>
+  <p>A category is scored over its <b>units</b>: each standard it applies to, plus the report itself where the category covers the cover or the output (see "Applies to" in <a href="#categories">The six categories</a>).</p>
   <h3>The calculation</h3>
-  <p>For each part <i>p</i> with weight <i>w<sub>p</sub></i>, applied to <i>n<sub>p</sub></i> units:</p>
+  <p>For each category <i>c</i> with weight <i>w<sub>c</sub></i>, scored over <i>n<sub>c</sub></i> units:</p>
   <ol>
-    <li>For each unit <i>u</i>, add up the points of its findings in that part: <i>P<sub>p,u</sub></i>.</li>
-    <li>The unit's share of the part is <i>q<sub>p,u</sub></i> = 1 − min(<i>P<sub>p,u</sub></i>, 6) ÷ 6, a number between 0 and 1.</li>
-    <li>The part's quality is the average over its units: <i>Q<sub>p</sub></i> = (Σ<sub>u</sub> <i>q<sub>p,u</sub></i>) ÷ <i>n<sub>p</sub></i>.</li>
-    <li>The part's points are <i>w<sub>p</sub></i> × <i>Q<sub>p</sub></i>, rounded <b>down</b> to a whole number.</li>
-    <li>The readiness score is the sum of the six parts' points.</li>
+    <li>For each unit <i>u</i>, add up the points of its findings in that category: <i>P<sub>c,u</sub></i>.</li>
+    <li>The unit keeps <i>q<sub>c,u</sub></i> = 1 − min(<i>P<sub>c,u</sub></i>, 6) ÷ 6 of the category, a number between 0 and 1. Six points empties the category for that unit; nothing beyond six counts.</li>
+    <li>The category's quality is the average over its units: <i>Q<sub>c</sub></i> = (Σ<sub>u</sub> <i>q<sub>c,u</sub></i>) ÷ <i>n<sub>c</sub></i>.</li>
+    <li>The category's score is <i>w<sub>c</sub></i> × <i>Q<sub>c</sub></i>, rounded <b>down</b> to a whole number.</li>
+    <li>The readiness score is the sum of the six category scores.</li>
   </ol>
-  <div class="q"><b>Why it behaves:</b> a part can never give or take more than its weight; one unit can never move a part by more than <i>w<sub>p</sub></i> ÷ <i>n<sub>p</sub></i>; one High finding moves it by at most half of that. Rounding each part down means a part shows full marks only when it has nothing scored to fix, and the total always equals the sum of the parts on screen. Adding standards does not dilute or inflate the score, because every part is an average.</div>
+  <div class="q"><b>Why it behaves:</b> a category can never give or take more than its weight; one unit can never move a category by more than its weight ÷ its number of units; one High finding moves it by at most half of that. Rounding each category down means a category shows full marks only when it has nothing scored left to fix, and the total always equals the sum of the six bars on screen. Adding standards neither dilutes nor inflates the score, because every category is an average.</div>
   <h3>Rules at the edges</h3>
   <ul>
-    <li><b>Not started.</b> A selected standard with no response scores 0 in Completeness (there is nothing to print) and is left out of the other five parts, which have nothing to check.</li>
-    <li><b>Left out by a send back.</b> The standard is removed from every part until it returns; the score is about what would print now.</li>
-    <li><b>Not checked.</b> A unit a check could not run on (service down, no style guide) is left out of that part's average, and the check shows "Partially checked". If a whole part could not run, it shows "—" and the total reads "{points} of {available}" (for example "79 of 90") until it runs.</li>
+    <li><b>Not started.</b> A selected standard with no response scores 0 in Completeness and is left out of the other five categories, which have nothing to check.</li>
+    <li><b>Left out by a send back.</b> The standard is removed from every category until it returns; the score is about what would print now.</li>
+    <li><b>Not checked.</b> A unit a check could not run on is left out of that category's average, and the check shows "Partially checked". If a whole category could not run, its bar shows "—" and the total reads "{points} of {available}" (for example "79 of 90") until it runs.</li>
     <li><b>Approvals</b> are not in the score. They decide whether a final can be published, and they are shown beside the score so nobody mistakes 100 for "ready to submit".</li>
     <li><b>The AI score</b> is separate and never mixed in.</li>
   </ul>
   <h3>Worked example: the demo report</h3>
   <p>Twelve standards selected; 3.3 not started, so eleven have a response; the report itself has no findings.</p>
   <div class="tablewrap"><table>
-    <thead><tr><th>Part</th><th>Units</th><th>Units that lost points</th><th>Q</th><th>Points</th></tr></thead>
+    <thead><tr><th>Category</th><th>Units</th><th>Units that lost points</th><th>Q</th><th>Score</th></tr></thead>
     <tbody>
-      <tr><td>Evidence (25)</td><td>11</td><td>4.2: 2 High = 6 → 0 · 6.2: High + Medium = 4 → ⅓</td><td>9.33 ÷ 11 = 0.848</td><td>21</td></tr>
-      <tr><td>Completeness (20)</td><td>13 (12 standards + report)</td><td>3.3: no response → 0</td><td>12 ÷ 13 = 0.923</td><td>18</td></tr>
-      <tr><td>Review (15)</td><td>11</td><td>1.1, 3.1, 5.2: 1 open comment each → ⅚</td><td>10.5 ÷ 11 = 0.955</td><td>14</td></tr>
-      <tr><td>Language (10)</td><td>11</td><td>1.1: 1 Medium → ⅚ · 2.1: 2 Medium → ⅔ (its Low style finding counts 0)</td><td>10.5 ÷ 11 = 0.955</td><td>9</td></tr>
-      <tr><td>Print and export (15)</td><td>12 (11 standards + report)</td><td>3.1: 1 High → ½ · 4.2: 1 Medium → ⅚ · 6.1: High + Medium → ⅓</td><td>10.67 ÷ 12 = 0.889</td><td>13</td></tr>
-      <tr><td>Accessibility (15)</td><td>11</td><td>4.2: 1 Medium → ⅚</td><td>10.83 ÷ 11 = 0.985</td><td>14</td></tr>
+      <tr><td>Evidence (25)</td><td>11 standards</td><td>4.2: 2 High = 6 → 0 · 6.2: High + Medium = 4 → ⅓</td><td>9.33 ÷ 11 = 0.848</td><td>21</td></tr>
+      <tr><td>Completeness (20)</td><td>12 standards + report</td><td>3.3: not started → 0</td><td>12 ÷ 13 = 0.923</td><td>18</td></tr>
+      <tr><td>Review (15)</td><td>11 standards</td><td>1.1, 3.1, 5.2: 1 Medium each → ⅚</td><td>10.5 ÷ 11 = 0.955</td><td>14</td></tr>
+      <tr><td>Language (10)</td><td>11 standards</td><td>1.1: 1 Medium → ⅚ · 2.1: 2 Medium → ⅔ (its Low style finding counts 0)</td><td>10.5 ÷ 11 = 0.955</td><td>9</td></tr>
+      <tr><td>Print and export (15)</td><td>11 standards + report</td><td>3.1: 1 High → ½ · 4.2: 1 Medium → ⅚ · 6.1: High + Medium → ⅓</td><td>10.67 ÷ 12 = 0.889</td><td>13</td></tr>
+      <tr><td>Accessibility (15)</td><td>11 standards</td><td>4.2: 1 Medium → ⅚</td><td>10.83 ÷ 11 = 0.985</td><td>14</td></tr>
       <tr><td colspan="4"><b>Readiness score</b></td><td><b>89</b></td></tr>
     </tbody>
   </table></div>
-  <p>Shown on the dashboard as "21 + 18 + 14 + 9 + 13 + 14 = 89", with "Final: not yet · 3.3, 4.2, 6.2 not approved" beside it. Fixing both missing documents on 4.2 would lift Evidence to 0.939 and its points to 23: the score moves only by what Evidence is worth, and only as far as 4.2's slice of it.</p>
+  <p>Shown on the dashboard as "21 + 18 + 14 + 9 + 13 + 14 = 89", with "Final: not yet · 3.3, 4.2, 6.2 not approved" beside it. Fixing both missing documents on 4.2 lifts Evidence to 0.939 and its score to 23: the readiness score moves only within Evidence's share, and only by 4.2's slice of it.</p>
 </section>
 
 <section id="travel" aria-labelledby="h-travel">
   <h2 id="h-travel">Where findings go</h2>
   <ul>
-    <li><b>Under the standard's row</b> on Readiness, one line each: "{Severity} · {Kind} · {where} — {detail}", with "Open {code} in All Accreditation".</li>
+    <li><b>Under the standard's row</b> on Readiness, one line each: "{Severity} · {Check} · {where} — {detail}", with "Open {code} in All Accreditation". Findings on the report itself appear as a banner above the standards.</li>
     <li><b>In the Review panel,</b> where the passages that carry a finding are marked in amber in the response as it will print.</li>
     <li><b>In a send back,</b> as the first part of the compiled comment the holder receives, each finding ticked by default and untickable. Send all back does this for every standard with findings at once.</li>
-    <li><b>In Preview,</b> for formatting findings: Auto-format fixes tables, images, headings, spacing, citations and contents in one pass and shows every change before and after.</li>
-    <li><b>In the Excel download</b> of the run on screen (including an out-of-date one): a Summary sheet, one row per finding with standard, check, severity, location, description, suggested action, report-wide, left out, status and holder; one row per standard with its counts and chain state; the AI findings when a run exists; report-wide findings; and one row per check with its status. Plain values, filters on every sheet, no formulas. A CSV of the findings alone is also offered.</li>
+    <li><b>In Preview,</b> for the Print and export findings and Headings: Auto-format fixes tables, images, file-name characters and heading levels in one pass and shows every change before and after.</li>
+    <li><b>In the Excel download</b> of the run on screen (including an out-of-date one), six sheets:
+      <ul>
+        <li><b>Summary:</b> the readiness score, the six category scores with their weights, the verdicts, approvals, the run date and who ran it.</li>
+        <li><b>Findings:</b> one row per finding with category, check, standard, severity, points, location, description, suggested action, left out, status and holder.</li>
+        <li><b>Standards:</b> one row per standard with its points in each category, its chain state and holder.</li>
+        <li><b>Report:</b> the findings on the report itself.</li>
+        <li><b>Checks:</b> one row per check with its category and status.</li>
+        <li><b>AI findings:</b> present only when an AI run exists.</li>
+      </ul>
+      Plain values, filters on every sheet, no formulas. A CSV of the Findings sheet alone is also offered.</li>
   </ul>
 </section>
 
@@ -275,14 +306,14 @@ table{border-collapse:collapse;width:100%;font-size:.88rem}th,td{text-align:left
   <div class="tablewrap"><table>
     <thead><tr><th>Status</th><th>Meaning</th><th>Shown as</th></tr></thead>
     <tbody>
-      <tr><td>Passed</td><td>The check ran on everything and found nothing</td><td>Green "Passed"; a clean standard reads "All 13 checks passed · approved {date}"</td></tr>
+      <tr><td>Passed</td><td>The check ran on every unit and found nothing</td><td>Green "Passed"; a clean standard reads "All 13 checks passed · approved {date}"</td></tr>
       <tr><td>Issues found</td><td>The check ran and found findings</td><td>The count of findings, never of cells or words</td></tr>
-      <tr><td>Partially checked</td><td>The check ran but some standards or items could not be checked</td><td>"{n} not checked" with the reason, for example "3 standards not started"</td></tr>
+      <tr><td>Partially checked</td><td>The check ran but some units could not be checked</td><td>"{n} not checked" with the reason, for example "1 standard not started"</td></tr>
       <tr><td>Not checked</td><td>The check did not run</td><td>"Not checked" with the reason (service unavailable, no style guide, cancelled)</td></tr>
     </tbody>
   </table></div>
   <ul>
-    <li>Before any run: the ring shows "—", verdicts "Not checked yet", the lists are hidden, Next is still available.</li>
+    <li>Before any run: the ring and the six bars show "—", the verdicts read "Not checked yet", the lists are hidden, Next is still available.</li>
     <li>While running: "Checking {n} of {m} sections", Cancel. Cancelled: "Checks cancelled · Run checks". Not finished in ten minutes: "Checks couldn't finish · Run again", previous result kept.</li>
     <li>After a change: "Out of date · Run again" on the dashboard and on Step 4.</li>
     <li>The last-run line: "Last run {date, time} · {k} of 13 checks completed · language checks by WProofreader".</li>
@@ -292,38 +323,41 @@ table{border-collapse:collapse;width:100%;font-size:.88rem}th,td{text-align:left
 <section id="acceptance" aria-labelledby="h-acc">
   <h2 id="h-acc">Acceptance</h2>
   <ul class="ac">
-    <li><b>Full run.</b> Given the demo data. When Run checks again. Then all thirteen checks report a status, the score reads 89 with "21 + 18 + 14 + 9 + 13 + 14 = 89", the six bars show 21 / 25, 18 / 20, 14 / 15, 9 / 10, 13 / 15 and 14 / 15, and 17 findings are listed under their standards.</li>
+    <li><b>Full run.</b> Given the demo data. When Run checks again. Then all thirteen checks report a status, the six bars read Evidence 21 / 25, Completeness 18 / 20, Review 14 / 15, Language 9 / 10, Print and export 13 / 15 and Accessibility 14 / 15, the ring reads 89 with "21 + 18 + 14 + 9 + 13 + 14 = 89", and 17 findings are listed under their standards.</li>
+    <li><b>Proportion.</b> Given any report. When every finding in one category is resolved. Then the readiness score rises by exactly that category's lost points and no other bar moves. Given a standard with ten High findings in one category. Then that category loses no more than that standard's slice of it.</li>
     <li><b>One per element.</b> Given a table with nine wide columns. Then exactly one Table format finding, High, naming the table and page.</li>
-    <li><b>Language engine.</b> Given "occurence" in 2.1. Then a Medium Spelling finding with the suggestion, no AI label and no credit line anywhere near it; the same word is marked in the editor as you type.</li>
-    <li><b>Institution dictionary.</b> Given "Westmoor" added to the institution's dictionary. Then it is never reported; a word only in that dictionary used in another institution's report is Low, not Medium.</li>
-    <li><b>Placeholder.</b> Given "[Name of Institution]" on the cover. Then a High finding, listed under "Before you publish", and the cover preview shows it.</li>
-    <li><b>Expected count not set.</b> Given 6.2 with no expected evidence count. Then High "Expected evidence count not set · 0 documents" and the Evidence bar excludes it from "complete".</li>
-    <li><b>Hidden text.</b> Given white-on-white text in 2.1. Then the banner "Hidden text removed from 2.1 · see the standard", the download lists it, the standard's text in All Accreditation is unchanged, and Print and export loses at most 15 ÷ 12 ÷ 2 ≈ 0.6 of a point.</li>
-    <li><b>Proportion.</b> Given any report. When every finding in one part is resolved. Then the score rises by exactly that part's lost points and no other bar moves. Given a standard with ten High findings in one part. Then that part loses no more than that standard's slice of it.</li>
-    <li><b>Out of date.</b> Given a run and a writer's change to 1.1. Then "Out of date · Run again"; the old findings stay listed until the next run.</li>
+    <li><b>Expected count not set.</b> Given 6.2 with no expected evidence count and no documents. Then a High "Expected evidence count not set" and a Medium "No documents attached", and Evidence keeps ⅓ of 6.2's slice.</li>
+    <li><b>Placeholder.</b> Given "[Name of Institution]" on the cover. Then a High Placeholder text finding on the report, listed under "Before you publish", and Completeness loses half of the report's slice.</li>
+    <li><b>Not started.</b> Given 3.3 with no response. Then no finding is raised, 3.3 scores 0 in Completeness, and it does not appear in the other five categories.</li>
+    <li><b>Language engine.</b> Given "occurence" in 2.1. Then a Medium Spelling finding with the suggestion, no AI label and no credit line; the same word is marked in the editor as you type.</li>
+    <li><b>Institution dictionary.</b> Given "Westmoor" added to the institution's dictionary. Then it is never reported; a word known only to that dictionary is Low, not Medium.</li>
+    <li><b>Hidden text.</b> Given white-on-white text in 2.1. Then the banner "Hidden text removed from 2.1 · see the standard", the download lists it on the Report sheet, the standard in All Accreditation is unchanged, and Print and export loses at most 15 ÷ 12 ÷ 2 ≈ 0.6 of a point.</li>
+    <li><b>Out of date.</b> Given a run and a writer's change to 1.1. Then "Out of date · Run again"; the old findings and scores stay until the next run.</li>
     <li><b>Cancelled.</b> When Cancel during a run. Then "Checks cancelled · Run checks", the previous result stays, nothing is recorded as a completed run.</li>
-    <li><b>Download.</b> When Download report (Excel). Then a workbook named with the institution, template, draft and run date, six sheets, 17 finding rows, one row per check with status, no formulas.</li>
+    <li><b>Download.</b> When Download report (Excel). Then a workbook named with the institution, template, draft and run date, with the six sheets above, 17 rows on Findings and the six category scores on Summary, no formulas.</li>
   </ul>
 </section>
 
 <section id="v6" aria-labelledby="h-v6">
   <h2 id="h-v6">Mapping to the v6.0.0.8 build</h2>
   <div class="tablewrap"><table>
-    <thead><tr><th>This specification</th><th>v6 build</th><th>Change</th></tr></thead>
+    <thead><tr><th>Category</th><th>This specification</th><th>v6 build</th><th>Change</th></tr></thead>
     <tbody>
-      <tr><td>Spelling, grammar and punctuation</td><td>Spell Check, under "AI can fix these"</td><td>Move out of the AI group; it is neither AI nor fixed by Publish. Name the engine once in the last-run line.</td></tr>
-      <tr><td>Style</td><td>—</td><td>New.</td></tr>
-      <tr><td>Link validation</td><td>Link Validation</td><td>Keep. Add severity by cause; the "Document file not found on server" case is High.</td></tr>
-      <tr><td>Table format</td><td>Table Format, "181 issues"</td><td>Keep; count tables, not cells. Fixed in Preview by Auto-format, not on this step.</td></tr>
-      <tr><td>Image sizes</td><td>Image Sizes</td><td>Keep; fixed in Preview by Auto-format.</td></tr>
-      <tr><td>Alt text, Headings</td><td>—</td><td>New; both count in the Accessibility bar.</td></tr>
-      <tr><td>Illegal characters</td><td>Illegal Characters ("0 narrative · 4 files")</td><td>Keep, with the severity split by file name versus narrative.</td></tr>
-      <tr><td>Missing attachments</td><td>Missing Attachments ("87 standards")</td><td>Keep; count standards with a shortfall, and report "expected count not set" as its own High finding.</td></tr>
-      <tr><td>Placeholder text, Required cover fields</td><td>—</td><td>New; the v6 cover shows exactly the placeholders this catches.</td></tr>
-      <tr><td>Open comments and unresolved edits</td><td>Narrative Comments, "Not Checked"</td><td>It must run on every readiness run.</td></tr>
-      <tr><td>Hidden text</td><td>—</td><td>New; report-wide.</td></tr>
-      <tr><td>—</td><td>Issue Summary</td><td>A view, not a check; remove from the checks table.</td></tr>
-      <tr><td>—</td><td>"AI can fix these" / "These need your review" grouping</td><td>Replace with "Fixed in Preview with Auto-format" (tables, images, headings) and "Fixed by the writer"; nothing on this step carries an AI label unless it costs credits.</td></tr>
+      <tr><td rowspan="2">Evidence</td><td>1 Missing attachments</td><td>Missing Attachments ("87 standards")</td><td>Keep; count findings, not standards, and report "expected count not set" as its own High finding.</td></tr>
+      <tr><td>2 Link validation</td><td>Link Validation</td><td>Keep; add severity by cause ("Document file not found on server" is High).</td></tr>
+      <tr><td rowspan="2">Completeness</td><td>3 Placeholder text</td><td>—</td><td>New; the v6 cover shows exactly the placeholders it catches.</td></tr>
+      <tr><td>4 Required cover fields</td><td>—</td><td>New; v6 collects these fields on "Structure &amp; Branding".</td></tr>
+      <tr><td>Review</td><td>5 Open comments and unresolved edits</td><td>Narrative Comments, "Not Checked"</td><td>It must run on every readiness run.</td></tr>
+      <tr><td rowspan="2">Language</td><td>6 Spelling, grammar and punctuation</td><td>Spell Check, under "AI can fix these"</td><td>Move into Language; it is neither AI nor fixed by Publish.</td></tr>
+      <tr><td>7 Style</td><td>—</td><td>New.</td></tr>
+      <tr><td rowspan="4">Print and export</td><td>8 Table format</td><td>Table Format, "181 issues"</td><td>Keep; count tables, not cells.</td></tr>
+      <tr><td>9 Image sizes</td><td>Image Sizes</td><td>Keep.</td></tr>
+      <tr><td>10 Illegal characters</td><td>Illegal Characters ("0 narrative · 4 files")</td><td>Keep, with severity split by file name versus narrative.</td></tr>
+      <tr><td>11 Hidden text</td><td>—</td><td>New.</td></tr>
+      <tr><td rowspan="2">Accessibility</td><td>12 Alt text</td><td>—</td><td>New.</td></tr>
+      <tr><td>13 Headings</td><td>—</td><td>New.</td></tr>
+      <tr><td>—</td><td>—</td><td>Issue Summary</td><td>A view, not a check; replaced by the six category bars.</td></tr>
+      <tr><td>—</td><td>—</td><td>"AI can fix these" / "These need your review"</td><td>Replaced by the six categories; nothing on this step carries an AI label unless it costs credits.</td></tr>
     </tbody>
   </table></div>
 </section>
