@@ -4,7 +4,7 @@ source: readiness-checks.html
 format: markdown export of the HTML document; tables are pipe tables; the HTML remains the reference rendering
 ---
 
-Specification · Readiness checks (free) · v3 · 23 Oct 2026
+Specification · Readiness checks (free) · v4 · 23 Oct 2026
 
 # The readiness checks
 
@@ -211,7 +211,8 @@ a category can never give or take more than its weight; one unit can never move 
 
 - **Not started.** A selected standard with no response scores 0 in Completeness and is left out of the other five categories, which have nothing to check.
 - **Left out by a send back.** The standard is removed from every category until it returns; the score is about what would print now.
-- **Not checked.** A unit a check could not run on is left out of that category's average, and the check shows "Partially checked". If a whole category could not run, its bar shows "—" and the total reads "{points} of {available}" (for example "79 of 90") until it runs.
+- **Not checked.** A unit a check could not run on is left out of that category's average, and the check shows "Partially checked". If a whole category could not run, its bar shows "—" and the total reads "{points} of {available}" (for example "80 of 90" for the demo report with the language service down) until it runs.
+- **Nothing to score.** When no selected standard has a response (or every one is left out), the ring and the bars show "—" with "No responses to check yet"; the score is not shown as a partial number.
 - **Approvals** are not in the score. They decide whether a final can be published, and they are shown beside the score so nobody mistakes 100 for "ready to submit".
 - **The AI score** is separate and never mixed in.
 
@@ -230,6 +231,80 @@ Twelve standards selected; 3.3 not started, so eleven have a response; the repor
 | **Readiness score** | **89** |  |  |  |
 
 Shown on the dashboard as "21 + 18 + 14 + 9 + 13 + 14 = 89", with "Final: not yet · 3.3, 4.2, 6.2 not approved" beside it. Fixing both missing documents on 4.2 lifts Evidence to 0.939 and its score to 23: the readiness score moves only within Evidence's share, and only by 4.2's slice of it.
+
+## Exact calculation for the build
+
+This is the normative definition the build implements and tests against. It produces exactly the numbers in the worked example above. Scoring rules version: **readiness-score v1**.
+
+### Inputs, all from the stored run
+
+- The run's rule findings, each with its check, severity and unit (a standard code, or `REPORT` for the cover and output). AI findings are never inputs.
+- For each selected standard: has a response, not started, or left out by an open send back.
+- For each check and unit: whether the check ran on that unit.
+
+### Constants
+
+| Constant | Value |
+| --- | --- |
+| Points per finding | High 3 · Medium 1 · Low 0 |
+| Cap per unit per category | 6 points |
+| Weights | Evidence 25 · Completeness 20 · Review 15 · Language 10 · Print and export 15 · Accessibility 15 |
+| Check → category | 1, 2 → Evidence · 3, 4 → Completeness · 5 → Review · 6, 7 → Language · 8, 9, 10, 11 → Print and export · 12, 13 → Accessibility |
+| Categories that include the report unit | Completeness (checks 3, 4 on the cover) · Print and export (checks 10, 11 on the output and the whole document) |
+
+### Algorithm
+
+```
+for each category c with weight w:
+    units = []
+    for each selected standard s:
+        if s is left out:                skip
+        if s is not started:
+            if c is Completeness:        units.append(6)        # nothing to print = full penalty
+            skip
+        if no check of c ran on s:       skip                   # "Partially checked"
+        P = sum(points of s's findings from the checks of c that ran)
+        units.append(min(P, 6))
+    if c includes the report unit and at least one check of c ran on REPORT:
+        P = sum(points of REPORT's findings from the checks of c)
+        units.append(min(P, 6))
+    n = len(units)
+    if n == 0:                           category[c] = NOT_AVAILABLE; continue
+    kept = sum(6 - p for p in units)     # integer
+    category[c] = floor(w * kept / (6 * n))   # integer division, never floating point
+
+if no selected standard has a response and is not left out:
+    show "—", "No responses to check yet"
+else:
+    score     = sum(category[c] for available c)
+    available = sum(w for available c)
+    show score if available == 100 else "{score} of {available}"
+```
+
+- **Integers only.** Compute `(w × kept) div (6 × n)` in integer arithmetic. Floating point turns an exact 24 into 23.999… and floors it to 23.
+- **Bar width** is `kept ÷ (6 × n)` as a percentage. Colour: below 70 % red, below 90 % amber, otherwise the neutral bar.
+- **Stored, not recomputed.** The six category values, their `kept` and `n`, the total, the available maximum and the rules version are stored with the run. Displays and the download read the stored values. A score is compared with another only when both carry the same rules version.
+- **Formula line.** The dashboard prints the six stored values in the fixed order Evidence, Completeness, Review, Language, Print and export, Accessibility, joined by " + ", then " = " and the total. A category that is not available prints "—" and is left out of the sum.
+- **Download.** The Summary sheet lists, per category, the weight, `n`, `kept`, the score and the rules version, so any score can be rechecked by hand.
+
+### Test cases
+
+Built on the demo report unless stated. Each line gives the six category scores in the fixed order, then what the ring shows.
+
+| # | Case | Evidence | Completeness | Review | Language | Print and export | Accessibility | Ring |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | Demo report | 21 | 18 | 14 | 9 | 13 | 14 | **89** |
+| 2 | Clean report, every standard started, no findings | 25 | 20 | 15 | 10 | 15 | 15 | **100** |
+| 3 | Demo, both missing documents on 4.2 attached | 23 | 18 | 14 | 9 | 13 | 14 | **91** |
+| 4 | Demo, 4.2 and 6.2 left out by send back | 25 | 18 | 14 | 9 | 13 | 15 | **94** (Final still blocked) |
+| 5 | Demo, language service unavailable | 21 | 18 | 14 | — | 13 | 14 | **80 of 90** |
+| 6 | Demo, a placeholder on the cover (High on REPORT) | 21 | 17 | 14 | 9 | 13 | 14 | **88** |
+| 7 | Demo, hidden text found (High on REPORT) | 21 | 18 | 14 | 9 | 12 | 14 | **88** |
+| 8 | Demo, plus ten High Evidence findings on 3.2 | 18 | 18 | 14 | 9 | 13 | 14 | **86** (3.2 capped at 6 points) |
+| 9 | One standard selected, one Medium spelling finding | 25 | 20 | 15 | 8 | 15 | 15 | **98** |
+| 10 | Every selected standard not started | — | — | — | — | — | — | **—** "No responses to check yet" |
+
+Case 4 is intended: the score describes what would print now, and standards left out do not print; Final stays blocked until they return approved. Case 8 shows the cap: ten High findings cost 3.2 its full Evidence slice (25 ÷ 11 ≈ 2.3 points) and no more.
 
 ## Where findings go
 
@@ -269,7 +344,7 @@ Shown on the dashboard as "21 + 18 + 14 + 9 + 13 + 14 = 89", with "Final: not ye
 - **Not started.** Given 3.3 with no response. Then no finding is raised, 3.3 scores 0 in Completeness, and it does not appear in the other five categories.
 - **Language engine.** Given "occurence" in 2.1. Then a Medium Spelling finding with the suggestion, no AI label and no credit line; the same word is marked in the editor as you type.
 - **Institution dictionary.** Given "Westmoor" added to the institution's dictionary. Then it is never reported; a word known only to that dictionary is Low, not Medium.
-- **Hidden text.** Given white-on-white text in 2.1. Then the banner "Hidden text removed from 2.1 · see the standard", the download lists it on the Report sheet, the standard in All Accreditation is unchanged, and Print and export loses at most 15 ÷ 12 ÷ 2 ≈ 0.6 of a point.
+- **Hidden text.** Given white-on-white text in 2.1. Then the banner "Hidden text removed from 2.1 · see the standard", the download lists it on the Report sheet, the standard in All Accreditation is unchanged, and Print and export drops from 13 to 12 (0.63 of a point before rounding down), so the score reads 88.
 - **Out of date.** Given a run and a writer's change to 1.1. Then "Out of date · Run again"; the old findings and scores stay until the next run.
 - **Cancelled.** When Cancel during a run. Then "Checks cancelled · Run checks", the previous result stays, nothing is recorded as a completed run.
 - **Download.** When Download report (Excel). Then a workbook named with the institution, template, draft and run date, with the six sheets above, 17 rows on Findings and the six category scores on Summary, no formulas.
