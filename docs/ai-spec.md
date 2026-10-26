@@ -1,6 +1,6 @@
 ---
 title: "SPOL Publish · AI behaviour spec"
-source: https://rajatcord.github.io/spol-publish-prototype/docs/ai-spec.html
+source: ai-spec.html
 format: markdown export of the HTML document; tables are pipe tables; the HTML remains the reference rendering
 ---
 
@@ -23,10 +23,11 @@ The two places in Publish where a model is used, described as product behaviour:
 - **One standard at a time.** Each standard is read on its own, with its own wording, reviewer questions, response and evidence index. No call ever receives the whole report. The cross-standard pass sees only the facts extracted from each standard, never the text.
 - **Documents are data.** The report text is treated as content to be reviewed, never as instructions. Hidden text is removed before anything is sent and reported as a finding. Text that tries to steer the review is itself reported.
 - **Structured answers only.** The model answers in a fixed form (kinds, severities, anchors, short fixes). No free prose reaches the screen; a malformed answer is a failed call, not a thinner answer.
-- **The score is arithmetic you can check.** SPOL computes the AI score from the findings with a published formula. The model is never asked for a number.
+- **The score is arithmetic you can check.** SPOL computes the AI review score from the findings with a published formula. The model is never asked for a number.
 - **Refuse rather than degrade.** A standard whose result cannot be verified, that was too long, or that the provider could not process is reported "not checked" with its reason and refunded. The rest of the run proceeds.
 - **Zero data retention only.** Models run under the provider's zero-retention, no-training terms, pinned to a version; a version changes only after the quality bar passes again.
 - **Recorded.** Every run, decision, charge and refund is in the audit trail with who, when and which version.
+- **Never the free checks' territory.** AI readiness does not report spelling, grammar, punctuation, style, attachment counts, broken links, layout, alt text, headings, placeholders, hidden text or open comments; the free readiness checks own those. The AI is told so, and SPOL drops any such finding before it is shown. The AI review score is built only from AI findings and the readiness score only from the free checks; the two are never combined.
 
 ## AI readiness
 
@@ -67,7 +68,7 @@ Every finding carries a **severity** (High: a committee would likely cite it · 
 ### How SPOL treats a result
 
 - **Verification.** Every quote is matched against the text that was sent; every reviewer question and document reference must exist. Findings that fail are dropped. If more than three in ten findings on a standard fail, the standard is "not checked" and refunded rather than shown with gaps.
-- **Score.** Per checked standard: 100 − 8 per High − 3 per Medium − 1 per Low, never below 0; the AI score is the average over checked standards. Contradictions are listed separately and do not enter it. A standard that could not be checked is left out and never counts against the institution. The AI score sits beside the rules score and never replaces it: only the rules score gates a final.
+- **Score.** Per checked standard: 100 − 8 per High − 3 per Medium − 1 per Low, never below 0; the AI review score is the average over checked standards. Contradictions are listed separately and do not enter it. A standard that could not be checked is left out and never counts against the institution. The AI review score sits beside the readiness score and is never added to it; neither score decides publishing, which needs approvals and the free blocking conditions.
 - **States.** A finding is open, sent back (accepted and included in a send back), closed (ignored with a reason, or cleared), outdated (its passage changed since the run; its actions stay available) or resolved by the latest run (not reproduced after the text changed; shown greyed).
 - **Decisions.** Two only: **Accept and send back**, which carries the finding to the person who holds the standard as a comment, marked as a suggestion; and **Ignore** with one of four reasons: not an issue, already covered, fix after this draft, accepted risk. "Fix after this draft" reopens on the next draft. A closed finding can be reopened. Decisions attach to the finding, so when a later run reproduces it the decision carries, whatever draft it was made in.
 - **Manipulation.** A manipulation finding is shown with a fixed message, never with the planted text; it cannot be accepted or ignored, only cleared by a coordinator with a note; it blocks a final (not a draft) until cleared; the standard stays in the score and its other findings are still reported.
@@ -141,7 +142,7 @@ Every run: who started it, which draft, which rubric and model versions, the sta
 ## Limits, stated plainly
 
 - It is not the visiting committee. It predicts questions a reviewer is likely to ask; it does not know the reviewers, the institution's history or the accreditor's unwritten expectations.
-- It can miss things and it can be wrong. The quality bar bounds how often, not to zero, which is why every finding has Ignore and why the rules score, not the AI score, gates a final.
+- It can miss things and it can be wrong. The quality bar bounds how often, not to zero, which is why every finding has Ignore and why publishing never depends on the AI review score.
 - It reads one standard at a time, and extracts rather than files. A cited document is judged by its title and 40 words from each cited page; it cannot tell that a 60-page policy is weak.
 - It never writes. A suggested fix says what to change; it does not supply the paragraph.
 - It is not identical every time; results are stored so that a team sees one set.

@@ -30,10 +30,10 @@ table{border-collapse:collapse;width:100%;font-size:.88rem}th,td{text-align:left
 
 <main>
 <header>
-  <div class="eyebrow">Specification · AI checks · v1 · 22 Oct 2026</div>
+  <div class="eyebrow">Specification · AI checks · v2 · 26 Oct 2026</div>
   <h1>The AI checks</h1>
   <p class="meta" style="margin-top:.5rem">The five checks AI readiness performs when a coordinator unlocks it, and the one AI feature that acts on the document, Auto-format. This page says what each check looks for, what it is given, what a finding looks like, how severe and how confident it is, what a person can do with it, what it costs and where it stops. The free readiness checks are a separate document; the user-facing explanation is the dossier "How AI readiness works".</p>
-  <nav class="toc" aria-label="Sections" style="margin-top:.8rem"><a href="#difference">What makes a check an AI check</a> · <a href="#inputs">What the AI is given</a> · <a href="#five">The five checks</a> · <a href="#finding">What a finding carries</a> · <a href="#trust">Why a finding can be trusted</a> · <a href="#decide">What a person does with it</a> · <a href="#score">The AI score</a> · <a href="#run">A run</a> · <a href="#cost">Cost</a> · <a href="#autoformat">Auto-format</a> · <a href="#limits">Limits</a> · <a href="#acceptance">Acceptance</a></nav>
+  <nav class="toc" aria-label="Sections" style="margin-top:.8rem"><a href="#difference">What makes a check an AI check</a> · <a href="#boundary">Free and AI: one owner per question</a> · <a href="#inputs">What the AI is given</a> · <a href="#five">The five checks</a> · <a href="#finding">What a finding carries</a> · <a href="#trust">Why a finding can be trusted</a> · <a href="#decide">What a person does with it</a> · <a href="#score">The AI review score</a> · <a href="#run">A run</a> · <a href="#cost">Cost</a> · <a href="#autoformat">Auto-format</a> · <a href="#limits">Limits</a> · <a href="#acceptance">Acceptance</a></nav>
 </header>
 
 <section class="tldr" aria-labelledby="t">
@@ -42,13 +42,45 @@ table{border-collapse:collapse;width:100%;font-size:.88rem}th,td{text-align:left
     <li><b>Five checks that need reading,</b> not rules: argument strength, evidence sufficiency, consistency across standards, clarity, reviewer readiness. Each reads one standard the way a visiting reviewer would.</li>
     <li><b>Opt-in, quoted first.</b> Behind an unlock card: 2 credits per standard not already checked + 5 for the cross-standard check (12 standards → 29). Never more than the quote.</li>
     <li><b>Suggestions only.</b> Every finding quotes the text or names the reviewer question it concerns; SPOL verifies that before showing it. A person accepts and sends it back, or ignores it with a reason. Nothing changes without a person.</li>
-    <li><b>The AI score is advice;</b> the rules score gates a final.</li>
+    <li><b>The AI review score is advice.</b> It is never added to the readiness score and never decides whether a report can be published.</li>
   </ul>
 </section>
 
 <section id="difference" aria-labelledby="h-d">
   <h2 id="h-d">What makes a check an AI check</h2>
   <p>A free check answers a question a machine can settle without judgment: is a link alive, is a table too wide, is a comment open. An AI check answers a question a reviewer settles by reading: does this response make its case, does the evidence actually support the claim, do two standards disagree, will a committee misread this passage. If a rule could answer it, it never goes to AI. The two sets never overlap: AI readiness does not check spelling, links or layout, and the free checks never judge an argument.</p>
+</section>
+
+<section id="boundary" aria-labelledby="h-boundary">
+  <h2 id="h-boundary">Free and AI: one owner per question</h2>
+  <p>The AI checks and the free readiness checks never measure the same thing. Each question about a report has exactly one owner, and each score is built only from its own side's findings.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Question about the report</th><th>Answered by the free readiness checks</th><th>Answered by the AI checks</th></tr></thead>
+    <tbody>
+      <tr><td>Is every expected document attached, and does every link open?</td><td>Attachments and links (checks 1, 2)</td><td>Never</td></tr>
+      <tr><td>Does the text back each claim with something it cites, and does the cited extract agree?</td><td>Never</td><td>Evidence sufficiency</td></tr>
+      <tr><td>Is everything that should print filled in?</td><td>Completeness (checks 3, 4; a standard not started)</td><td>Never</td></tr>
+      <tr><td>Does the response make its case and answer every reviewer question?</td><td>Never</td><td>Argument strength</td></tr>
+      <tr><td>Is anything still being discussed or edited?</td><td>Open items (check 5)</td><td>Never</td></tr>
+      <tr><td>Is the spelling, grammar, punctuation and house style right?</td><td>Language (checks 6, 7)</td><td>Never</td></tr>
+      <tr><td>Will a reviewer misread a passage?</td><td>Never</td><td>Clarity</td></tr>
+      <tr><td>Do numbers, dates and named roles agree across standards?</td><td>Never</td><td>Consistency</td></tr>
+      <tr><td>Will tables, images and file names print and export cleanly?</td><td>Print and export (checks 8, 9, 10)</td><td>Never</td></tr>
+      <tr><td>Is there text no reader can see?</td><td>Print and export (check 11, hidden text, removed before AI reads anything)</td><td>Never</td></tr>
+      <tr><td>Does visible text try to steer a reader or an AI?</td><td>Never</td><td>Manipulation</td></tr>
+      <tr><td>Can everyone read it (alt text, headings)?</td><td>Accessibility (checks 12, 13)</td><td>Never</td></tr>
+      <tr><td>Which standards would a committee likely cite?</td><td>Never</td><td>Reviewer readiness (from AI findings only)</td></tr>
+      <tr><td>Is every standard approved?</td><td colspan="2">Neither score. Approvals are shown beside the readiness score and decide whether a final can be published.</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li><b>One owner per question.</b> Every question above is answered by exactly one side. The free checks never judge meaning; the AI checks never report anything a free check owns.</li>
+    <li><b>AI findings in free territory are dropped.</b> The AI is told what it must not report, and SPOL drops any AI finding about spelling, grammar, punctuation, style, file counts, broken links, layout, alt text, headings, placeholders, hidden text or open comments before anyone sees it.</li>
+    <li><b>No finding is in both scores.</b> The readiness score is built only from the thirteen free checks; the AI review score only from AI findings. Neither ever reads the other's findings.</li>
+    <li><b>Two scores, two names, never combined.</b> "Readiness score" (free, six categories, out of 100) and "AI review score" (paid, out of 100). They are shown side by side and are never added, averaged or merged into one number.</li>
+    <li><b>No shared words.</b> The six free categories and the five AI areas use different names, so a bar on one side can never be mistaken for a bar on the other.</li>
+    <li><b>Neither score decides publishing.</b> A final needs every selected standard approved and the free blocking conditions met; the AI manipulation flag also blocks a final until a coordinator clears it, as a condition, not as a score.</li>
+  </ul>
 </section>
 
 <section id="inputs" aria-labelledby="h-i">
@@ -82,6 +114,7 @@ table{border-collapse:collapse;width:100%;font-size:.88rem}th,td{text-align:left
     <li><b>Example:</b> "No passage says how assessment results were used to improve a programme." (reviewer question 4.2:4) · Suggested fix: "Add one example of a change made because of assessment results."</li>
     <li><b>Severity:</b> High when a committee would likely cite the gap; Medium when it would ask.</li>
     <li><b>On the panel:</b> the bar "Argument strength · {n} of {m} standards" counts standards with no open finding of these kinds.</li>
+    <li><b>Does not:</b> report a standard that has no response yet; an empty standard is the free Completeness category's finding.</li>
   </ul>
 
   <h3>2 · Evidence sufficiency</h3>
@@ -90,7 +123,7 @@ table{border-collapse:collapse;width:100%;font-size:.88rem}th,td{text-align:left
     <li><b>Finding kinds:</b> <i>Unsupported claim</i> (a sentence that cites nothing; a passage that cites an indexed document counts as supported even when the 40-word extract is silent on the detail) and <i>Evidence mismatch</i> (the extract says the opposite of the sentence citing it).</li>
     <li><b>Example:</b> ""Every programme completed its assessment cycle in 2024–25" cites nothing." · Suggested fix: "Cite the assessment summary."</li>
     <li><b>Severity:</b> High for an unsupported claim the standard turns on; Medium for a mismatch or a secondary claim.</li>
-    <li><b>Does not:</b> judge the quality of a document from its extract; it cannot tell that a 60-page policy is weak.</li>
+    <li><b>Does not:</b> count attachments against an expected number, or test whether a link or file opens; those belong to the free Attachments and links category. It judges only what the text claims and what the cited extracts say. It cannot tell that a 60-page policy is weak from its extract.</li>
   </ul>
 
   <h3>3 · Consistency across standards</h3>
@@ -100,7 +133,7 @@ table{border-collapse:collapse;width:100%;font-size:.88rem}th,td{text-align:left
     <li><b>Finding kind:</b> <i>Contradiction</i>, pointing at both passages, titled "6.1 vs 5.1".</li>
     <li><b>Example:</b> "6.1 reports 312 full-time faculty for 2024–25; 5.1 reports 298 for the same year." · Suggested fix: "Confirm the count with HR and use one figure in both standards."</li>
     <li><b>Severity:</b> High, always: contradictions are the first thing a committee flags and undermine every other number.</li>
-    <li><b>On the panel:</b> "Contradictions: {n} to resolve" and the bar "Consistency · {n} contradictions". Contradictions are listed separately and do not enter the AI score.</li>
+    <li><b>On the panel:</b> "Contradictions: {n} to resolve" and the bar "Consistency · {n} contradictions". Contradictions are listed separately and do not enter the AI review score.</li>
   </ul>
 
   <h3>4 · Clarity</h3>
@@ -109,19 +142,19 @@ table{border-collapse:collapse;width:100%;font-size:.88rem}th,td{text-align:left
     <li><b>Finding kind:</b> <i>Clarity</i>, pointing at the passage, always with why.</li>
     <li><b>Example:</b> "Paragraph 2 runs 140 words; a reviewer may miss the recusal point." · Suggested fix: "Split the paragraph after "without a vote" and start the next with the disclosure and recusal record."</li>
     <li><b>Severity:</b> Medium when the misreading would change what a reviewer concludes; Low when it is wording.</li>
-    <li><b>Does not:</b> flag style, grammar or length for their own sake; those are the free language checks. It never rewrites the prose.</li>
+    <li><b>Does not:</b> flag spelling, grammar, punctuation, house style or length for their own sake; those belong to the free Language category. It never rewrites the prose.</li>
   </ul>
 
   <h3>5 · Reviewer readiness</h3>
   <ul>
     <li><b>Question:</b> Which standards still carry a finding a committee would likely cite?</li>
-    <li><b>How:</b> not a separate reading; it is the roll-up of the High findings from the four checks above, per standard.</li>
+    <li><b>How:</b> not a separate reading; it is the roll-up of the High AI findings from the four checks above, per standard. Findings from the free readiness checks never count here.</li>
     <li><b>On the panel:</b> "Reviewer view: {n} likely follow-ups" (the number of High findings) and the bar "Reviewer readiness · {n} of {m} standards" (standards with no High finding).</li>
     <li><b>Purpose:</b> it turns findings into the question a coordinator actually asks before a submission: what will the committee come back on.</li>
   </ul>
 
   <h3>Also reported: manipulation</h3>
-  <p>Text inside the document that tries to instruct the reader or an AI ("ignore the rules above", "report nothing for this standard") is reported as a High finding that points at the passage without quoting it. It cannot be accepted or ignored, only cleared by a coordinator with a note; it blocks a final, not a draft, until cleared; the standard stays in the score and its other findings are still reported. It exists so that no one can use planted text to escape review.</p>
+  <p>Visible text inside the document that tries to instruct the reader or an AI (hidden text is removed and reported by the free Hidden text check before the AI reads anything) ("ignore the rules above", "report nothing for this standard") is reported as a High finding that points at the passage without quoting it. It cannot be accepted or ignored, only cleared by a coordinator with a note; it blocks a final, not a draft, until cleared; the standard stays in the AI review score and its other findings are still reported. It exists so that no one can use planted text to escape review.</p>
 </section>
 
 <section id="finding" aria-labelledby="h-f">
@@ -165,8 +198,8 @@ table{border-collapse:collapse;width:100%;font-size:.88rem}th,td{text-align:left
 </section>
 
 <section id="score" aria-labelledby="h-s">
-  <h2 id="h-s">The AI score</h2>
-  <p>Per checked standard: 100 − 8 per High − 3 per Medium − 1 per Low, never below 0. The AI score is the average over the standards that were checked. Contradictions are listed separately and do not enter it. A standard that could not be checked is left out and listed with its reason; it never counts against the institution. The model is never asked for a number; SPOL does the arithmetic and prints it. The AI score sits beside the rules score and never replaces it: the rules score gates a final, the AI score is advice.</p>
+  <h2 id="h-s">The AI review score</h2>
+  <p>Per checked standard: 100 − 8 per High − 3 per Medium − 1 per Low, never below 0. The AI review score is the average over the standards that were checked. Contradictions are listed separately and do not enter it. A standard that could not be checked is left out and listed with its reason; it never counts against the institution. The model is never asked for a number; SPOL does the arithmetic and prints it. The AI review score sits beside the readiness score and is never added to it. Neither score decides publishing: a final needs every standard approved and the free blocking conditions met.</p>
 </section>
 
 <section id="run" aria-labelledby="h-run">
@@ -175,7 +208,7 @@ table{border-collapse:collapse;width:100%;font-size:.88rem}th,td{text-align:left
     <li><b>Locked.</b> The panel shows a blurred preview behind the unlock card: what it adds, "Suggestions only. Nothing changes without you", the quote "{n} credits for {m} standards · {left} left this year", Unlock AI readiness, How AI readiness works. Standards that will be skipped (too long, personal data) are named in the quote. Writers see no cost line and cannot unlock.</li>
     <li><b>Unlock.</b> If the free checks are out of date they run first. Above 50 credits a second coordinator approves; the credits wait, the request expires after 7 days, and nothing is blocked meanwhile.</li>
     <li><b>Reading.</b> "Reading {n} standards… started by {name}". A second person who unlocks the same draft joins the run. People keep working; only publishing waits. Cancel keeps and charges the standards that finished and refunds the rest, including the cross-standard check: "Cancelled · 4 of 12 checked".</li>
-    <li><b>Result.</b> The AI score, "Reviewer view", "Contradictions", the five bars, the findings list, the tally "{open} open · {sent} sent back · {closed} closed · {credits} credits used · {left} left this year · recorded in the audit trail". Standards not checked appear as rows with the reason and "{n} credits refunded".</li>
+    <li><b>Result.</b> The AI review score, "Reviewer view", "Contradictions", the five bars, the findings list, the tally "{open} open · {sent} sent back · {closed} closed · {credits} credits used · {left} left this year · recorded in the audit trail". Standards not checked appear as rows with the reason and "{n} credits refunded".</li>
     <li><b>Not finished.</b> After the planned time plus 15 minutes: "AI readiness didn't finish · credits for unchecked standards refunded · Try again". Nothing checked at all: "AI readiness couldn't run · {n} credits refunded" and the card locks again.</li>
     <li><b>Run again.</b> Shows a fresh quote; standards whose text and evidence did not change cost nothing: "21 credits for 8 standards · 4 already checked".</li>
     <li><b>Hide.</b> The panel can be collapsed to a one-line strip at any time; nothing stops or is lost.</li>
@@ -207,7 +240,7 @@ table{border-collapse:collapse;width:100%;font-size:.88rem}th,td{text-align:left
   <h2 id="h-l">Limits, stated plainly</h2>
   <ul>
     <li>It is not the visiting committee. It predicts questions a reviewer is likely to ask; it does not know the reviewers, the institution's history or the accreditor's unwritten expectations.</li>
-    <li>It can miss things and be wrong. The tests bound how often, not to zero. That is why every finding has Ignore, and why the rules score, not the AI score, gates a final.</li>
+    <li>It can miss things and be wrong. The tests bound how often, not to zero. That is why every finding has Ignore, and why publishing never depends on the AI review score.</li>
     <li>It reads one standard at a time; an argument that spans standards is noticed only through the facts the consistency check compares.</li>
     <li>It reads extracts, not files.</li>
     <li>It does not write. A suggested fix says what to change; it never supplies the paragraph.</li>

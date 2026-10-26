@@ -4,7 +4,7 @@ source: readiness-checks.html
 format: markdown export of the HTML document; tables are pipe tables; the HTML remains the reference rendering
 ---
 
-Specification · Readiness checks (free) · v4 · 23 Oct 2026
+Specification · Readiness checks (free) · v5 · 26 Oct 2026
 
 # The readiness checks
 
@@ -12,7 +12,7 @@ SPOL runs thirteen checks on a report before it is published, grouped into six c
 
 ## In short
 
-- **Six categories, thirteen checks, one score.** Evidence 25, Completeness 20, Review 15, Language 10, Print and export 15, Accessibility 15. The weights add up to 100, and the score is the sum of the six categories.
+- **Six categories, thirteen checks, one score.** Attachments and links 25, Completeness 20, Open items 15, Language 10, Print and export 15, Accessibility 15. The weights add up to 100, and the score is the sum of the six categories.
 - **Each category can lose only its own share.** A category loses points only for its own findings, averaged over the standards it applies to. One standard can only lose its own slice of a category.
 - **A check answers a question a machine can settle** without judgment: is something present, well-formed, within a limit, unresolved. Anything that needs reading goes to the AI checks instead.
 - **Two engines.** SPOL's own rules run eleven of the checks. WProofreader, licensed by SPOL, runs the two Language checks.
@@ -24,15 +24,43 @@ Each category answers one question a coordinator asks before publishing, carries
 
 | Category | The question it answers | Checks | Weight | Applies to |
 | --- | --- | --- | --- | --- |
-| **Evidence** | Is every claim backed by something a reviewer can open? | 1 Missing attachments · 2 Link validation | 25 | Each standard with a response |
+| **Attachments and links** | Is every expected document attached, and does every link open? | 1 Missing attachments · 2 Link validation | 25 | Each standard with a response |
 | **Completeness** | Is everything that should print actually there? | 3 Placeholder text · 4 Required cover fields | 20 | Each selected standard, and the report itself (the cover) |
-| **Review** | Is anything still being discussed or edited? | 5 Open comments and unresolved edits | 15 | Each standard with a response |
+| **Open items** | Is anything still being discussed or edited? | 5 Open comments and unresolved edits | 15 | Each standard with a response |
 | **Language** | Does it read correctly? | 6 Spelling, grammar and punctuation · 7 Style | 10 | Each standard with a response |
 | **Print and export** | Will it print and export cleanly? | 8 Table format · 9 Image sizes · 10 Illegal characters · 11 Hidden text | 15 | Each standard with a response, and the report itself (output file name, hidden text) |
 | **Accessibility** | Can everyone read it? | 12 Alt text · 13 Headings | 15 | Each standard with a response |
 | **Total** | **100** |  |  |  |
 
-Why these weights: evidence is what an accreditor judges a standard on; completeness is what makes a report submittable; review, print and export, and accessibility each carry a real cost if missed; language matters least to the outcome and is mostly fixed as people type. The weights are set by SPOL, are the same for every institution, and are printed in "How the score is built" on the dashboard.
+Why these weights: the attached evidence is the first thing an accreditor opens; completeness is what makes a report submittable; review, print and export, and accessibility each carry a real cost if missed; language matters least to the outcome and is mostly fixed as people type. The weights are set by SPOL, are the same for every institution, and are printed in "How the score is built" on the dashboard.
+
+## Free and AI: one owner per question
+
+The free readiness checks and the paid AI checks never measure the same thing. Each question about a report has exactly one owner, and each score is built only from its own side's findings.
+
+| Question about the report | Answered by the free readiness checks | Answered by the AI checks |
+| --- | --- | --- |
+| Is every expected document attached, and does every link open? | Attachments and links (checks 1, 2) | Never |
+| Does the text back each claim with something it cites, and does the cited extract agree? | Never | Evidence sufficiency |
+| Is everything that should print filled in? | Completeness (checks 3, 4; a standard not started) | Never |
+| Does the response make its case and answer every reviewer question? | Never | Argument strength |
+| Is anything still being discussed or edited? | Open items (check 5) | Never |
+| Is the spelling, grammar, punctuation and house style right? | Language (checks 6, 7) | Never |
+| Will a reviewer misread a passage? | Never | Clarity |
+| Do numbers, dates and named roles agree across standards? | Never | Consistency |
+| Will tables, images and file names print and export cleanly? | Print and export (checks 8, 9, 10) | Never |
+| Is there text no reader can see? | Print and export (check 11, hidden text, removed before AI reads anything) | Never |
+| Does visible text try to steer a reader or an AI? | Never | Manipulation |
+| Can everyone read it (alt text, headings)? | Accessibility (checks 12, 13) | Never |
+| Which standards would a committee likely cite? | Never | Reviewer readiness (from AI findings only) |
+| Is every standard approved? | Neither score. Approvals are shown beside the readiness score and decide whether a final can be published. |  |
+
+- **One owner per question.** Every question above is answered by exactly one side. The free checks never judge meaning; the AI checks never report anything a free check owns.
+- **AI findings in free territory are dropped.** The AI is told what it must not report, and SPOL drops any AI finding about spelling, grammar, punctuation, style, file counts, broken links, layout, alt text, headings, placeholders, hidden text or open comments before anyone sees it.
+- **No finding is in both scores.** The readiness score is built only from the thirteen free checks; the AI review score only from AI findings. Neither ever reads the other's findings.
+- **Two scores, two names, never combined.** "Readiness score" (free, six categories, out of 100) and "AI review score" (paid, out of 100). They are shown side by side and are never added, averaged or merged into one number.
+- **No shared words.** The six free categories and the five AI areas use different names, so a bar on one side can never be mistaken for a bar on the other.
+- **Neither score decides publishing.** A final needs every selected standard approved and the free blocking conditions met; the AI manipulation flag also blocks a final until a coordinator clears it, as a condition, not as a score.
 
 ## When they run
 
@@ -44,7 +72,7 @@ Why these weights: evidence is what an accreditor judges a standard on; complete
 ## What they produce
 
 - **Findings.** Each finding names its category, its check, the standard (or "Report" for the cover and output), the severity, where it is (page, paragraph or element), what is wrong in one line, and what would fix it.
-- **Six category scores,** each shown as a bar with its points ("Evidence 21 / 25").
+- **Six category scores,** each shown as a bar with its points ("Attachments and links 21 / 25").
 - **The readiness score** out of 100, the sum of the six category scores, printed beside the ring as that sum ("21 + 18 + 14 + 9 + 13 + 14 = 89").
 - **Two verdicts,** separate from the score: "Internal draft: ready" (unless no standard is selected) and "Final: ready" or "Final: not yet · {codes} not approved". Approvals decide Final and are shown beside the score ("Approvals 9 of 12 · they decide Final, not the score").
 - **A recommendation paragraph** assembled from the findings with templated sentences, no AI: "Publish an internal draft now. For a final: send 4.2 and 6.2 back for evidence, get 3.3 written…"
@@ -54,7 +82,7 @@ Why these weights: evidence is what an accreditor judges a standard on; complete
 
 Within each category, each check gives what it looks at, what a finding says, the severity rule and who fixes it. The full severity table follows in Severity and points.
 
-### Evidence · weight 25
+### Attachments and links · weight 25
 
 #### 1 · Missing attachments
 
@@ -87,7 +115,7 @@ Within each category, each check gives what it looks at, what a finding says, th
 - **Severity:** High when a required field is missing (blocks a final, never a draft); Medium when a signer is named but their date is unsigned.
 - **Fixed by:** Step 3, or Admin for the profile and role holders. Also listed under "Before you publish" on Step 4.
 
-### Review · weight 15
+### Open items · weight 15
 
 #### 5 · Open comments and unresolved edits
 
@@ -171,11 +199,11 @@ Three levels, one meaning each, applied by the rule, never by a person, and each
 
 | Category | Check | High | Medium | Low | Not checked when |
 | --- | --- | --- | --- | --- | --- |
-| Evidence | 1 Missing attachments | Nothing attached; no expected count set; a cited file deleted | Fewer than expected | More than expected | Standard not started |
+| Attachments and links | 1 Missing attachments | Nothing attached; no expected count set; a cited file deleted | Fewer than expected | More than expected | Standard not started |
 | 2 Link validation | SPOL document or evidence file gone or unreadable | External address failing twice; deleted objective or outcome | Redirect; certificate warning | No network; target needs sign-in |  |
 | Completeness | 3 Placeholder text | Any placeholder | — | — | — |
 | 4 Required cover fields | A required field missing | Signer named, date unsigned | — | — |  |
-| Review | 5 Open comments and unresolved edits | — | Open comment or pending edit | — | Comment service unavailable |
+| Open items | 5 Open comments and unresolved edits | — | Open comment or pending edit | — | Comment service unavailable |
 | Language | 6 Spelling, grammar, punctuation | — | Misspelt word in neither dictionary | Grammar, punctuation; a word only the institution's dictionary knows | Language service unavailable |
 | 7 Style | — | A rule the institution marked required | Every other rule | No style guide configured |  |
 | Print and export | 8 Table format | Wider than the printable page | No header row; row split across pages | Fits only below 85 % | Width cannot be measured |
@@ -214,7 +242,7 @@ a category can never give or take more than its weight; one unit can never move 
 - **Not checked.** A unit a check could not run on is left out of that category's average, and the check shows "Partially checked". If a whole category could not run, its bar shows "—" and the total reads "{points} of {available}" (for example "80 of 90" for the demo report with the language service down) until it runs.
 - **Nothing to score.** When no selected standard has a response (or every one is left out), the ring and the bars show "—" with "No responses to check yet"; the score is not shown as a partial number.
 - **Approvals** are not in the score. They decide whether a final can be published, and they are shown beside the score so nobody mistakes 100 for "ready to submit".
-- **The AI score** is separate and never mixed in.
+- **The AI review score** is separate: these six categories never include an AI finding, and the AI review score never includes one of these findings. See Free and AI: one owner per question.
 
 ### Worked example: the demo report
 
@@ -222,15 +250,15 @@ Twelve standards selected; 3.3 not started, so eleven have a response; the repor
 
 | Category | Units | Units that lost points | Q | Score |
 | --- | --- | --- | --- | --- |
-| Evidence (25) | 11 standards | 4.2: 2 High = 6 → 0 · 6.2: High + Medium = 4 → ⅓ | 9.33 ÷ 11 = 0.848 | 21 |
+| Attachments and links (25) | 11 standards | 4.2: 2 High = 6 → 0 · 6.2: High + Medium = 4 → ⅓ | 9.33 ÷ 11 = 0.848 | 21 |
 | Completeness (20) | 12 standards + report | 3.3: not started → 0 | 12 ÷ 13 = 0.923 | 18 |
-| Review (15) | 11 standards | 1.1, 3.1, 5.2: 1 Medium each → ⅚ | 10.5 ÷ 11 = 0.955 | 14 |
+| Open items (15) | 11 standards | 1.1, 3.1, 5.2: 1 Medium each → ⅚ | 10.5 ÷ 11 = 0.955 | 14 |
 | Language (10) | 11 standards | 1.1: 1 Medium → ⅚ · 2.1: 2 Medium → ⅔ (its Low style finding counts 0) | 10.5 ÷ 11 = 0.955 | 9 |
 | Print and export (15) | 11 standards + report | 3.1: 1 High → ½ · 4.2: 1 Medium → ⅚ · 6.1: High + Medium → ⅓ | 10.67 ÷ 12 = 0.889 | 13 |
 | Accessibility (15) | 11 standards | 4.2: 1 Medium → ⅚ | 10.83 ÷ 11 = 0.985 | 14 |
 | **Readiness score** | **89** |  |  |  |
 
-Shown on the dashboard as "21 + 18 + 14 + 9 + 13 + 14 = 89", with "Final: not yet · 3.3, 4.2, 6.2 not approved" beside it. Fixing both missing documents on 4.2 lifts Evidence to 0.939 and its score to 23: the readiness score moves only within Evidence's share, and only by 4.2's slice of it.
+Shown on the dashboard as "21 + 18 + 14 + 9 + 13 + 14 = 89", with "Final: not yet · 3.3, 4.2, 6.2 not approved" beside it. Fixing both missing documents on 4.2 lifts Attachments and links to 0.939 and its score to 23: the readiness score moves only within the share of Attachments and links, and only by 4.2's slice of it.
 
 ## Exact calculation for the build
 
@@ -248,8 +276,8 @@ This is the normative definition the build implements and tests against. It prod
 | --- | --- |
 | Points per finding | High 3 · Medium 1 · Low 0 |
 | Cap per unit per category | 6 points |
-| Weights | Evidence 25 · Completeness 20 · Review 15 · Language 10 · Print and export 15 · Accessibility 15 |
-| Check → category | 1, 2 → Evidence · 3, 4 → Completeness · 5 → Review · 6, 7 → Language · 8, 9, 10, 11 → Print and export · 12, 13 → Accessibility |
+| Weights | Attachments and links 25 · Completeness 20 · Open items 15 · Language 10 · Print and export 15 · Accessibility 15 |
+| Check → category | 1, 2 → Attachments and links · 3, 4 → Completeness · 5 → Open items · 6, 7 → Language · 8, 9, 10, 11 → Print and export · 12, 13 → Accessibility |
 | Categories that include the report unit | Completeness (checks 3, 4 on the cover) · Print and export (checks 10, 11 on the output and the whole document) |
 
 ### Algorithm
@@ -284,14 +312,14 @@ else:
 - **Integers only.** Compute `(w × kept) div (6 × n)` in integer arithmetic. Floating point turns an exact 24 into 23.999… and floors it to 23.
 - **Bar width** is `kept ÷ (6 × n)` as a percentage. Colour: below 70 % red, below 90 % amber, otherwise the neutral bar.
 - **Stored, not recomputed.** The six category values, their `kept` and `n`, the total, the available maximum and the rules version are stored with the run. Displays and the download read the stored values. A score is compared with another only when both carry the same rules version.
-- **Formula line.** The dashboard prints the six stored values in the fixed order Evidence, Completeness, Review, Language, Print and export, Accessibility, joined by " + ", then " = " and the total. A category that is not available prints "—" and is left out of the sum.
+- **Formula line.** The dashboard prints the six stored values in the fixed order Attachments and links, Completeness, Open items, Language, Print and export, Accessibility, joined by " + ", then " = " and the total. A category that is not available prints "—" and is left out of the sum.
 - **Download.** The Summary sheet lists, per category, the weight, `n`, `kept`, the score and the rules version, so any score can be rechecked by hand.
 
 ### Test cases
 
 Built on the demo report unless stated. Each line gives the six category scores in the fixed order, then what the ring shows.
 
-| # | Case | Evidence | Completeness | Review | Language | Print and export | Accessibility | Ring |
+| # | Case | Attachments and links | Completeness | Open items | Language | Print and export | Accessibility | Ring |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Demo report | 21 | 18 | 14 | 9 | 13 | 14 | **89** |
 | 2 | Clean report, every standard started, no findings | 25 | 20 | 15 | 10 | 15 | 15 | **100** |
@@ -300,11 +328,11 @@ Built on the demo report unless stated. Each line gives the six category scores 
 | 5 | Demo, language service unavailable | 21 | 18 | 14 | — | 13 | 14 | **80 of 90** |
 | 6 | Demo, a placeholder on the cover (High on REPORT) | 21 | 17 | 14 | 9 | 13 | 14 | **88** |
 | 7 | Demo, hidden text found (High on REPORT) | 21 | 18 | 14 | 9 | 12 | 14 | **88** |
-| 8 | Demo, plus ten High Evidence findings on 3.2 | 18 | 18 | 14 | 9 | 13 | 14 | **86** (3.2 capped at 6 points) |
+| 8 | Demo, plus ten High findings in Attachments and links on 3.2 | 18 | 18 | 14 | 9 | 13 | 14 | **86** (3.2 capped at 6 points) |
 | 9 | One standard selected, one Medium spelling finding | 25 | 20 | 15 | 8 | 15 | 15 | **98** |
 | 10 | Every selected standard not started | — | — | — | — | — | — | **—** "No responses to check yet" |
 
-Case 4 is intended: the score describes what would print now, and standards left out do not print; Final stays blocked until they return approved. Case 8 shows the cap: ten High findings cost 3.2 its full Evidence slice (25 ÷ 11 ≈ 2.3 points) and no more.
+Case 4 is intended: the score describes what would print now, and standards left out do not print; Final stays blocked until they return approved. Case 8 shows the cap: ten High findings cost 3.2 its full slice of Attachments and links (25 ÷ 11 ≈ 2.3 points) and no more.
 
 ## Where findings go
 
@@ -336,10 +364,10 @@ Case 4 is intended: the score describes what would print now, and standards left
 
 ## Acceptance
 
-- **Full run.** Given the demo data. When Run checks again. Then all thirteen checks report a status, the six bars read Evidence 21 / 25, Completeness 18 / 20, Review 14 / 15, Language 9 / 10, Print and export 13 / 15 and Accessibility 14 / 15, the ring reads 89 with "21 + 18 + 14 + 9 + 13 + 14 = 89", and 17 findings are listed under their standards.
+- **Full run.** Given the demo data. When Run checks again. Then all thirteen checks report a status, the six bars read Attachments and links 21 / 25, Completeness 18 / 20, Open items 14 / 15, Language 9 / 10, Print and export 13 / 15 and Accessibility 14 / 15, the ring reads 89 with "21 + 18 + 14 + 9 + 13 + 14 = 89", and 17 findings are listed under their standards.
 - **Proportion.** Given any report. When every finding in one category is resolved. Then the readiness score rises by exactly that category's lost points and no other bar moves. Given a standard with ten High findings in one category. Then that category loses no more than that standard's slice of it.
 - **One per element.** Given a table with nine wide columns. Then exactly one Table format finding, High, naming the table and page.
-- **Expected count not set.** Given 6.2 with no expected evidence count and no documents. Then a High "Expected evidence count not set" and a Medium "No documents attached", and Evidence keeps ⅓ of 6.2's slice.
+- **Expected count not set.** Given 6.2 with no expected evidence count and no documents. Then a High "Expected evidence count not set" and a Medium "No documents attached", and Attachments and links keeps ⅓ of 6.2's slice.
 - **Placeholder.** Given "[Name of Institution]" on the cover. Then a High Placeholder text finding on the report, listed under "Before you publish", and Completeness loses half of the report's slice.
 - **Not started.** Given 3.3 with no response. Then no finding is raised, 3.3 scores 0 in Completeness, and it does not appear in the other five categories.
 - **Language engine.** Given "occurence" in 2.1. Then a Medium Spelling finding with the suggestion, no AI label and no credit line; the same word is marked in the editor as you type.
@@ -353,11 +381,11 @@ Case 4 is intended: the score describes what would print now, and standards left
 
 | Category | This specification | v6 build | Change |
 | --- | --- | --- | --- |
-| Evidence | 1 Missing attachments | Missing Attachments ("87 standards") | Keep; count findings, not standards, and report "expected count not set" as its own High finding. |
+| Attachments and links | 1 Missing attachments | Missing Attachments ("87 standards") | Keep; count findings, not standards, and report "expected count not set" as its own High finding. |
 | 2 Link validation | Link Validation | Keep; add severity by cause ("Document file not found on server" is High). |  |
 | Completeness | 3 Placeholder text | — | New; the v6 cover shows exactly the placeholders it catches. |
 | 4 Required cover fields | — | New; v6 collects these fields on "Structure & Branding". |  |
-| Review | 5 Open comments and unresolved edits | Narrative Comments, "Not Checked" | It must run on every readiness run. |
+| Open items | 5 Open comments and unresolved edits | Narrative Comments, "Not Checked" | It must run on every readiness run. |
 | Language | 6 Spelling, grammar and punctuation | Spell Check, under "AI can fix these" | Move into Language; it is neither AI nor fixed by Publish. |
 | 7 Style | — | New. |  |
 | Print and export | 8 Table format | Table Format, "181 issues" | Keep; count tables, not cells. |

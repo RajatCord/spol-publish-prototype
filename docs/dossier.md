@@ -1,6 +1,6 @@
 ---
 title: "How AI readiness works"
-source: https://rajatcord.github.io/spol-publish-prototype/docs/dossier.html
+source: dossier.html
 format: markdown export of the HTML document; tables are pipe tables; the HTML remains the reference rendering
 ---
 
@@ -86,13 +86,13 @@ For each checked standard:
 
 finding, never below 0. The
 
-AI readiness score
+AI review score
 
 is the average over the standards that were checked. Contradictions are listed separately ("1 to resolve") and do not enter the score.
 
 - The five bars show shares of standards: argument strength (no high argument or missing-element finding), evidence sufficiency (no evidence finding), clarity (no clarity finding), reviewer readiness (no high finding), and the number of contradictions.
 - A standard that could not be checked (too long, personal data found, output not verifiable, provider unavailable, cancelled) is left out of the average and listed with its reason. It never counts against you.
-- The AI score sits beside the rules score and never replaces it. The rules score (approvals, evidence present, comments, formatting, accessibility) is free and is what gates a final; the AI score is advice.
+- The AI review score sits beside the readiness score and is never added to it. The readiness score is free and built from six categories (attachments and links, completeness, open items, language, print and export, accessibility); it never includes an AI finding, and the AI review score never includes one of its findings. Neither score decides publishing: a final needs every standard approved.
 
 ## What you do with a finding
 
@@ -171,7 +171,7 @@ The reviewer questions themselves are written by SPOL's accreditation team per a
 ## What it cannot do
 
 - **It is not the visiting committee.** It predicts questions a reviewer is likely to ask; it does not know your reviewers, your history, or the accreditor's unwritten expectations.
-- **It can miss things and it can be wrong.** The tests bound how often, they do not make it zero. That is why every finding is a suggestion with an Ignore button, and why the rules score, not the AI score, gates a final.
+- **It can miss things and it can be wrong.** The tests bound how often, they do not make it zero. That is why every finding is a suggestion with an Ignore button, and why publishing never depends on the AI review score.
 - **It reads one standard at a time.** It will not notice an argument that spans standards except through the numbers, dates and named roles the cross-standard check compares.
 - **It reads extracts, not files.** A cited document is judged by its title and 40 words from each cited page. It cannot tell you a 60-page policy is weak.
 - **It does not write.** A suggested fix says what to change; it never supplies the paragraph.
@@ -187,8 +187,11 @@ Every run writes an audit entry: who started it, on which draft, which model and
 **Can I send every finding back at once?**  
 Yes. "Send all back" on the Readiness step sends each standard that carries findings to the person who holds it, with one comment per standard: the rule findings and, if you unlocked AI readiness, its open recommendations marked as suggestions with the suggested fix. You see the full list and who receives what before anything is sent, and each send is in the audit trail.
 
+**Does AI readiness check spelling, links or layout?**  
+No. Those are the free readiness checks, which every report gets: attachments and links, completeness, open items, language, print and export, accessibility. AI readiness only answers questions that need reading: whether a response makes its case, whether its claims are backed, whether standards agree, whether a passage will be misread. The two never overlap, and their scores are never added together.
+
 **Is the spelling check AI?**  
-No. Spelling, grammar, punctuation and style are checked by WProofreader, a proofreading tool SPOL licenses, using SPOL's accreditation dictionary and your institution's own words. It runs as you type and again at readiness, costs no credits, and is never counted in the AI score. WProofreader's own AI writing assistant is switched off.
+No. Spelling, grammar, punctuation and style are checked by WProofreader, a proofreading tool SPOL licenses, using SPOL's accreditation dictionary and your institution's own words. It runs as you type and again at readiness, costs no credits, and is never counted in the AI review score. WProofreader's own AI writing assistant is switched off.
 
 **Does the AI approve or reject my standards?**  
 No. Approval is the chain's: writer, reader, editor. The AI only adds findings you can accept or ignore.
