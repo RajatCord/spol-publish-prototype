@@ -78,12 +78,13 @@ Ankush's Wizard 1029 designs take precedence where they differ from the prototyp
 # AI review score
 # Auto-format
 # Prompts, guardrails and test set
+# Log every AI run
 
 *Not in this epic:* Free readiness checks (E1); Writer-side AI (E3)
 
 *Depends on*
 * E1: the workflow this sits in
-* E4: credit pool, metering and the overall AI switch
+* E4: credit pool, metering, the overall AI switch and the AI usage log
 * Clearance to send report text and evidence to the model
 
 *Estimate needed (calendar dates)*
@@ -132,7 +133,14 @@ Also say whether this can start before E1 closes.",spol-ai-delivery
 *Acceptance criteria*
 * Each check has a prompt, guardrails and a test set of real reports.
 * Results on the test set are reviewed before release.",spol-ai-delivery
-18,,Epic,E3 · Accreditation writer AI: Review and fix,"*Goal:* Add AI to the narrative screen, where a writer works on the response to a standard. Version 1 reviews a response the writer has already written; it never drafts one from scratch.
+18,10,Story,Log every AI run,"Part of E2 · Publishing workflow with AI
+
+*Acceptance criteria*
+* Every AI readiness run and every Auto-format run is recorded in the AI usage log (E4), named by feature and check.
+* Each record carries the prompt version and model, so results can be traced when a prompt changes.
+* What people did with the results is recorded: findings accepted and sent back, ignored (with the reason), reopened or cleared.
+* From the log we can see cost per run, per standard and per report.",spol-ai-delivery
+19,,Epic,E3 · Accreditation writer AI: Review and fix,"*Goal:* Add AI to the narrative screen, where a writer works on the response to a standard. Version 1 reviews a response the writer has already written; it never drafts one from scratch.
 
 *Stories*
 # AI button on Edit response
@@ -140,13 +148,14 @@ Also say whether this can start before E1 closes.",spol-ai-delivery
 # Accept or reject each suggestion
 # Writer stays in control
 # AI inputs and rules
+# Log every Review and fix run
 
 *Not in this epic:* Cite evidence; Drafting from scratch; Modules other than Accreditation
 
 *Depends on*
 * Ankush: final writer-flow design
 * Leo: AI rules for the narrative screen
-* E4: credit pool, metering and the overall AI switch
+* E4: credit pool, metering, the overall AI switch and the AI usage log
 * Clearance to send response text and evidence to the model
 
 *Estimate needed (calendar dates)*
@@ -159,42 +168,50 @@ Also say whether this can start before E1 closes.",spol-ai-delivery
 * [Writer flow, boards W0 to W5|https://rajatcord.github.io/spol-publish-prototype/W0.dc.html]
 
 The UI was started by Anubhav; the AI behind it is not built.",spol-ai-delivery
-19,18,Story,AI button on Edit response,"Part of E3 · Accreditation writer AI: Review and fix
+20,19,Story,AI button on Edit response,"Part of E3 · Accreditation writer AI: Review and fix
 
 *Acceptance criteria*
 * Edit response shows an AI button that runs one action, Review and fix (4 credits).
 * The cost is shown before the run.
 * The button is hidden when the account's AI switch is off (E4).",spol-ai-delivery
-20,18,Story,Review and fix results,"Part of E3 · Accreditation writer AI: Review and fix
+21,19,Story,Review and fix results,"Part of E3 · Accreditation writer AI: Review and fix
 
 *Acceptance criteria*
 * The results show how many of the guide's requirements the response answers.
 * They show how many claims the attached evidence backs.
 * They show the number of wording suggestions still open.",spol-ai-delivery
-21,18,Story,Accept or reject each suggestion,"Part of E3 · Accreditation writer AI: Review and fix
+22,19,Story,Accept or reject each suggestion,"Part of E3 · Accreditation writer AI: Review and fix
 
 *Acceptance criteria*
 * Each suggestion appears inline with an accept (tick) and a reject (cross).
 * ""Accept all"" accepts the remaining suggestions.
 * An accepted suggestion can be undone.",spol-ai-delivery
-22,18,Story,Writer stays in control,"Part of E3 · Accreditation writer AI: Review and fix
+23,19,Story,Writer stays in control,"Part of E3 · Accreditation writer AI: Review and fix
 
 *Acceptance criteria*
 * Nothing in the response changes until the writer accepts.
 * The screen stays light on AI: one entry point, results only on request.",spol-ai-delivery
-23,18,Story,AI inputs and rules,"Part of E3 · Accreditation writer AI: Review and fix
+24,19,Story,AI inputs and rules,"Part of E3 · Accreditation writer AI: Review and fix
 
 *Acceptance criteria*
 * The AI is given the accreditor's guide, the response and its evidence.
 * Behaviour follows the rules Leo writes for the narrative screen.",spol-ai-delivery
-24,,Epic,E4 · AI admin: credit pool and overall AI switch,"*Goal:* Build the two parts of Admin › Utilities › AI that the AI features depend on. A separate team builds the rest of the page; this epic covers only these two.
+25,19,Story,Log every Review and fix run,"Part of E3 · Accreditation writer AI: Review and fix
+
+*Acceptance criteria*
+* Every run is recorded in the AI usage log (E4), with the standard it ran on.
+* Each record carries the prompt version and model, so results can be traced when a prompt changes.
+* What the writer did is recorded: suggestions accepted, rejected or undone, and whether Accept all was used.
+* From the log we can see cost per run and how often suggestions are kept.",spol-ai-delivery
+26,,Epic,"E4 · AI admin: credit pool, AI switch and usage log","*Goal:* Build the two parts of Admin › Utilities › AI that the AI features depend on, plus the AI usage log behind them. A separate team builds the rest of the page; this epic covers only these. The log is how we calculate cost, check credits against model spend, and see what the AI is doing.
 
 *Stories*
 # Total credit pool
 # Credit metering
+# AI usage log
 # Overall AI switch
 
-*Not in this epic:* Per-feature switches; Who can use AI; Spending controls; Data and privacy; Records; Buying credits and the AI reserve
+*Not in this epic:* Per-feature switches; Who can use AI; Spending controls; Data and privacy; Records (the admin screen that shows the usage log); Buying credits and the AI reserve
 
 *Depends on*
 * Ankush: approved admin design
@@ -202,26 +219,34 @@ The UI was started by Anubhav; the AI behind it is not built.",spol-ai-delivery
 * Admin page team: where the pool and the switch connect to their screens
 
 *Estimate needed (calendar dates)*
-* Pool and metering ready for E2 and E3: 
-* Pool and AI switch release-ready: 
+* Pool, metering and usage log ready for E2 and E3: 
+* Pool, AI switch and usage log release-ready: 
 * Confidence (high / medium / low): 
 
 *References*
 * [AI admin, Advanced and Enterprise (A1)|https://rajatcord.github.io/spol-publish-prototype/A1.dc.html]
 * [AI admin, IE Essentials (A1b)|https://rajatcord.github.io/spol-publish-prototype/A1b.dc.html]
 
-Needed by E2 and E3: both draw from the pool and stop when AI is off.",spol-ai-delivery
-25,24,Story,Total credit pool,"Part of E4 · AI admin: credit pool and overall AI switch
+Needed by E2 and E3: both draw from the pool, stop when AI is off, and write to the usage log.",spol-ai-delivery
+27,26,Story,Total credit pool,"Part of E4 · AI admin: credit pool, AI switch and usage log
 
 *Acceptance criteria*
 * One balance, fed by every module's allocation, shows credits used out of the total.
 * The balance is the same wherever it is shown.",spol-ai-delivery
-26,24,Story,Credit metering,"Part of E4 · AI admin: credit pool and overall AI switch
+28,26,Story,Credit metering,"Part of E4 · AI admin: credit pool, AI switch and usage log
 
 *Acceptance criteria*
 * Every AI action holds its quoted credits, charges on success and releases the hold on failure or cancel.
 * AI actions stop when the balance reaches zero, with a clear message.",spol-ai-delivery
-27,24,Story,Overall AI switch,"Part of E4 · AI admin: credit pool and overall AI switch
+29,26,Story,AI usage log,"Part of E4 · AI admin: credit pool, AI switch and usage log
+
+*Acceptance criteria*
+* Every AI call, from any feature, is recorded: account, module, feature, the person who ran it, date and time, model and prompt version.
+* Each record also carries input and output tokens (reasoning included), credits quoted and charged, model cost in US dollars, duration, and the outcome (succeeded, failed, cancelled or refused).
+* Failed and cancelled calls are recorded with their reason and the credit release.
+* Credits charged and model cost can be totalled by account, module, feature, person and month, and exported.
+* The log stores no report or response text beyond what the data policy allows.",spol-ai-delivery
+30,26,Story,Overall AI switch,"Part of E4 · AI admin: credit pool, AI switch and usage log
 
 *Acceptance criteria*
 * One account-wide switch, on by default where the tier includes AI (Advanced, Enterprise), off on IE Essentials.
