@@ -41,7 +41,7 @@ What SPOL sends to the model, what it gets back, what it may do with it, and the
 | 3 | Build passages with stable ids `std:4.2\\|p:2` (ids live in the snapshot; new paragraphs get new ids, existing ids never shift); extract numeric facts (counts, dates, money, named figures) with their sentence; build the evidence index with 40-word extracts of cited pages. | SPOL | passages[], facts[], evidence[] |
 | 4 | **Pseudonymise where detected:** institution, people, programme and place names → `[ORG_1]`, `[PERSON_3]`…; strip IDs, emails, phone numbers. Applies to narratives, comments, evidence titles and extracts, and the facts table. The map stays in SPOL. Detection is named-entity recognition plus the institution's directory and is not perfect; the provider agreement, not pseudonymisation, is the privacy guarantee. A pre-send scan for student IDs, SSN patterns, emails, phone numbers and small-cell tables excludes only the affected standard ("not checked: personal data"). | SPOL | pseudonymised inputs + map |
 | 5 | **Exclude AI-origin text:** comments tagged `origin: ai` (earlier accepted findings) are never attached as input. | SPOL | filtered comments |
-| 6 | **Plan and budget:** count tokens with the provider's `count_tokens`; a standard above 14,000 input tokens is split into k = ⌈tokens / 14,000⌉ parts at paragraph boundaries, at most 3 (beyond that: "not checked: too long"). Each part re-includes the standard text, rubric and judgment and only the evidence and comments tied to its passages; a split standard yields one result (findings merged, deduped, capped at 8; tokens summed) and is charged 2 × k. Compute the planned cost at caps with no retries. Standards excluded here (too long, personal data) are listed in the quote and never charged. | SPOL | plan, token counts, charge, budget |
+| 6 | **Plan and budget:** count tokens with the provider's `count_tokens`; no request is planned at 100,000 input tokens or more (see Request settings for how each call is split); a standard above 14,000 input tokens is split into k = ⌈tokens / 14,000⌉ parts at paragraph boundaries, at most 3 (beyond that: "not checked: too long"). Each part re-includes the standard text, rubric and judgment and only the evidence and comments tied to its passages; a split standard yields one result (findings merged, deduped, capped at 8; tokens summed) and is charged 2 × k. Compute the planned cost at caps with no retries. Standards excluded here (too long, personal data) are listed in the quote and never charged. | SPOL | plan, token counts, charge, budget |
 | 7 | Quote and hold: charge only standards whose key is not stored; hold exactly the charge in credits; take the per-key lock. Return stored results for keys already computed. Above 50 credits, wait for a second coordinator's approval (7 days, then expired). | SPOL | reservation, lock |
 | 8 | **Call A1**, once per standard (or part), up to 4 in parallel, exponential backoff on 429/529. A retry is attempted only while the remaining USD budget covers it; otherwise the standard is "not checked: retry budget" and refunded. | Claude Haiku 5.5, effort high | findings[] per standard |
 | 9 | **Validate per call** (see the A1 validator). Order: validate every returned finding → failure rate = invalid ÷ returned (0 returned passes; injection findings whose text is discarded are not failures) → dedupe on (kind, anchor) → sort high > medium > low, then model order → keep 8. More than 30% invalid → "not checked: ungrounded", refunded. An injection finding keeps its location only; all its model text is discarded and a fixed message is rendered; the standard's other findings are kept. | SPOL | validated findings or "not checked" with reason |
@@ -101,7 +101,8 @@ All three calls use the same request shape. Only the effort level, the system pr
 
 | Setting | Value | Why |
 | --- | --- | --- |
-| Model | `claude-haiku-5-5`, pinned, for A1, A2 and B | $0.10 / $0.50 per million input / output tokens for prompts up to 100K tokens; every SPOL prompt is far below that. |
+| Model | `claude-haiku-5-5`, pinned, for A1, A2 and B | $0.10 / $0.50 per million input / output tokens. That rate applies only to prompts under 100K tokens, and the input-size rule below keeps every request there. |
+| **Input size** | **Every request under 100,000 input tokens** (system prompt + messages + document), counted with `count_tokens` before it is sent | A request that would reach 100,000 is never sent. It is broken into several requests by the split rules below, so no call is ever billed at the higher rate ($0.50 / $2.50). |
 | Thinking | `{"type": "adaptive"}`, sent explicitly; never `disabled` | Haiku 5.5 thinks by default; effort is the control. Thinking is billed as output and counts against `max_tokens`. |
 | Effort (`output_config.effort`) | A1 `high` · A2 `high` · B `low` | A1 and A2 are reviewer judgment and strict instruction following, where Haiku needs `high`. B is one small choice per item. The default would be `medium`, so it is always set. |
 | `max_tokens` | **128,000** on every call | The $1 rule below. A ceiling, not a target: a typical call uses a few thousand tokens. |
@@ -112,6 +113,19 @@ All three calls use the same request shape. Only the effort level, the system pr
 | Token counts | `count_tokens` with `model: "claude-haiku-5-5"` | Haiku 5.5's tokenizer counts more tokens for the same text than older models; the 14,000-token split threshold is measured with it. |
 | Stop reasons | `end_turn` → validate · `max_tokens` → "not checked: ungrounded" · `refusal` → "not checked: refusal" | A refusal is not retried with the same prompt. B items in either case are "not formatted". |
 
+#### Splitting at 100,000 input tokens
+
+The planner counts every request before sending it. Each call has its own way of breaking a request that would reach 100,000 input tokens into smaller requests that each stay under it. Each smaller request is a full call with its own $1 rule.
+
+| Call | What can grow | How it is split | How the results are combined |
+| --- | --- | --- | --- |
+| A1, one standard | The narrative, evidence extracts and comments | Already split far below the limit: at 14,000 tokens a standard is cut into parts at paragraph boundaries, and each part carries the standard text, rubric and judgment plus only its own passages' evidence and comments (Pipeline, step 6). | Findings merged, deduplicated and capped at 8; a missing_element is kept only if every part reports it. |
+| A2, consistency | The facts table of a group | Rows are grouped by measure, and whole measure groups are packed into requests that each stay under 100,000 tokens, so every row of one measure is in the same request. If one measure alone would reach the limit, its rows are cut into chunks and every pair of chunks is checked in its own request. | Contradictions merged and deduplicated on the fact pair; at most 10 kept per group, most serious first. |
+| B, citations | The evidence index sent with each citation | The index is cut into chunks that each keep the request under 100,000 tokens; the citation is sent once per chunk. | Applied only if exactly one chunk answers `cite`; otherwise `leave`. |
+| B, tables and headings | Nothing: each item is a fixed, small input | Never reaches the limit (about 1,000 tokens per request). | — |
+
+Splitting changes no charge: AI readiness is still charged per standard (a split A1 part counts as a standard, as before) plus 5 credits for the consistency check, and Auto-format is still 4 credits. The extra requests come out of the run's USD budget.
+
 #### The $1 rule
 
 No call may spend more than $1 of model cost, input and output combined:
@@ -120,7 +134,7 @@ No call may spend more than $1 of model cost, input and output combined:
 max_tokens = min(128,000, floor(($1.00 − input_tokens × input_rate) ÷ output_rate))
 ```
 
-On Claude Haiku 5.5 a prompt under 100K tokens costs at most $0.01 to read, so the rule allows about 1.98 million output tokens. The model's own 128,000-token output limit is the binding ceiling, and every call sets `max_tokens: 128000`. The most expensive possible call is A1 at its 14,000-token input cap: $0.0014 + 128,000 × $0.50 / 1M = **$0.065**. The same formula applies unchanged if a call ever moves to a model with higher rates.
+Every request is under 100,000 input tokens, so on Claude Haiku 5.5 its input costs at most $0.01, so the rule allows about 1.98 million output tokens. The model's own 128,000-token output limit is the binding ceiling, and every call sets `max_tokens: 128000`. The most expensive possible call is A1 at its 14,000-token input cap: $0.0014 + 128,000 × $0.50 / 1M = **$0.065**. The same formula applies unchanged if a call ever moves to a model with higher rates.
 
 What bounds a whole run is not `max_tokens` but the run's USD budget (1.5× the charge) and, for Auto-format, the 20-second timeout per item.
 
@@ -370,7 +384,7 @@ Any other value is discarded. `cite` is applied only if `evidence_id` is in the 
 
 ## Cost, charging and refunds
 
-Model prices are the provider's list rates at the time of writing: Claude Haiku 5.5 $0.10 / $0.50 per million input / output tokens for prompts up to 100K tokens ($0.50 / $2.50 above, which no SPOL call reaches); cache reads 0.1× the input rate. Thinking tokens are billed as output. 1 credit = $0.05 of model cost. Token counts in the plan come from `count_tokens` with the Haiku model; the figures below are for a 184-page report with 12 selected standards (about 15 pages, 10,000 narrative tokens, per standard). Thinking at `high` effort is estimated and must be re-measured on the test set before release.
+Model prices are the provider's list rates at the time of writing: Claude Haiku 5.5 $0.10 / $0.50 per million input / output tokens for prompts up to 100K tokens ($0.50 / $2.50 at 100K and above, which no SPOL request is allowed to reach); cache reads 0.1× the input rate. Thinking tokens are billed as output. 1 credit = $0.05 of model cost. Token counts in the plan come from `count_tokens` with the Haiku model; the figures below are for a 184-page report with 12 selected standards (about 15 pages, 10,000 narrative tokens, per standard). Thinking at `high` effort is estimated and must be re-measured on the test set before release.
 
 | Call | Typical input | Typical output (JSON + thinking) | Typical cost | Cap per call | Worst case (A: caps + 1 retry; B: caps, no retry) |
 | --- | --- | --- | --- | --- | --- |
@@ -438,7 +452,7 @@ Model prices are the provider's list rates at the time of writing: Claude Haiku 
 | Injection: false positives | 30 clean standards containing ordinary reader-addressed prose ("the committee will note…") | ≤ 1 flagged |
 | Precision, every kind | 60 seeded cases per kind for weak_argument, missing_element, clarity | ≥ 80% precision each |
 | Map-back | 200 findings on pseudonymised standards with 40 named entities | ≤ 2% quotes dropped at re-verification; 0 unknown tokens shown |
-| Charging | Plans for N = 1…70 standards at both A1 caps, with and without splits | 0 refusals for unsplit reports; spend ≤ budget in every simulated retry pattern; ledger invariants hold on every path |
+| Charging | Plans for N = 1…70 standards at both A1 caps, with and without splits | 0 refusals for unsplit reports; 0 requests planned at 100,000 input tokens or more, including facts tables and evidence indexes large enough to split; spend ≤ budget in every simulated retry pattern; ledger invariants hold on every path |
 | Stability | Same input, 5 fresh runs | ≥ 90% overlap of (kind, anchor); ≥ 95% after a pseudonym reshuffle |
 | Fairness: style | 20 standards, each rewritten in three registers (plain, formal, non-native) with identical facts and evidence; 5 runs per variant | Mean finding count and severity distribution within 0.3 of each other across registers (aggregated, above the run-to-run noise) |
 | Fairness: size | Same narratives with institution-size cues varied; 5 runs per variant | Same bar as style |
