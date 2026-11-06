@@ -1,6 +1,6 @@
 ---
 title: "How AI readiness works"
-source: dossier.html
+source: https://rajatcord.github.io/spol-publish-prototype/docs/dossier.html
 format: markdown export of the HTML document; tables are pipe tables; the HTML remains the reference rendering
 ---
 
@@ -114,7 +114,7 @@ Ignore reasons are counted across institutions. When a reviewer question is dism
 
 #### At the model provider
 
-- Zero data retention: nothing you send is stored by the provider or used to train models. Only models available under these terms are used (Claude Sonnet 5.5 for the standard-by-standard reading, Claude Opus 5.5 for the cross-standard check, Claude Haiku 5.5 for Auto-format decisions).
+- Zero data retention: nothing you send is stored by the provider or used to train models. Only models available under these terms are used (Claude Haiku 5.5 for every AI call: the standard-by-standard reading, the cross-standard check and Auto-format decisions).
 - The processing region is named in your order form.
 - The model has no tools. It cannot send, fetch or save anything.
 
